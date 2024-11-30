@@ -9,10 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1065030730256607911}
+  - component: {fileID: 5008732800725289648}
   - component: {fileID: 6157534491502116171}
   - component: {fileID: 5312017805105449806}
+  - component: {fileID: 2959289655283027862}
   m_Layer: 7
-  m_Name: sphere
+  m_Name: particleSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,6 +35,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2589855124523295490}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+--- !u!114 &5008732800725289648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3801542935904869878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8fd28304c62e844d89e4b30c3ffd413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!198 &6157534491502116171
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -3864,7 +3878,7 @@ ParticleSystem:
     outside: 0
     enter: 2
     exit: 0
-    colliderQueryMode: 0
+    colliderQueryMode: 2
     radiusScale: 1
     primitives: []
   SubModule:
@@ -4888,6 +4902,27 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!135 &2959289655283027862
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3801542935904869878}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5615053370887633287
 GameObject:
   m_ObjectHideFlags: 0
