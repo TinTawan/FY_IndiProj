@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fd28304c62e844d89e4b30c3ffd413, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outlineMaterial: {fileID: 2100000, guid: 60bef8d6fa720dd4dbc282d80bc6d3cd, type: 2}
 --- !u!198 &6157534491502116171
 ParticleSystem:
   m_ObjectHideFlags: 0
