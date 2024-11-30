@@ -30,6 +30,6 @@ public class SendEchoPulse : MonoBehaviour
         pulsePS.Play();
 
 
-        Destroy(pulse, pulseDuration + 0.5f);
+        Destroy(pulse, pulseDuration + 1f);
     }
 }
