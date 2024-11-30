@@ -40,12 +40,10 @@ public class ObjectOutline : MonoBehaviour
         {
             mat.SetFloat("_outlineDepth", i);
             yield return null;
-            //yield return new WaitForSeconds(0.1f);
 
         }
 
         isOutlined = false;
-        //canBeTriggered = true;
 
     }
 
