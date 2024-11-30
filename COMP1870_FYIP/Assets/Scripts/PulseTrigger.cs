@@ -7,9 +7,9 @@ public class PulseTrigger : MonoBehaviour
     private SphereCollider sphereCol;
     private ParticleSystem ps;
 
-    private Material outlineMat;
-
-    [SerializeField] private float outlineTime = 3f;
+    //private Material outlineMat;
+    
+    //[SerializeField] private float outlineTime = 3f;
 
 
 
@@ -39,13 +39,27 @@ public class PulseTrigger : MonoBehaviour
     {
         Debug.Log($"HIT {other.name}");
 
-
-        if(other.TryGetComponent(out MeshRenderer mr))
+        if(other.TryGetComponent(out ObjectOutline outline))
         {
-            outlineMat = mr.materials[1];
+            if (!outline.GetIsOutlined())
+            {
+                outline.SetCanBeTriggered(true);
+
+            }
+            else
+            {
+                outline.SetCanBeTriggered(false);
+            }
+        }
+
+
+        /*if(other.TryGetComponent(out MeshRenderer mr))
+        {
+            *//*outlineMat = mr.materials[1];
             StartCoroutine(FadeOutline(outlineMat));
 
-            Debug.Log(outlineMat);
+            Debug.Log(outlineMat);*//*
+
 
             
 
@@ -54,12 +68,12 @@ public class PulseTrigger : MonoBehaviour
         {
             Debug.Log("no material");
 
-        }
+        }*/
 
 
     }
 
-    IEnumerator FadeOutline(Material mat)
+    /*IEnumerator FadeOutline(Material mat)
     {
 
         mat.SetFloat("_outlineDepth", 0.02f);
@@ -76,6 +90,6 @@ public class PulseTrigger : MonoBehaviour
         }
 
 
-    }
+    }*/
 
 }
