@@ -5,13 +5,15 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
     PlayerInput playerInput;
-    InputAction moveAction;
-
     Rigidbody rb;
 
-    Vector3 moveVect;
+    [SerializeField] Transform cam;
 
+
+    [Header("Movement")]
+    Vector3 moveVect;
     [SerializeField] private float moveForce = 1f;
 
     private void Awake()
@@ -28,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     private void Move_performed(InputAction.CallbackContext ctx)
     {
         moveVect = ctx.ReadValue<Vector3>();
-        //Debug.Log(moveVect);
     }
 
     private void FixedUpdate()
@@ -39,10 +40,9 @@ public class PlayerMovement : MonoBehaviour
     void Move()
     {
         //x = A/D | y = Space/LShift | z = W/S
-        //moveVect = moveAction.ReadValue<Vector3>();
-        //Vector3 direction = (transform.forward * moveVect.x) + (transform.right * moveVect.z) + (Vector3.up * moveVect.y);
+        Vector3 direction = (cam.forward.normalized * moveVect.z) + (cam.right.normalized * moveVect.x) + (Vector3.up * moveVect.y);
 
-        rb.AddForce(moveVect * moveForce, ForceMode.Acceleration);
+        rb.AddForce(direction * moveForce, ForceMode.Acceleration);
 
     }
 
