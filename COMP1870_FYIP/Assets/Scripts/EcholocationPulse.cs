@@ -1,22 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
-public class SendEchoPulse : MonoBehaviour
+public class EcholocationPulse : MonoBehaviour
 {
     [SerializeField] private GameObject pulsePrefab;
     [SerializeField] private float pulseDuration;
     [SerializeField] private int pulseSize;
 
-    private void Update()
+    PlayerInput playerInput;
+
+    private void Awake()
     {
-        /*if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Pulse();
-        }*/
+        playerInput = new PlayerInput();
+        playerInput.Player.Enable();
+        playerInput.Player.Echo.performed += Echo_performed;
     }
 
-    void Pulse()
+
+    void Echo_performed(InputAction.CallbackContext ctx)
     {
         GameObject pulse = Instantiate(pulsePrefab, transform.position, Quaternion.identity);
         ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
@@ -31,5 +34,10 @@ public class SendEchoPulse : MonoBehaviour
 
 
         Destroy(pulse, pulseDuration + 1f);
+    }
+
+    private void OnDisable()
+    {
+        playerInput.Player.Disable();
     }
 }

@@ -24,41 +24,37 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
 
         playerInput = new PlayerInput();
-        playerInput.Movement.Enable();
-        playerInput.Movement.Move.performed += Move_performed;
-        playerInput.Movement.Move.canceled += Move_cancelled;
-        playerInput.Movement.VerticalMove.performed += VerticalMove_performed;
-        playerInput.Movement.VerticalMove.canceled += VerticalMove_cancelled;
-        playerInput.Movement.Boost.performed += Boost_performed;
+        playerInput.Player.Enable();
+        playerInput.Player.Move.performed += Move_performed;
+        playerInput.Player.Move.canceled += Move_cancelled;
+        playerInput.Player.VerticalMove.performed += VerticalMove_performed;
+        playerInput.Player.VerticalMove.canceled += VerticalMove_cancelled;
+        playerInput.Player.Boost.performed += Boost_performed;
 
         cam = Camera.main.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Move_performed(InputAction.CallbackContext ctx)
+    {
+        moveVect = ctx.ReadValue<Vector2>();
+    }
     private void Move_cancelled(InputAction.CallbackContext ctx)
     {
         moveVect = Vector2.zero;
     }
-
-    private void VerticalMove_cancelled(InputAction.CallbackContext ctx)
-    {
-        vertMove = 0;
-    }
-
     private void VerticalMove_performed(InputAction.CallbackContext ctx)
     {
         vertMove = ctx.ReadValue<float>();
     }
-
+    private void VerticalMove_cancelled(InputAction.CallbackContext ctx)
+    {
+        vertMove = 0;
+    }
     private void Boost_performed(InputAction.CallbackContext ctx)
     {
         rb.AddForce(cam.forward.normalized * boostForce, ForceMode.Impulse);
-    }
-
-    private void Move_performed(InputAction.CallbackContext ctx)
-    {
-        moveVect = ctx.ReadValue<Vector2>();
     }
 
     private void FixedUpdate()
@@ -68,18 +64,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        //x = A/D | y = Space/LShift | z = W/S
         //move direction taking into account the direction camera is facing
         Vector3 dir = (cam.forward.normalized * moveVect.y) + (cam.right.normalized * moveVect.x) + (Vector3.up * vertMove);
         rb.AddForce(dir * moveForce, ForceMode.Force);
 
-        //rotate player with camera (not sure if this is even needed?
+        //rotate player with camera (not sure if this is even needed?)
         transform.rotation = cam.rotation;
 
     }
 
     private void OnDisable()
     {
-        playerInput.Movement.Disable();
+        playerInput.Player.Disable();
     }
 }

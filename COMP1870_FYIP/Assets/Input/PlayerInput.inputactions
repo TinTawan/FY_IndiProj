@@ -2,7 +2,7 @@
     "name": "PlayerInput",
     "maps": [
         {
-            "name": "Movement",
+            "name": "Player",
             "id": "70d34c1b-c2be-4084-94bb-ab3d4b76613b",
             "actions": [
                 {
@@ -36,6 +36,15 @@
                     "name": "Boost",
                     "type": "Button",
                     "id": "2571fad6-4f81-4de5-9c8b-1aee346f8f66",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Echo",
+                    "type": "Button",
+                    "id": "9b4c7ecc-83cb-4939-82b5-a258058df000",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -194,6 +203,28 @@
                     "processors": "Scale(factor=-1)",
                     "groups": "Keyboard and Mouse",
                     "action": "VerticalMove",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "25bd5105-201d-425c-9e83-9a6e8c821bd9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Echo",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e550d406-f40d-4683-9b72-e3020d906126",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Echo",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
