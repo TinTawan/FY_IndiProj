@@ -9,15 +9,15 @@ public class GameUI : MonoBehaviour
     EcholocationPulse echoPulse;
 
     [Header("Pulse Cooldowns")]
-    [SerializeField] Image HighFreqImage;
-    [SerializeField] Image LowFreqImage;
+    [SerializeField] Image HighFreqFillImage;
+    [SerializeField] Image LowFreqFillImage;
 
     private void Start()
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
 
-        HighFreqImage.fillAmount = 0;
-        LowFreqImage.fillAmount = 0;
+        HighFreqFillImage.fillAmount = 0;
+        LowFreqFillImage.fillAmount = 0;
 
     }
 
@@ -32,8 +32,8 @@ public class GameUI : MonoBehaviour
         float hFill = Mathf.InverseLerp(0, echoPulse.GetMaxHighCD(), echoPulse.GetHTimer());
         float lFill = Mathf.InverseLerp(0, echoPulse.GetMaxLowCD(), echoPulse.GetLTimer());
 
-        HighFreqImage.fillAmount = hFill;
-        LowFreqImage.fillAmount = lFill;
+        HighFreqFillImage.fillAmount = hFill;
+        LowFreqFillImage.fillAmount = lFill;
 
     }
 

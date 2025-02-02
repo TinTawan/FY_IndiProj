@@ -126,7 +126,7 @@ public class EcholocationPulse : MonoBehaviour
 
     void PulseCooldown()
     {
-        Debug.Log($"HTimer: {hTimer}");
+        //Debug.Log($"HTimer: {hTimer}");
         if(hTimer <= 0)
         {
             canHPulse = true;
@@ -136,7 +136,7 @@ public class EcholocationPulse : MonoBehaviour
             hTimer -= Time.deltaTime;
         }
 
-        Debug.Log($"LTimer: {lTimer}");
+        //Debug.Log($"LTimer: {lTimer}");
         if (lTimer <= 0)
         {
             canLPulse = true;
