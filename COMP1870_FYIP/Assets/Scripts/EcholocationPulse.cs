@@ -14,13 +14,21 @@ public class EcholocationPulse : MonoBehaviour
     PlayerInput playerInput;
 
     //current pulse
-    GameObject pulsePrefab;
+    /*GameObject pulsePrefab;
     float pulseDuration;
-    int pulseSize;
-
+    int pulseSize;*/
 
     //Switch pulse
     int currentPulse;
+
+
+    [Header("Pulse Cooldown")]
+    [SerializeField] float highCD = 2f;
+    [SerializeField] float lowCD = 1f;
+    float hTimer, lTimer;
+
+    bool canHPulse, canLPulse;
+    bool canPulse;
 
 
     private void Awake()
@@ -33,10 +41,18 @@ public class EcholocationPulse : MonoBehaviour
     private void Start()
     {
         //start game with high freq pulse
-        pulsePrefab = highPulsePrefab;
+        /*pulsePrefab = highPulsePrefab;
         pulseDuration = highPulseDuration;
-        pulseSize = highPulseSize;
+        pulseSize = highPulseSize;*/
+        
         currentPulse = 0;
+        //canPulse = canHPulse;
+
+    }
+
+    private void Update()
+    {
+        PulseCooldown();
     }
 
     private void SwitchPulse_performed(InputAction.CallbackContext ctx)
@@ -46,18 +62,18 @@ public class EcholocationPulse : MonoBehaviour
 
         if (currentPulse == 0)
         {
-            pulsePrefab = highPulsePrefab;
+            /*pulsePrefab = highPulsePrefab;
             pulseDuration = highPulseDuration;
-            pulseSize = highPulseSize;
+            pulseSize = highPulseSize;*/
 
             Debug.Log($"Current pulse: {currentPulse} : High Frequency");
 
         }
         if (currentPulse == 1)
         {
-            pulsePrefab = lowPulsePrefab;
+            /*pulsePrefab = lowPulsePrefab;
             pulseDuration = lowPulseDuration;
-            pulseSize = lowPulseSize;
+            pulseSize = lowPulseSize;*/
 
             Debug.Log($"Current pulse: {currentPulse} : Low Frequency");
 
@@ -67,22 +83,88 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
-        GameObject pulse = Instantiate(pulsePrefab, transform.position, Quaternion.identity);
-        ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
+        if (canHPulse && currentPulse == 0)
+        {
+            GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
+            ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
 
-        pulsePS.Stop();
+            pulsePS.Stop();
 
-        ParticleSystem.MainModule pulseMain = pulsePS.main;
-        pulseMain.startLifetime = pulseDuration;
-        pulseMain.startSize = pulseSize;
+            ParticleSystem.MainModule pulseMain = pulsePS.main;
+            pulseMain.startLifetime = highPulseDuration;
+            pulseMain.startSize = highPulseSize;
 
-        pulsePS.Play();
+            pulsePS.Play();
 
 
-        Destroy(pulse, pulseDuration + 1f);
+            Destroy(pulse, highPulseDuration + 1f);
+
+            canHPulse = false;
+            hTimer = highCD;
+        }
+        if (canLPulse && currentPulse == 1)
+        {
+            GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
+            ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
+
+            pulsePS.Stop();
+
+            ParticleSystem.MainModule pulseMain = pulsePS.main;
+            pulseMain.startLifetime = lowPulseDuration;
+            pulseMain.startSize = lowPulseSize;
+
+            pulsePS.Play();
+
+
+            Destroy(pulse, lowPulseDuration + 1f);
+
+            canLPulse = false;
+            lTimer = lowCD;
+        }
+        
+    }
+
+    void PulseCooldown()
+    {
+        Debug.Log($"HTimer: {hTimer}");
+        if(hTimer <= 0)
+        {
+            canHPulse = true;
+        }
+        else
+        {
+            hTimer -= Time.deltaTime;
+        }
+
+        Debug.Log($"LTimer: {lTimer}");
+        if (lTimer <= 0)
+        {
+            canLPulse = true;
+        }
+        else
+        {
+            lTimer -= Time.deltaTime;
+        }
+
     }
 
 
+    public float GetHTimer()
+    {
+        return hTimer;
+    }
+    public float GetMaxHighCD()
+    {
+        return highCD;
+    }
+    public float GetLTimer()
+    {
+        return lTimer;
+    }
+    public float GetMaxLowCD()
+    {
+        return lowCD;
+    }
 
     private void OnDisable()
     {

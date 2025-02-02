@@ -32,7 +32,7 @@ public class PulseTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"HIT {other.name}");
+        //Debug.Log($"HIT {other.name}");
 
         Renderer rend = other.GetComponent<Renderer>();
 
