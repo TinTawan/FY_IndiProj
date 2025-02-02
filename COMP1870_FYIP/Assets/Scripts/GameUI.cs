@@ -9,15 +9,19 @@ public class GameUI : MonoBehaviour
     EcholocationPulse echoPulse;
 
     [Header("Pulse Cooldowns")]
-    [SerializeField] Image HighFreqFillImage;
-    [SerializeField] Image LowFreqFillImage;
+    [SerializeField] Image highFreqFillImage;
+    [SerializeField] Image lowFreqFillImage;
+    [SerializeField] Image highCover, lowCover;
 
     private void Start()
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
 
-        HighFreqFillImage.fillAmount = 0;
-        LowFreqFillImage.fillAmount = 0;
+        highFreqFillImage.fillAmount = 0;
+        lowFreqFillImage.fillAmount = 0;
+
+        highCover.enabled = false;
+        lowCover.enabled = true;
 
     }
 
@@ -32,9 +36,24 @@ public class GameUI : MonoBehaviour
         float hFill = Mathf.InverseLerp(0, echoPulse.GetMaxHighCD(), echoPulse.GetHTimer());
         float lFill = Mathf.InverseLerp(0, echoPulse.GetMaxLowCD(), echoPulse.GetLTimer());
 
-        HighFreqFillImage.fillAmount = hFill;
-        LowFreqFillImage.fillAmount = lFill;
+        highFreqFillImage.fillAmount = hFill;
+        lowFreqFillImage.fillAmount = lFill;
 
+        int currentPulse = echoPulse.GetCurrentPulse();
+
+        if (currentPulse == 0)
+        {
+            highCover.enabled = false;
+            lowCover.enabled = true;
+
+
+        }
+        if (currentPulse == 1)
+        {
+            highCover.enabled = true;
+            lowCover.enabled = false;
+
+        }
     }
 
 }

@@ -13,11 +13,6 @@ public class EcholocationPulse : MonoBehaviour
     
     PlayerInput playerInput;
 
-    //current pulse
-    /*GameObject pulsePrefab;
-    float pulseDuration;
-    int pulseSize;*/
-
     //Switch pulse
     int currentPulse;
 
@@ -28,7 +23,6 @@ public class EcholocationPulse : MonoBehaviour
     float hTimer, lTimer;
 
     bool canHPulse, canLPulse;
-    bool canPulse;
 
 
     private void Awake()
@@ -164,6 +158,11 @@ public class EcholocationPulse : MonoBehaviour
     public float GetMaxLowCD()
     {
         return lowCD;
+    }
+
+    public int GetCurrentPulse()
+    {
+        return currentPulse;
     }
 
     private void OnDisable()
