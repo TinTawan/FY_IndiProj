@@ -6,18 +6,22 @@ using UnityEngine.InputSystem;
 public class EcholocationPulse : MonoBehaviour
 {
     [Header("Echo pulses")]
-    [SerializeField] private GameObject highPulsePrefab, lowPulsePrefab;
+    [SerializeField] private GameObject highPulsePrefab;
+    [SerializeField] private GameObject lowPulsePrefab;
     [SerializeField] private float highPulseDuration, lowPulseDuration;
     [SerializeField] private int highPulseSize, lowPulseSize;
+    
+    PlayerInput playerInput;
 
+    //current pulse
     GameObject pulsePrefab;
     float pulseDuration;
     int pulseSize;
 
-    PlayerInput playerInput;
 
     //Switch pulse
     int currentPulse;
+
 
     private void Awake()
     {
@@ -37,15 +41,29 @@ public class EcholocationPulse : MonoBehaviour
 
     private void SwitchPulse_performed(InputAction.CallbackContext ctx)
     {
-        //Debug.Log(ctx.ReadValue<float>());
         currentPulse += (int)ctx.ReadValue<float>();
         currentPulse = Mathf.Clamp(currentPulse, 0, 1);
 
-        Debug.Log($"Current pulse: {currentPulse}");
+        if (currentPulse == 0)
+        {
+            pulsePrefab = highPulsePrefab;
+            pulseDuration = highPulseDuration;
+            pulseSize = highPulseSize;
+
+            Debug.Log($"Current pulse: {currentPulse} : High Frequency");
+
+        }
+        if (currentPulse == 1)
+        {
+            pulsePrefab = lowPulsePrefab;
+            pulseDuration = lowPulseDuration;
+            pulseSize = lowPulseSize;
+
+            Debug.Log($"Current pulse: {currentPulse} : Low Frequency");
+
+        }
 
     }
-
-
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
@@ -63,7 +81,6 @@ public class EcholocationPulse : MonoBehaviour
 
         Destroy(pulse, pulseDuration + 1f);
     }
-
 
 
 
