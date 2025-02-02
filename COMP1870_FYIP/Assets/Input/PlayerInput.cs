@@ -71,6 +71,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwitchPulse"",
+                    ""type"": ""Value"",
+                    ""id"": ""62506e0c-a782-4c06-835b-2bef2108121b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -260,6 +269,39 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Echo"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb16f096-3cc4-4f77-af68-cd20f00d1376"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": ""Clamp(min=-1,max=1)"",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""SwitchPulse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""070890a7-ec65-4f06-adb9-71a3bfbec1f4"",
+                    ""path"": ""<Gamepad>/dpad/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SwitchPulse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76ece174-60a5-4bf0-9c90-65e97abb6095"",
+                    ""path"": ""<Gamepad>/dpad/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""SwitchPulse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -284,6 +326,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Echo = m_Player.FindAction("Echo", throwIfNotFound: true);
+        m_Player_SwitchPulse = m_Player.FindAction("SwitchPulse", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -350,6 +393,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Echo;
+    private readonly InputAction m_Player_SwitchPulse;
     public struct PlayerActions
     {
         private @PlayerInput m_Wrapper;
@@ -359,6 +403,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Echo => m_Wrapper.m_Player_Echo;
+        public InputAction @SwitchPulse => m_Wrapper.m_Player_SwitchPulse;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -383,6 +428,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Echo.started += instance.OnEcho;
             @Echo.performed += instance.OnEcho;
             @Echo.canceled += instance.OnEcho;
+            @SwitchPulse.started += instance.OnSwitchPulse;
+            @SwitchPulse.performed += instance.OnSwitchPulse;
+            @SwitchPulse.canceled += instance.OnSwitchPulse;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -402,6 +450,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Echo.started -= instance.OnEcho;
             @Echo.performed -= instance.OnEcho;
             @Echo.canceled -= instance.OnEcho;
+            @SwitchPulse.started -= instance.OnSwitchPulse;
+            @SwitchPulse.performed -= instance.OnSwitchPulse;
+            @SwitchPulse.canceled -= instance.OnSwitchPulse;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -444,5 +495,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnEcho(InputAction.CallbackContext context);
+        void OnSwitchPulse(InputAction.CallbackContext context);
     }
 }

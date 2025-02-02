@@ -305,9 +305,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fc1ccdb998e1a14cba250b918689fd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pulsePrefab: {fileID: 5615053370887633287, guid: bc2e1e056fd499042a25414c065a8a78, type: 3}
-  pulseDuration: 6
-  pulseSize: 100
+  highPulsePrefab: {fileID: 5615053370887633287, guid: bc2e1e056fd499042a25414c065a8a78, type: 3}
+  lowPulsePrefab: {fileID: 2407416443998286090, guid: 1f6d426c98fe35444b290dd124914f87, type: 3}
+  highPulseDuration: 6
+  lowPulseDuration: 1
+  highPulseSize: 100
+  lowPulseSize: 40
 --- !u!114 &138295381
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: intersectionUnLit_test_material
+  m_Name: intersectionUnLit_test_material_blue
   m_Shader: {fileID: -6465566751694194690, guid: 993b01a9f03ed1d4090b43b79c0617a6, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -68,5 +68,5 @@ Material:
     - _ZWriteControl: 0
     - _intersectDepth: 1.6
     m_Colors:
-    - _intersectColour: {r: 0, g: 28.604467, b: 0.17697476, a: 1}
+    - _intersectColour: {r: 0, g: 0.5349487, b: 26.80882, a: 1}
   m_BuildTextureStacks: []

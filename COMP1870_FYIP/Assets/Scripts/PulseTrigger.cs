@@ -34,7 +34,9 @@ public class PulseTrigger : MonoBehaviour
     {
         Debug.Log($"HIT {other.name}");
 
-        if(other.TryGetComponent(out ObjectOutline outline))
+        Renderer rend = other.GetComponent<Renderer>();
+
+        if (other.TryGetComponent(out ObjectOutline outline) && rend.isVisible)
         {
             if (!outline.GetIsOutlined())
             {
