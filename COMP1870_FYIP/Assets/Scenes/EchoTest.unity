@@ -386,7 +386,7 @@ MonoBehaviour:
   lowPulseDuration: 1
   highPulseSize: 100
   lowPulseSize: 40
-  highCD: 2
+  highCD: 3.5
   lowCD: 1
 --- !u!114 &138295381
 MonoBehaviour:
