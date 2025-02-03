@@ -39,7 +39,7 @@ public class EcholocationPulse : MonoBehaviour
         pulseDuration = highPulseDuration;
         pulseSize = highPulseSize;*/
         
-        currentPulse = 0;
+        currentPulse = 1;
         //canPulse = canHPulse;
 
     }
@@ -54,7 +54,7 @@ public class EcholocationPulse : MonoBehaviour
         currentPulse += (int)ctx.ReadValue<float>();
         currentPulse = Mathf.Clamp(currentPulse, 0, 1);
 
-        if (currentPulse == 0)
+        if (currentPulse == 1)
         {
             /*pulsePrefab = highPulsePrefab;
             pulseDuration = highPulseDuration;
@@ -63,7 +63,7 @@ public class EcholocationPulse : MonoBehaviour
             Debug.Log($"Current pulse: {currentPulse} : High Frequency");
 
         }
-        if (currentPulse == 1)
+        if (currentPulse == 0)
         {
             /*pulsePrefab = lowPulsePrefab;
             pulseDuration = lowPulseDuration;
@@ -77,7 +77,7 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
-        if (canHPulse && currentPulse == 0)
+        if (canHPulse && currentPulse == 1)
         {
             GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
@@ -97,7 +97,7 @@ public class EcholocationPulse : MonoBehaviour
             canHPulse = false;
             hTimer = highCD;
         }
-        if (canLPulse && currentPulse == 1)
+        if (canLPulse && currentPulse == 0)
         {
             GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();

@@ -284,9 +284,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""070890a7-ec65-4f06-adb9-71a3bfbec1f4"",
-                    ""path"": ""<Gamepad>/dpad/y"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Scale(factor=-1)"",
                     ""groups"": ""Controller"",
                     ""action"": ""SwitchPulse"",
                     ""isComposite"": false,
@@ -295,9 +295,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""76ece174-60a5-4bf0-9c90-65e97abb6095"",
-                    ""path"": ""<Gamepad>/dpad/x"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Scale"",
                     ""groups"": ""Controller"",
                     ""action"": ""SwitchPulse"",
                     ""isComposite"": false,

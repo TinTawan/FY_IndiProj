@@ -41,14 +41,14 @@ public class GameUI : MonoBehaviour
 
         int currentPulse = echoPulse.GetCurrentPulse();
 
-        if (currentPulse == 0)
+        if (currentPulse == 1)
         {
             highCover.enabled = false;
             lowCover.enabled = true;
 
 
         }
-        if (currentPulse == 1)
+        if (currentPulse == 0)
         {
             highCover.enabled = true;
             lowCover.enabled = false;
