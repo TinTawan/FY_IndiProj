@@ -86,6 +86,7 @@ public class EcholocationPulse : MonoBehaviour
 
             ParticleSystem.MainModule pulseMain = pulsePS.main;
             pulseMain.startLifetime = highPulseDuration;
+            pulseMain.duration = highPulseDuration;
             pulseMain.startSize = highPulseSize;
 
             pulsePS.Play();
@@ -105,6 +106,7 @@ public class EcholocationPulse : MonoBehaviour
 
             ParticleSystem.MainModule pulseMain = pulsePS.main;
             pulseMain.startLifetime = lowPulseDuration;
+            pulseMain.duration = lowPulseDuration;
             pulseMain.startSize = lowPulseSize;
 
             pulsePS.Play();
