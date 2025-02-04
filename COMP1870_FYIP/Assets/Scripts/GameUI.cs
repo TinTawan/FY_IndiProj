@@ -13,6 +13,15 @@ public class GameUI : MonoBehaviour
     [SerializeField] Image lowFreqFillImage;
     [SerializeField] Image highCover, lowCover;
 
+    [Header("Edge Gradient info")]
+    [SerializeField] RawImage edgeGradientRI;
+    [SerializeField] Color highFreqCol;
+    [SerializeField] Color lowFreqCol;
+    //min val for the radius that is furthest off the screen, max for closest towards middle
+    [SerializeField] float edgeRadMin = 0.75f, edgeRadMax = 0.5f;
+
+    Material edgeGradientMat;
+
     private void Start()
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
@@ -23,11 +32,16 @@ public class GameUI : MonoBehaviour
         highCover.enabled = false;
         lowCover.enabled = true;
 
+        edgeGradientMat = edgeGradientRI.material;
+        edgeGradientMat.SetColor("_edgeColour", highFreqCol);
+
+
     }
 
     private void Update()
     {
-        CooldownFillImages();
+        //CooldownFillImages();
+        SetEdgeCol();
     }
 
 
@@ -53,6 +67,21 @@ public class GameUI : MonoBehaviour
             highCover.enabled = true;
             lowCover.enabled = false;
 
+        }
+    }
+
+    void SetEdgeCol()
+    {
+        switch (echoPulse.GetCurrentPulse())
+        {
+            case 0:
+                edgeGradientMat.SetColor("_edgeColour", lowFreqCol);
+
+                break;
+            case 1:
+                edgeGradientMat.SetColor("_edgeColour", highFreqCol);
+
+                break;
         }
     }
 
