@@ -22,6 +22,9 @@ public class GameUI : MonoBehaviour
 
     Material edgeGradientMat;
 
+    [SerializeField] float colLerpSpeed = 2f;
+    Color currentEdgeCol;
+
     private void Start()
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
@@ -41,7 +44,8 @@ public class GameUI : MonoBehaviour
     private void Update()
     {
         //CooldownFillImages();
-        SetEdgeCol();
+        //SetEdgeCol();
+        LerpEdgeCol();
     }
 
 
@@ -83,6 +87,35 @@ public class GameUI : MonoBehaviour
 
                 break;
         }
+    }
+
+    void LerpEdgeCol()
+    {
+        Color targetCol;
+
+        if(echoPulse.GetCurrentPulse() == 0)
+        {
+            targetCol = lowFreqCol;
+        }
+        else
+        {
+            targetCol = highFreqCol;
+
+        }
+
+        currentEdgeCol = Color.Lerp(currentEdgeCol, targetCol, colLerpSpeed * Time.deltaTime);
+
+        edgeGradientMat.SetColor("_edgeColour", currentEdgeCol);
+
+    }
+
+
+
+
+    private void OnDisable()
+    {
+        edgeGradientMat.SetColor("_edgeColour", highFreqCol);
+
     }
 
 }

@@ -64,5 +64,5 @@ Material:
     - _softness: 3.5
     m_Colors:
     - _EdgeColour: {r: 1, g: 1, b: 1, a: 1}
-    - _edgeColour: {r: 0, g: 0.83137256, b: 1, a: 1}
+    - _edgeColour: {r: 0, g: 0.8484731, b: 0.9125092, a: 0.9999994}
   m_BuildTextureStacks: []
