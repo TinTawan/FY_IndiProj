@@ -61,8 +61,8 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _radius: 0.5
-    - _softness: 3.5
+    - _softness: 3.3
     m_Colors:
     - _EdgeColour: {r: 1, g: 1, b: 1, a: 1}
-    - _edgeColour: {r: 0, g: 0.8484731, b: 0.9125092, a: 0.9999994}
+    - _edgeColour: {r: 0, g: 1, b: 0.13725491, a: 1}
   m_BuildTextureStacks: []
