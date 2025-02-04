@@ -45,7 +45,9 @@ public class GameUI : MonoBehaviour
     {
         //CooldownFillImages();
         //SetEdgeCol();
+
         LerpEdgeCol();
+        EdgeCooldownLerp();
     }
 
 
@@ -107,8 +109,27 @@ public class GameUI : MonoBehaviour
 
         edgeGradientMat.SetColor("_edgeColour", currentEdgeCol);
 
+
     }
 
+    void EdgeCooldownLerp()
+    {
+
+        float hRad = Mathf.Lerp(edgeRadMax, edgeRadMin, echoPulse.GetHTimer());
+        float lRad = Mathf.Lerp(edgeRadMax, edgeRadMin, echoPulse.GetLTimer());
+
+        if (echoPulse.GetCurrentPulse() == 0) 
+        {
+            edgeGradientMat.SetFloat("_radius", lRad);
+
+        }
+        else
+        {
+            edgeGradientMat.SetFloat("_radius", hRad);
+
+        }
+
+    }
 
 
 
