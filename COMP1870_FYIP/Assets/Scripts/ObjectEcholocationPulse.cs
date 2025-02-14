@@ -15,28 +15,40 @@ public class ObjectEcholocationPulse : MonoBehaviour
 
     ParticleSystem ps;
     ParticleSystem.MainModule psMain;
+    ParticleSystem.ColorOverLifetimeModule psCol;
+    ParticleSystem.EmissionModule psEm;
     float burstTime = 0f;
 
-    private void Start()
+    private void Awake()
     {
-        ps = GetComponent<ParticleSystem>();
+        ps = GetComponentInChildren<ParticleSystem>();
         psMain = ps.main;
+        psCol = ps.colorOverLifetime;
+        psEm = ps.emission;
 
         SetPS();
         SetBurst();
+
+    }
+    private void Start()
+    {
+        ps.Play();
+
     }
 
     void SetPS()
     {
         //set colour and colorOverLifetime colour
-        psMain.startColor = pulseColour;
-        ParticleSystem.ColorOverLifetimeModule psCol = ps.colorOverLifetime;
+        /*ParticleSystem.MinMaxGradient colour = pulseColour;
+        psMain.startColor = colour.color;*/
+
+
         Gradient grad = new Gradient();
         grad.SetKeys(
             new GradientColorKey[] { new GradientColorKey(pulseColour, 0.0f), new GradientColorKey(pulseColour, 1.0f)}, 
             new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 0.95f)}
         );
-        psCol.color = grad;
+        psCol.color = new ParticleSystem.MinMaxGradient(grad);
 
         //set timings
         psMain.duration = fullDuration;
@@ -49,8 +61,6 @@ public class ObjectEcholocationPulse : MonoBehaviour
     void SetBurst()
     {
         burstTime = 0f;
-
-        ParticleSystem.EmissionModule psEm = ps.emission;
 
         //set burst count
         ParticleSystem.Burst[] bursts = new ParticleSystem.Burst[burstCount];
@@ -66,10 +76,10 @@ public class ObjectEcholocationPulse : MonoBehaviour
         }
     }
 
-    private void OnValidate()
+    /*private void OnValidate()
     {
         SetPS();
         SetBurst();
-    }
+    }*/
 
 }
