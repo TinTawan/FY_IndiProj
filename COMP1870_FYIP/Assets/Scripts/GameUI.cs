@@ -8,11 +8,6 @@ public class GameUI : MonoBehaviour
 {
     EcholocationPulse echoPulse;
 
-    [Header("Pulse Cooldowns")]
-    [SerializeField] Image highFreqFillImage;
-    [SerializeField] Image lowFreqFillImage;
-    [SerializeField] Image highCover, lowCover;
-
     [Header("Edge Gradient info")]
     [SerializeField] RawImage edgeGradientRI;
     [SerializeField] Color highFreqCol;
@@ -29,66 +24,15 @@ public class GameUI : MonoBehaviour
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
 
-        highFreqFillImage.fillAmount = 0;
-        lowFreqFillImage.fillAmount = 0;
-
-        highCover.enabled = false;
-        lowCover.enabled = true;
-
         edgeGradientMat = edgeGradientRI.material;
         edgeGradientMat.SetColor("_edgeColour", highFreqCol);
-
 
     }
 
     private void Update()
     {
-        //CooldownFillImages();
-        //SetEdgeCol();
-
         LerpEdgeCol();
         EdgeCooldownLerp();
-    }
-
-
-    void CooldownFillImages()
-    {
-        float hFill = Mathf.InverseLerp(0, echoPulse.GetMaxHighCD(), echoPulse.GetHTimer());
-        float lFill = Mathf.InverseLerp(0, echoPulse.GetMaxLowCD(), echoPulse.GetLTimer());
-
-        highFreqFillImage.fillAmount = hFill;
-        lowFreqFillImage.fillAmount = lFill;
-
-        int currentPulse = echoPulse.GetCurrentPulse();
-
-        if (currentPulse == 1)
-        {
-            highCover.enabled = false;
-            lowCover.enabled = true;
-
-
-        }
-        if (currentPulse == 0)
-        {
-            highCover.enabled = true;
-            lowCover.enabled = false;
-
-        }
-    }
-
-    void SetEdgeCol()
-    {
-        switch (echoPulse.GetCurrentPulse())
-        {
-            case 0:
-                edgeGradientMat.SetColor("_edgeColour", lowFreqCol);
-
-                break;
-            case 1:
-                edgeGradientMat.SetColor("_edgeColour", highFreqCol);
-
-                break;
-        }
     }
 
     void LerpEdgeCol()
@@ -135,7 +79,9 @@ public class GameUI : MonoBehaviour
 
     private void OnDisable()
     {
+        //reset material attributes
         edgeGradientMat.SetColor("_edgeColour", highFreqCol);
+        edgeGradientMat.SetFloat("_radius", edgeRadMax);
 
     }
 
