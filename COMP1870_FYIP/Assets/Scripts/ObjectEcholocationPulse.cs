@@ -38,11 +38,10 @@ public class ObjectEcholocationPulse : MonoBehaviour
 
     void SetPS()
     {
-        //set colour and colorOverLifetime colour
-        /*ParticleSystem.MinMaxGradient colour = pulseColour;
-        psMain.startColor = colour.color;*/
+        //set the colour of the system
+        psMain.startColor = pulseColour;
 
-
+        //set the colour over lifetime module colour using a gradient
         Gradient grad = new Gradient();
         grad.SetKeys(
             new GradientColorKey[] { new GradientColorKey(pulseColour, 0.0f), new GradientColorKey(pulseColour, 1.0f)}, 
