@@ -35,6 +35,7 @@ public class GameUI : MonoBehaviour
         EdgeCooldownLerp();
     }
 
+    //lerp between the colours for the currently selected frequency type
     void LerpEdgeCol()
     {
         Color targetCol;
@@ -56,9 +57,9 @@ public class GameUI : MonoBehaviour
 
     }
 
+    //lerp the radius of the edge colour to act as a cooldown bar
     void EdgeCooldownLerp()
     {
-
         float hRad = Mathf.Lerp(edgeRadMax, edgeRadMin, echoPulse.GetHTimer());
         float lRad = Mathf.Lerp(edgeRadMax, edgeRadMin, echoPulse.GetLTimer());
 
@@ -72,6 +73,12 @@ public class GameUI : MonoBehaviour
             edgeGradientMat.SetFloat("_radius", hRad);
 
         }
+
+    }
+
+    //slowly increase and decrease the smoothness in a beating heart pattern to make the edge feel more alive
+    void EdgeSoftness()
+    {
 
     }
 

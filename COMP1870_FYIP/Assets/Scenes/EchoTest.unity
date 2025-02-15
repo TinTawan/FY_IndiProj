@@ -1158,7 +1158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edgeGradientRI: {fileID: 203532584}
   highFreqCol: {r: 0, g: 1, b: 0.13725491, a: 1}
-  lowFreqCol: {r: 0, g: 0.42990637, b: 1, a: 1}
+  lowFreqCol: {r: 0, g: 0.8784314, b: 1, a: 1}
   edgeRadMin: 0.75
   edgeRadMax: 0.5
   colLerpSpeed: 2
