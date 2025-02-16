@@ -1060,7 +1060,7 @@ GameObject:
   m_Component:
   - component: {fileID: 350762603}
   m_Layer: 0
-  m_Name: ItemSlot
+  m_Name: ItemPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12414,11 +12414,11 @@ GameObject:
   - component: {fileID: 1403825635}
   m_Layer: 0
   m_Name: ObectiveSlot
-  m_TagString: Untagged
+  m_TagString: ObjectiveSlot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1403825635
 MonoBehaviour:
   m_ObjectHideFlags: 0

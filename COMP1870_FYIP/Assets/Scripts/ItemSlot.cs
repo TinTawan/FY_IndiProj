@@ -6,44 +6,31 @@ using UnityEngine;
 
 public class ItemSlot : MonoBehaviour
 {
-    PlayerInput playerInput;
-    ItemInteract itemInteract;
-
-    bool canPlace;
-
-    private void Awake()
-    {
-        playerInput = new PlayerInput();
-        playerInput.Player.Enable();
-        playerInput.Player.Interact.started += Interact_started;
-    }
-
-    private void Interact_started(InputAction.CallbackContext ctx)
-    {
-        if (canPlace)
-        {
-            itemInteract.Dropitem();
-        }
-    }
+    int items = 0;
+    bool collected;
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("Player"))
         {
-            canPlace = true;
-            itemInteract = col.GetComponent<ItemInteract>();
-        }
-    }
-    private void OnTriggerExit(Collider col)
-    {
-        if (col.CompareTag("Player"))
-        {
-            canPlace = false;
+            /*if (col.TryGetComponent(out ItemInteract item))
+            {
+                if (item.GetDropped())
+                {
+                    items++;
+                    Debug.Log($"Objective Items found: {items}");
+                    Destroy(col.gameObject, 0.1f);
+                }
+                
+            }
+            if (col.GetComponent<ItemInteract>().GetDropped())
+            {
+                items++;
+                Debug.Log($"Objective Items found: {items}");
+                Destroy(col.gameObject, 0.1f);
+            }*/
+
         }
     }
 
-    private void OnDisable()
-    {
-        playerInput.Player.Disable();
-    }
 }

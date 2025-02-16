@@ -11,6 +11,8 @@ public class ItemInteract : MonoBehaviour
 
     GameObject heldItem;
 
+    Collider[] itemCols;
+
     bool canPickUp, holdingItem;
 
 
@@ -66,20 +68,43 @@ public class ItemInteract : MonoBehaviour
 
     void CarryItem(GameObject inHeldItem)
     {
+        SetCols(false);
+
         inHeldItem.transform.SetPositionAndRotation(itemSlot.position, Quaternion.identity);
         inHeldItem.transform.SetParent(itemSlot);
 
         canPickUp = false;
         holdingItem = true;
+
     }
 
-    public void Dropitem()
+    void Dropitem()
     {
+        SetCols(true);
+
         heldItem.transform.SetParent(null);
         heldItem = null;
 
         canPickUp = true;
         holdingItem = false;
+
+    }
+
+    void SetCols(bool areCollidersOn)
+    {
+        /*GameObject[] objs = GetComponentsInChildren<GameObject>();
+        foreach(GameObject go in objs)
+        {
+            GameObject.findta
+        }*/
+
+
+        //so far this removes the players colliders
+        itemCols = heldItem.GetComponents<Collider>();
+        foreach (Collider col in itemCols)
+        {
+            col.enabled = areCollidersOn;
+        }
     }
 
 
