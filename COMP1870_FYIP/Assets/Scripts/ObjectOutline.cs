@@ -10,10 +10,21 @@ public class ObjectOutline : MonoBehaviour
     [SerializeField] private Color outlineColour;
     Material outlineMat;
 
+    ObjectEcholocationPulse objEchoPulse;
+
     private void Start()
     {
         outlineMat = GetComponent<MeshRenderer>().materials[1];
         outlineMat.SetColor("_outlineColour", outlineColour);
+
+        if(TryGetComponent(out ObjectEcholocationPulse oep))
+        {
+            objEchoPulse = oep;
+        }
+        else
+        {
+            objEchoPulse = null;
+        }
         
     }
 
@@ -31,6 +42,13 @@ public class ObjectOutline : MonoBehaviour
     IEnumerator FadeOutline(Material mat)
     {
         isOutlined = true;
+
+        if(objEchoPulse != null)
+        {
+            yield return new WaitForFixedUpdate();
+            objEchoPulse.SetPlayOnce(false);
+        }
+
         mat.SetFloat("_outlineDepth", 0.02f);
 
         yield return new WaitForSeconds(outlineTime);
@@ -45,6 +63,10 @@ public class ObjectOutline : MonoBehaviour
 
         isOutlined = false;
 
+        if (objEchoPulse != null)
+        {
+            objEchoPulse.SetPlayOnce(true);
+        }
     }
 
 

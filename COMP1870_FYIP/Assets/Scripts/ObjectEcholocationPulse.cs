@@ -19,6 +19,9 @@ public class ObjectEcholocationPulse : MonoBehaviour
     ParticleSystem.EmissionModule psEm;
     float burstTime = 0f;
 
+    ObjectOutline objOutline;
+    bool playOnce = true;
+
     private void Awake()
     {
         ps = GetComponentInChildren<ParticleSystem>();
@@ -29,10 +32,21 @@ public class ObjectEcholocationPulse : MonoBehaviour
         SetPS();
         SetBurst();
 
+        objOutline = GetComponent<ObjectOutline>();
+
     }
-    private void Start()
+
+    private void Update()
     {
-        ps.Play();
+        if (objOutline.GetIsOutlined() && playOnce)
+        {
+            ps.Play();
+            
+        }
+        /*if (!objOutline.GetIsOutlined() || !playOnce)
+        {
+            ps.Stop();
+        }*/
 
     }
 
@@ -73,6 +87,11 @@ public class ObjectEcholocationPulse : MonoBehaviour
             burstTime += burstInterval;
 
         }
+    }
+
+    public void SetPlayOnce(bool inBool)
+    {
+        playOnce = inBool;
     }
 
     /*private void OnValidate()
