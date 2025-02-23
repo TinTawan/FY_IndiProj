@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2297339597393324913}
   - component: {fileID: 2722596538037452912}
   - component: {fileID: 5570875285255555509}
+  - component: {fileID: 3367278823858247892}
+  - component: {fileID: 1893258278066662593}
   m_Layer: 6
   m_Name: 'emittingPS '
   m_TagString: Untagged
@@ -5004,6 +5006,39 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!135 &3367278823858247892
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739320863236053113}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1893258278066662593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739320863236053113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8fd28304c62e844d89e4b30c3ffd413, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3453502494064406700
 GameObject:
   m_ObjectHideFlags: 0

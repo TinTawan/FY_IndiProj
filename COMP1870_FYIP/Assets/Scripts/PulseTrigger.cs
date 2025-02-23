@@ -7,26 +7,41 @@ public class PulseTrigger : MonoBehaviour
     private SphereCollider sphereCol;
     private ParticleSystem ps;
 
+    float timer;
 
-    private void OnEnable()
+
+    private void Start()
     {
         ps = GetComponent<ParticleSystem>();
         sphereCol = GetComponent<SphereCollider>();
+
+        sphereCol.radius = .5f;
     }
 
     private void Update()
     {
         ExpandColWithPS();
+
     }
 
 
     void ExpandColWithPS()
     {
-        ParticleSystem.SizeOverLifetimeModule sol = ps.sizeOverLifetime;
-        float delta = Mathf.Clamp01(ps.time / ps.main.startLifetime.constant);
-        float currentSize = sol.size.Evaluate(delta);
+        if(ps.isPlaying)
+        {
+            //timer += Time.deltaTime;
 
-        sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
+            ParticleSystem.SizeOverLifetimeModule sol = ps.sizeOverLifetime;
+            float delta = Mathf.Clamp01(ps.time / ps.main.startLifetime.constant);
+            float currentSize = sol.size.Evaluate(delta);
+
+            sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
+        }
+        else
+        {
+            sphereCol.radius = 0.5f;
+            //timer = 0;
+        }
 
     }
 
