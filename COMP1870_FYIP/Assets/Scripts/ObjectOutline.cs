@@ -79,4 +79,9 @@ public class ObjectOutline : MonoBehaviour
     {
         canBeTriggered = inBool;
     }
+
+    public void TurnOnOutline(float depth)
+    {
+        outlineMat.SetFloat("_outlineDepth", depth);
+    }
 }

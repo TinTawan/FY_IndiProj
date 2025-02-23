@@ -6,6 +6,7 @@ using UnityEngine;
 public class ItemInteract : MonoBehaviour
 {
     [SerializeField] Transform itemSlot;
+    [SerializeField] float outlineDepth = 0.02f;
 
     PlayerInput playerInput;
 
@@ -76,11 +77,24 @@ public class ItemInteract : MonoBehaviour
         canPickUp = false;
         holdingItem = true;
 
+        if (heldItem.TryGetComponent(out ObjectOutline outline))
+        {
+            outline.TurnOnOutline(outlineDepth);
+
+
+        }
+
     }
 
     void Dropitem()
     {
         SetCols(true);
+
+        if (heldItem.TryGetComponent(out ObjectOutline outline))
+        {
+            outline.TurnOnOutline(0f);
+            outline.SetCanBeTriggered(false);
+        }
 
         heldItem.transform.SetParent(null);
         heldItem = null;
