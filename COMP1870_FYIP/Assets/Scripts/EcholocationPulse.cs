@@ -24,6 +24,13 @@ public class EcholocationPulse : MonoBehaviour
 
     bool canHPulse, canLPulse;
 
+    [Header("Visibility")]
+    [SerializeField] float sinStrength = 1f;
+    [SerializeField] float expandSpeedHigh = 6f, rangeHigh, intensityHigh;
+    [SerializeField] float expandSpeedLow = 2f, rangeLow, intensityLow;
+    Light pLight;
+    bool lightOn = false;
+
 
     private void Awake()
     {
@@ -42,11 +49,17 @@ public class EcholocationPulse : MonoBehaviour
         currentPulse = 1;
         //canPulse = canHPulse;
 
+        pLight = GetComponentInChildren<Light>();
+        pLight.range = 0f;
+        pLight.intensity = 0f;
+
     }
 
     private void Update()
     {
         PulseCooldown();
+
+        Light();
     }
 
     private void SwitchPulse_performed(InputAction.CallbackContext ctx)
@@ -77,6 +90,8 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
+        lightOn = true;
+
         if (canHPulse && currentPulse == 1)
         {
             GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
@@ -126,6 +141,7 @@ public class EcholocationPulse : MonoBehaviour
         if(hTimer <= 0)
         {
             canHPulse = true;
+
         }
         else
         {
@@ -136,14 +152,30 @@ public class EcholocationPulse : MonoBehaviour
         if (lTimer <= 0)
         {
             canLPulse = true;
+
         }
         else
         {
             lTimer -= Time.deltaTime;
+
         }
 
     }
 
+    void Light()
+    {
+        if (lightOn)
+        {
+            pLight.enabled = true;
+            pLight.intensity = intensityLow;
+            pLight.range = Mathf.Lerp(pLight.range, rangeLow, Time.deltaTime * expandSpeedLow);
+        }
+        else
+        {
+            pLight.enabled = false;
+            pLight.range = 0f;
+        }
+    }
 
     public float GetHTimer()
     {
@@ -165,6 +197,11 @@ public class EcholocationPulse : MonoBehaviour
     public int GetCurrentPulse()
     {
         return currentPulse;
+    }
+
+    public void SetLightOn(bool inBool)
+    {
+        lightOn = inBool;
     }
 
     private void OnDisable()

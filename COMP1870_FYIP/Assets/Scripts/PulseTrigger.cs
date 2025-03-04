@@ -9,11 +9,15 @@ public class PulseTrigger : MonoBehaviour
 
     float timer;
 
+    EcholocationPulse echo;
+
 
     private void Start()
     {
         ps = GetComponent<ParticleSystem>();
         sphereCol = GetComponent<SphereCollider>();
+
+        echo = FindObjectOfType<EcholocationPulse>();
 
         sphereCol.radius = .5f;
     }
@@ -36,10 +40,14 @@ public class PulseTrigger : MonoBehaviour
             float currentSize = sol.size.Evaluate(delta);
 
             sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
+
+            echo.SetLightOn(true);
+
         }
         else
         {
             sphereCol.radius = 0.5f;
+            echo.SetLightOn(false);
             //timer = 0;
         }
 
