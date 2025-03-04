@@ -35,13 +35,13 @@ public class ItemInteract : MonoBehaviour
         //player can pick up or drop item by interacting
         if (holdingItem)
         {
-            Debug.Log("Dropped item");
+            //Debug.Log("Dropped item");
             Dropitem();
             return;
         }
         if (canPickUp)
         {
-            Debug.Log("Interacted with item");
+            //Debug.Log("Interacted with item");
             CarryItem(heldItem);
         }
 
@@ -108,12 +108,6 @@ public class ItemInteract : MonoBehaviour
 
     void SetCols(bool areCollidersOn)
     {
-        /*GameObject[] objs = GetComponentsInChildren<GameObject>();
-        foreach(GameObject go in objs)
-        {
-            GameObject.findta
-        }*/
-
 
         //so far this removes the players colliders
         itemCols = heldItem.GetComponents<Collider>();

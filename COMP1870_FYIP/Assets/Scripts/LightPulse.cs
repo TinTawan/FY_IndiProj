@@ -21,13 +21,13 @@ public class LightPulse : MonoBehaviour
 
     IEnumerator FadeLight(float onTime, float subVal)
     {
-        Debug.Log("Fade out soon");
+        //Debug.Log("Fade out soon");
         yield return new WaitForSeconds(onTime);
-        Debug.Log("Fade out now");
+        //Debug.Log("Fade out now");
 
         while (pLight.range > 0)
         {
-            Debug.Log("Fading");
+            //Debug.Log("Fading");
 
             pLight.range -= subVal;
             if(pLight.intensity > 0)
@@ -39,7 +39,7 @@ public class LightPulse : MonoBehaviour
 
         }
 
-        Debug.Log("Faded out");
+        //Debug.Log("Faded out");
 
         Destroy(pLight.gameObject, 1f);
     }
