@@ -46,16 +46,27 @@ public class PulseTrigger : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        //Debug.Log($"HIT {other.name}");
-
+    {       
         Renderer rend = other.GetComponent<Renderer>();
 
-        if (other.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
+        if (other.TryGetComponent(out ObjectOutline outline) && rend.isVisible)
         {
             if (!outline.GetIsOutlined())
             {
+                //outline the object
                 outline.SetCanBeTriggered(true);
+
+                //give lower outline time if hit by low pulse
+                if (gameObject.CompareTag("LowPulse"))
+                {
+                    outline.SetOutlineTime(2f);
+                }
+                //and longer outline time if hit by high pulse
+                if (gameObject.CompareTag("HighPulse"))
+                {
+                    outline.SetOutlineTime(6f);
+
+                }
 
             }
             else

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2959289655283027862}
   m_Layer: 7
   m_Name: particleSphere
-  m_TagString: Untagged
+  m_TagString: HighPulse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4992,7 +4992,7 @@ GameObject:
   - component: {fileID: 2589855124523295490}
   m_Layer: 0
   m_Name: echoPulseEffect_green
-  m_TagString: Untagged
+  m_TagString: HighPulse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

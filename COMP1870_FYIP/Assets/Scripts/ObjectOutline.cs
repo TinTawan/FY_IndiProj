@@ -71,6 +71,10 @@ public class ObjectOutline : MonoBehaviour
         }
     }
 
+    public void SetOutlineTime(float inTime)
+    {
+        outlineTime = inTime;
+    }
 
     public bool GetIsOutlined()
     {
