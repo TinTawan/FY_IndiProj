@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlot: {fileID: 350762603}
-  outlineDepth: 0.03
+  outlineDepth: 0.015
 --- !u!1 &195721559
 GameObject:
   m_ObjectHideFlags: 0

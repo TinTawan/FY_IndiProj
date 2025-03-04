@@ -79,8 +79,9 @@ public class ItemInteract : MonoBehaviour
 
         if (heldItem.TryGetComponent(out ObjectOutline outline))
         {
+            outline.StopFadeCR();
             outline.TurnOnOutline(outlineDepth);
-
+            outline.SetIsOutlined(true);
 
         }
 
@@ -94,6 +95,7 @@ public class ItemInteract : MonoBehaviour
         {
             outline.TurnOnOutline(0f);
             outline.SetCanBeTriggered(false);
+            outline.SetIsOutlined(false);
         }
 
         heldItem.transform.SetParent(null);

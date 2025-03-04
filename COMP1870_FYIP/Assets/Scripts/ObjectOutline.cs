@@ -12,6 +12,8 @@ public class ObjectOutline : MonoBehaviour
 
     ObjectEcholocationPulse objEchoPulse;
 
+    Coroutine fadeCR;
+
     private void Start()
     {
         outlineMat = GetComponent<MeshRenderer>().materials[1];
@@ -34,7 +36,7 @@ public class ObjectOutline : MonoBehaviour
         {
             canBeTriggered = false;
 
-            StartCoroutine(FadeOutline(outlineMat));
+            fadeCR = StartCoroutine(FadeOutline(outlineMat));
         }
     }
 
@@ -74,6 +76,10 @@ public class ObjectOutline : MonoBehaviour
     {
         return isOutlined;
     }
+    public void SetIsOutlined(bool inBool)
+    {
+        isOutlined = inBool;
+    }
 
     public void SetCanBeTriggered(bool inBool)
     {
@@ -83,5 +89,10 @@ public class ObjectOutline : MonoBehaviour
     public void TurnOnOutline(float depth)
     {
         outlineMat.SetFloat("_outlineDepth", depth);
+    }
+
+    public void StopFadeCR()
+    {
+        StopCoroutine(fadeCR);
     }
 }
