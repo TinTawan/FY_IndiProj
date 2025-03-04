@@ -24,12 +24,6 @@ public class EcholocationPulse : MonoBehaviour
 
     bool canHPulse, canLPulse;
 
-    [Header("Visibility")]
-    [SerializeField] float sinStrength = 1f;
-    [SerializeField] float expandSpeedHigh = 6f, rangeHigh, intensityHigh;
-    [SerializeField] float expandSpeedLow = 2f, rangeLow, intensityLow;
-    Light pLight;
-    bool lightOn = false;
 
 
     private void Awake()
@@ -49,9 +43,10 @@ public class EcholocationPulse : MonoBehaviour
         currentPulse = 1;
         //canPulse = canHPulse;
 
-        pLight = GetComponentInChildren<Light>();
-        pLight.range = 0f;
-        pLight.intensity = 0f;
+        //pLight = GetComponentInChildren<Light>();
+        //pLight.enabled = false;
+        //pLight.range = 0f;
+        //pLight.intensity = 0f;
 
     }
 
@@ -59,7 +54,6 @@ public class EcholocationPulse : MonoBehaviour
     {
         PulseCooldown();
 
-        Light();
     }
 
     private void SwitchPulse_performed(InputAction.CallbackContext ctx)
@@ -90,7 +84,6 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
-        lightOn = true;
 
         if (canHPulse && currentPulse == 1)
         {
@@ -162,21 +155,6 @@ public class EcholocationPulse : MonoBehaviour
 
     }
 
-    void Light()
-    {
-        if (lightOn)
-        {
-            pLight.enabled = true;
-            pLight.intensity = intensityLow;
-            pLight.range = Mathf.Lerp(pLight.range, rangeLow, Time.deltaTime * expandSpeedLow);
-        }
-        else
-        {
-            pLight.enabled = false;
-            pLight.range = 0f;
-        }
-    }
-
     public float GetHTimer()
     {
         return hTimer;
@@ -199,10 +177,6 @@ public class EcholocationPulse : MonoBehaviour
         return currentPulse;
     }
 
-    public void SetLightOn(bool inBool)
-    {
-        lightOn = inBool;
-    }
 
     private void OnDisable()
     {

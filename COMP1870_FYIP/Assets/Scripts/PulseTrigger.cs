@@ -4,20 +4,18 @@ using UnityEngine;
 
 public class PulseTrigger : MonoBehaviour
 {
+    [SerializeField] GameObject lightObj;
     private SphereCollider sphereCol;
     private ParticleSystem ps;
 
-    float timer;
+    Light pulseLight;
 
-    EcholocationPulse echo;
-
+    bool doOnce = true;
 
     private void Start()
     {
         ps = GetComponent<ParticleSystem>();
         sphereCol = GetComponent<SphereCollider>();
-
-        echo = FindObjectOfType<EcholocationPulse>();
 
         sphereCol.radius = .5f;
     }
@@ -33,7 +31,6 @@ public class PulseTrigger : MonoBehaviour
     {
         if(ps.isPlaying)
         {
-            //timer += Time.deltaTime;
 
             ParticleSystem.SizeOverLifetimeModule sol = ps.sizeOverLifetime;
             float delta = Mathf.Clamp01(ps.time / ps.main.startLifetime.constant);
@@ -41,14 +38,33 @@ public class PulseTrigger : MonoBehaviour
 
             sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
 
-            echo.SetLightOn(true);
+            if (doOnce)
+            {
+                GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
+                pulseLight = obj.GetComponent<Light>();
+
+
+                LightPulse lp = pulseLight.GetComponent<LightPulse>();
+                lp.SetLifetime(ps.main.startLifetime.constant + 1f);
+                lp.SetFadeSpeed(0.1f);
+
+
+                doOnce = false;
+            }
+
+            if(pulseLight != null)
+            {
+                pulseLight.range = sphereCol.radius;
+                pulseLight.intensity = ps.main.startSize.constant / 3;
+            }
+            
+
 
         }
         else
         {
             sphereCol.radius = 0.5f;
-            echo.SetLightOn(false);
-            //timer = 0;
+
         }
 
     }
@@ -86,5 +102,5 @@ public class PulseTrigger : MonoBehaviour
 
     }
 
-
+    
 }
