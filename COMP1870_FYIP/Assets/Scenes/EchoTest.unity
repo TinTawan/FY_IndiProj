@@ -602,13 +602,22 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8aa8ca10f34d6c143b12a97f69182d26, type: 3}
   - {fileID: 8300000, guid: 36fbf823daa5783489359c6279d1e656, type: 3}
   - {fileID: 8300000, guid: fcaf2c90e15070243b221ed7a6a37bc2, type: 3}
-  lowPulseHitSound: []
+  lowPulseHitSound:
+  - {fileID: 8300000, guid: 32c99b7559fcfbf4c803db55d351d6cc, type: 3}
+  - {fileID: 8300000, guid: 1bc4ee2923bdbb7448d50f23562355da, type: 3}
+  - {fileID: 8300000, guid: 63c52f567562faa418c30a0e0ec2a761, type: 3}
+  - {fileID: 8300000, guid: 0963b531f6d4ca1468bbaf1820a478f8, type: 3}
+  - {fileID: 8300000, guid: b43f36054b35f9a4b959b0010b758e56, type: 3}
   highPulseOutSound:
   - {fileID: 8300000, guid: d3bb4ca3e579b44489cbf70b11a9cebf, type: 3}
   - {fileID: 8300000, guid: 412bb7f2b30ffb84dbaefe185e93a2ab, type: 3}
   - {fileID: 8300000, guid: a120bbb59d5a4ff4493279ef477cbf70, type: 3}
   - {fileID: 8300000, guid: dbee1b7c58cff6747ba853e5117cbf52, type: 3}
-  highPulseHitSound: []
+  highPulseHitSound:
+  - {fileID: 8300000, guid: bf723bad39d91c64cad5e19cc395c376, type: 3}
+  - {fileID: 8300000, guid: 2e3852d09d206294a8228f9eba48f483, type: 3}
+  - {fileID: 8300000, guid: 9319cfa8b12a0614a9a61f299097267b, type: 3}
+  - {fileID: 8300000, guid: 682962a7582154b468f2181d051c90be, type: 3}
   emitterPulseOutSound: []
   emitterPulseHitSound: []
   canInteractSound:

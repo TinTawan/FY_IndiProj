@@ -68,13 +68,13 @@ public class PulseTrigger : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider col)
     {
-        Renderer rend = other.GetComponent<Renderer>();
+        Renderer rend = col.GetComponent<Renderer>();
 
-        if (other.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
+        if (col.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
         {
-            float[] vals = FindLeftOrRightOfPlayer(other.gameObject.transform.position);
+            float[] vals = FindLeftOrRightOfPlayer(col.gameObject.transform.position);
 
             //outline.StopFadeCR();
 
@@ -90,6 +90,8 @@ public class PulseTrigger : MonoBehaviour
 
                     HapticManager.instance.HapticFeedback(vals[0] * 0.2f, vals[1] * 0.7f, 0.3f);
 
+                    AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseHit, col.transform.position, 0.2f);
+
                 }
                 //and longer outline time if hit by high pulse
                 if (gameObject.CompareTag("HighPulse"))
@@ -98,6 +100,8 @@ public class PulseTrigger : MonoBehaviour
 
                     HapticManager.instance.HapticFeedback(vals[0] * 0.3f, vals[1] * 1f, 0.4f);
 
+                    AudioManager.instance.PlaySound(AudioManager.soundType.highPulseHit, col.transform.position, 0.2f);
+
                 }
                 //and middle time if hit by emitting object
                 if (gameObject.CompareTag("EmitterPulse"))
@@ -105,6 +109,8 @@ public class PulseTrigger : MonoBehaviour
                     outline.SetOutlineTime(emittingObjectPulseDuration);
 
                     HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.5f, 0.2f);
+
+                    AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseHit, col.transform.position, 0.2f);
 
                 }
 
