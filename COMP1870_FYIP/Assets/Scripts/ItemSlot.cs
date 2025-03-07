@@ -2,41 +2,50 @@ using UnityEngine;
 
 public class ItemSlot : MonoBehaviour
 {
-    [SerializeField] float colourDelta = 0.01f;
+    [SerializeField] float colourCheckDelta = 0.01f, outlineDepth = 0.02f;
     Color objectiveColour;
 
-    ItemInteract item;
-    ObjectOutline itemOutline;
+    ItemInteract itemInteract;
+    ObjectOutline itemOutline, slotOutline;
 
     private void Start()
     {
         objectiveColour = GetComponent<ObjectOutline>().GetOutlineColour();
+        slotOutline = GetComponent<ObjectOutline>();
     }
 
     private void OnTriggerEnter(Collider col)
     {
         if (col.CompareTag("ObjectiveItem"))
         {
-            item = col.GetComponentInParent<ItemInteract>();
-            itemOutline = col.GetComponent<ObjectOutline>();
-            if (item.GetIsHolding())
-            {
-                Debug.Log("item inside");
+            GameObject item = col.gameObject;
 
-                if(CompareColours(objectiveColour, itemOutline.GetOutlineColour(), colourDelta))
+            itemInteract = col.GetComponentInParent<ItemInteract>();
+            itemOutline = col.GetComponent<ObjectOutline>();
+            if (itemInteract != null && itemInteract.GetIsHolding())
+            {
+                if(CompareColours(objectiveColour, itemOutline.GetOutlineColour(), colourCheckDelta))
                 {
-                    Debug.Log($"Slot Colour = {objectiveColour}");
-                    Debug.Log($"item Colour = {itemOutline.GetOutlineColour()}");
+                    //correct item to correct slot
+                    Debug.Log("correct item inside");
+
+                    //show slot has been filled
+                    slotOutline.StopFadeCR();
+                    slotOutline.TurnOnOutline(outlineDepth);
+                    slotOutline.SetIsOutlined(true);
+
+                    //remove item 
+                    itemInteract.PlacedItem();
+                    Destroy(item, 0.1f);
 
                 }
                 else
                 {
-                    Debug.Log("not same colour");
+                    //wrong item for this slot
+                    Debug.Log("wrong item for this slot");
 
                     Debug.Log($"Item: R {itemOutline.GetOutlineColour().r}, G {itemOutline.GetOutlineColour().g}, B {itemOutline.GetOutlineColour().b}, A {itemOutline.GetOutlineColour().a}");
                     Debug.Log($"Slot: R {objectiveColour.r}, G {objectiveColour.g}, B {objectiveColour.b}, A {objectiveColour.a}");
-
-
 
                 }
 
@@ -56,5 +65,6 @@ public class ItemSlot : MonoBehaviour
             return false;
         }
     }
+
 
 }

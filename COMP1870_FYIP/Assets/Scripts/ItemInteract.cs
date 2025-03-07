@@ -126,6 +126,10 @@ public class ItemInteract : MonoBehaviour
     {
         return holdingItem;
     }
+    public void PlacedItem()
+    {
+        Dropitem();
+    }
 
 
     private void OnDisable()

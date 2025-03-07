@@ -5,7 +5,7 @@ using UnityEngine;
 public class PulseTrigger : MonoBehaviour
 {
     [SerializeField] GameObject lightObj;
-    [SerializeField] float lowPulseDuration = 3f, highPulseDuration = 8f;
+    [SerializeField] float lowPulseDuration = 3f, highPulseDuration = 8f, emittingObjectPulseDuration = 4f;
     private SphereCollider sphereCol;
     private ParticleSystem ps;
 
@@ -90,6 +90,12 @@ public class PulseTrigger : MonoBehaviour
                 if (gameObject.CompareTag("HighPulse"))
                 {
                     outline.SetOutlineTime(highPulseDuration);
+
+                }
+                //and middle time if hit by emitting object
+                else
+                {
+                    outline.SetOutlineTime(emittingObjectPulseDuration);
 
                 }
 
