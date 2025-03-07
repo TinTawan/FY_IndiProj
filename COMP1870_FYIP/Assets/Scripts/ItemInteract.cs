@@ -48,9 +48,18 @@ public class ItemInteract : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider col)
+    /*private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("ObjectiveItem"))
+        if (col.CompareTag("ObjectiveItem") && heldItem != col.gameObject)
+        {
+            canPickUp = true;
+            heldItem = col.gameObject;
+
+        }
+    }*/
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.CompareTag("ObjectiveItem") && !holdingItem)
         {
             canPickUp = true;
             heldItem = col.gameObject;
@@ -62,7 +71,7 @@ public class ItemInteract : MonoBehaviour
         if (col.CompareTag("ObjectiveItem"))
         {
             canPickUp = false;
-            heldItem = null;
+            //heldItem = null;
 
         }
     }
@@ -110,16 +119,24 @@ public class ItemInteract : MonoBehaviour
     void SetCols(bool areCollidersOn)
     {
         //so far this removes the players colliders
-        itemCols = heldItem.GetComponents<Collider>();
-        foreach (Collider col in itemCols)
+        if(itemCols != null && itemCols.Length > 0)
         {
-            col.enabled = areCollidersOn;
+            itemCols = heldItem.GetComponents<Collider>();
+            foreach (Collider col in itemCols)
+            {
+                col.enabled = areCollidersOn;
+            }
         }
+        
     }
     void SetCol(bool isColOn, int colIndex)
     {
-        itemCols = heldItem.GetComponents<Collider>();
-        itemCols[colIndex].enabled = isColOn;
+        if (itemCols != null && itemCols.Length > 0)
+        {
+            itemCols = heldItem.GetComponents<Collider>();
+            itemCols[colIndex].enabled = isColOn;
+
+        }
     }
 
     public bool GetIsHolding()
