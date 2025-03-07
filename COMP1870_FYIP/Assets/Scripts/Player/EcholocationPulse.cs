@@ -77,6 +77,8 @@ public class EcholocationPulse : MonoBehaviour
         {
             HapticManager.instance.HapticFeedback(highHapticStrength, 0, highHapticDuration);
 
+            AudioManager.instance.PlaySound(AudioManager.soundType.highPulseOut, transform.position, 0.1f);
+
             GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
 
@@ -98,6 +100,8 @@ public class EcholocationPulse : MonoBehaviour
         if (canLPulse && currentPulse == 0)
         {
             HapticManager.instance.HapticFeedback(0, lowHapticStrength, lowHapticDuration);
+
+            AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseOut, transform.position, 0.1f);
 
             GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();

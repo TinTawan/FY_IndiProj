@@ -48,15 +48,14 @@ public class ItemInteract : MonoBehaviour
 
     }
 
-    /*private void OnTriggerEnter(Collider col)
+    private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("ObjectiveItem") && heldItem != col.gameObject)
+        if (col.CompareTag("ObjectiveItem") && !holdingItem)
         {
-            canPickUp = true;
-            heldItem = col.gameObject;
+            AudioManager.instance.PlaySound(AudioManager.soundType.canInteract, transform.position, 0.3f);
 
         }
-    }*/
+    }
     private void OnTriggerStay(Collider col)
     {
         if (col.CompareTag("ObjectiveItem") && !holdingItem)
