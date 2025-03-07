@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lightObj: {fileID: 278942149619607265, guid: 8dd3fc033501f8a4aac8e4ee86ad6bd5, type: 3}
+  lowPulseDuration: 3
+  highPulseDuration: 8
+  emittingObjectPulseDuration: 4
 --- !u!198 &3110569007494351608
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -1061,20 +1064,20 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 2
-          outSlope: 2
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.8710938
-          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 0.8
+          value: 1
+          inSlope: 0.00000058639387
+          outSlope: 0.00000058639387
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.25411522
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
