@@ -122,7 +122,9 @@ public class PulseTrigger : MonoBehaviour
         PlayerMovement player = HapticManager.instance.GetPlayer();
 
         float[] output = new float[] { 0, 0 };
-        float dotProd = Vector3.Dot(obj, player.transform.right);
+
+        Vector3 directionToPlayer = (obj - player.transform.position).normalized;
+        float dotProd = Vector3.Dot(directionToPlayer, player.transform.right);
 
         if (dotProd > 0.1f)
         {
@@ -130,7 +132,7 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 0;
             output[1] = 1;
 
-
+            Debug.Log("right");
         }
         else if (dotProd < -0.1f)
         {
@@ -138,7 +140,7 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 1;
             output[1] = 0;
 
-
+            Debug.Log("left");
         }
         else
         {

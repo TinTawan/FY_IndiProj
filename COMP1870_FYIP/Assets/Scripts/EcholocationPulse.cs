@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,11 +8,11 @@ public class EcholocationPulse : MonoBehaviour
     [SerializeField] private GameObject lowPulsePrefab;
     [SerializeField] private float highPulseDuration, lowPulseDuration;
     [SerializeField] private int highPulseSize, lowPulseSize;
-    
+
     PlayerInput playerInput;
 
     //Switch pulse
-    int currentPulse;
+    int currentPulse = 1;
 
 
     [Header("Pulse Cooldown")]
@@ -24,6 +22,12 @@ public class EcholocationPulse : MonoBehaviour
 
     bool canHPulse, canLPulse;
 
+    [Header("Pulse Haptics")]
+    [SerializeField][Range(0,1)] float lowHapticStrength = 0.7f;
+    [SerializeField][Range(0,1)] float lowHapticDuration = 0.3f;
+    [SerializeField][Range(0,1)] float highHapticStrength = 0.3f;
+    [SerializeField][Range(0,1)] float highHapticDuration = 0.2f;
+
 
 
     private void Awake()
@@ -32,22 +36,6 @@ public class EcholocationPulse : MonoBehaviour
         playerInput.Player.Enable();
         playerInput.Player.Echo.performed += Echo_performed;
         playerInput.Player.SwitchPulse.performed += SwitchPulse_performed;
-    }
-    private void Start()
-    {
-        //start game with high freq pulse
-        /*pulsePrefab = highPulsePrefab;
-        pulseDuration = highPulseDuration;
-        pulseSize = highPulseSize;*/
-        
-        currentPulse = 1;
-        //canPulse = canHPulse;
-
-        //pLight = GetComponentInChildren<Light>();
-        //pLight.enabled = false;
-        //pLight.range = 0f;
-        //pLight.intensity = 0f;
-
     }
 
     private void Update()
@@ -87,7 +75,7 @@ public class EcholocationPulse : MonoBehaviour
 
         if (canHPulse && currentPulse == 1)
         {
-            //HapticManager.instance.HapticFeedback(0.3f, 0.3f, 0.3f);
+            HapticManager.instance.HapticFeedback(highHapticStrength, 0, highHapticDuration);
 
             GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
@@ -109,7 +97,7 @@ public class EcholocationPulse : MonoBehaviour
         }
         if (canLPulse && currentPulse == 0)
         {
-            //HapticManager.instance.HapticFeedback(0.2f, 0.2f, 0.2f);
+            HapticManager.instance.HapticFeedback(0, lowHapticStrength, lowHapticDuration);
 
             GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
@@ -129,13 +117,12 @@ public class EcholocationPulse : MonoBehaviour
             canLPulse = false;
             lTimer = lowCD;
         }
-        
+
     }
 
     void PulseCooldown()
     {
-        //Debug.Log($"HTimer: {hTimer}");
-        if(hTimer <= 0)
+        if (hTimer <= 0)
         {
             canHPulse = true;
 
@@ -145,7 +132,6 @@ public class EcholocationPulse : MonoBehaviour
             hTimer -= Time.deltaTime;
         }
 
-        //Debug.Log($"LTimer: {lTimer}");
         if (lTimer <= 0)
         {
             canLPulse = true;

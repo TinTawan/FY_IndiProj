@@ -108,4 +108,9 @@ public class ObjectOutline : MonoBehaviour
     {
         return outlineColour;
     }
+
+    public void CallFadeOutCoroutine()
+    {
+        fadeCR = StartCoroutine(FadeOutline(outlineMat));
+    }
 }

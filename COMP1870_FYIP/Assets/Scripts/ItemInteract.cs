@@ -103,9 +103,11 @@ public class ItemInteract : MonoBehaviour
 
         if (heldItem.TryGetComponent(out ObjectOutline outline))
         {
-            outline.TurnOnOutline(0f);
+            //outline.TurnOnOutline(0f);
+            //outline.SetIsOutlined(false);
+            outline.SetOutlineTime(3f);
             outline.SetCanBeTriggered(false);
-            outline.SetIsOutlined(false);
+            outline.CallFadeOutCoroutine();
         }
 
         heldItem.transform.SetParent(null);
