@@ -43,8 +43,6 @@ public class ObjectOutline : MonoBehaviour
 
     IEnumerator FadeOutline(Material mat)
     {
-        HapticManager.instance.HapticFeedback(0.2f, 0.2f, 0.1f);
-
         isOutlined = true;
 
         if(objEchoPulse != null)

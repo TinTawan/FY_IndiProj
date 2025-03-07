@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 public class HapticManager : MonoBehaviour
 {
     public static HapticManager instance;
+    
+    private PlayerMovement player;
 
     private Coroutine stopHaptics;
 
@@ -24,6 +26,8 @@ public class HapticManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
     }
 
@@ -50,5 +54,10 @@ public class HapticManager : MonoBehaviour
         }
 
         gamepad.ResetHaptics();
+    }
+
+    public PlayerMovement GetPlayer()
+    {
+        return player;
     }
 }

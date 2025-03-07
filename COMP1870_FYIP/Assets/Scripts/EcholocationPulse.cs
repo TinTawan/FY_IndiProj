@@ -84,11 +84,11 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
-        HapticManager.instance.HapticFeedback(0.5f, 0.5f, 0.25f);
-
 
         if (canHPulse && currentPulse == 1)
         {
+            //HapticManager.instance.HapticFeedback(0.3f, 0.3f, 0.3f);
+
             GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
 
@@ -109,6 +109,8 @@ public class EcholocationPulse : MonoBehaviour
         }
         if (canLPulse && currentPulse == 0)
         {
+            //HapticManager.instance.HapticFeedback(0.2f, 0.2f, 0.2f);
+
             GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
             ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
 

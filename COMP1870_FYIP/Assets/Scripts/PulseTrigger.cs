@@ -74,8 +74,12 @@ public class PulseTrigger : MonoBehaviour
     {       
         Renderer rend = other.GetComponent<Renderer>();
 
-        if (other.TryGetComponent(out ObjectOutline outline) && rend.isVisible)
+        if (other.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
         {
+            float[] vals = FindLeftOrRightOfPlayer(other.gameObject.transform.position);
+            //HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.1f, 2f);
+
+
             if (!outline.GetIsOutlined())
             {
                 //outline the object
@@ -85,17 +89,25 @@ public class PulseTrigger : MonoBehaviour
                 if (gameObject.CompareTag("LowPulse"))
                 {
                     outline.SetOutlineTime(lowPulseDuration);
+
+                    HapticManager.instance.HapticFeedback(vals[0] * 0.5f, vals[1] * 0.5f, 0.5f);
+
                 }
                 //and longer outline time if hit by high pulse
                 if (gameObject.CompareTag("HighPulse"))
                 {
                     outline.SetOutlineTime(highPulseDuration);
 
+                    //HapticManager.instance.HapticFeedback(0.3f, 0.3f, 0.2f);
+
+
                 }
                 //and middle time if hit by emitting object
                 else
                 {
                     outline.SetOutlineTime(emittingObjectPulseDuration);
+
+                    //HapticManager.instance.HapticFeedback(0.1f, 0.1f, 0.1f);
 
                 }
 
@@ -109,5 +121,48 @@ public class PulseTrigger : MonoBehaviour
 
     }
 
+    float[] FindLeftOrRightOfPlayer(Vector3 obj)
+    {
+        PlayerMovement player = HapticManager.instance.GetPlayer();
+
+        float[] output = new float[] { 0, 0 };
+        float dotProd = Vector3.Dot(obj, player.transform.right);
+
+        if(dotProd > 0.1f)
+        {
+            //right
+            output[0] = 0;
+            output[1] = 1;
+
+            Debug.Log("right");
+
+        }
+        else if(dotProd < -0.1f)
+        {
+            //left
+            output[0] = 1;
+            output[1] = 0;
+
+            Debug.Log("left");
+
+        }
+        else
+        {
+            //same plane
+            output[0] = 1;
+            output[1] = 1;
+
+            Debug.Log("same plane");
+
+        }
+
+        return output;
+
+    }
+
+    float DistanceBetweenObjects(Vector3 obj1, Vector3 obj2)
+    {
+        return Vector3.Distance(obj1, obj2);
+    }
     
 }
