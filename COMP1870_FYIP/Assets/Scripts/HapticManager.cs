@@ -8,14 +8,9 @@ public class HapticManager : MonoBehaviour
     
     private PlayerMovement player;
 
-    private Coroutine stopHaptics;
 
     private void Awake()
     {
-        /*if(instance == null)
-        {
-            instance = this;
-        }*/
 
         if (instance == null)
         {
@@ -37,10 +32,10 @@ public class HapticManager : MonoBehaviour
 
         if (gamepad != null)
         {
-            Debug.Log($"Left: {lowFrequency} | Right: {highFrequency}");
+            //Debug.Log($"Left: {lowFrequency} | Right: {highFrequency}");
             gamepad.SetMotorSpeeds(lowFrequency, highFrequency);
 
-            stopHaptics = StartCoroutine(StopHaptics(duration, gamepad));
+            StartCoroutine(StopHaptics(duration, gamepad));
 
         }
     }

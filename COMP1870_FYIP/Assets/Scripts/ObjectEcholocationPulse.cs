@@ -11,7 +11,7 @@ public class ObjectEcholocationPulse : MonoBehaviour
     [Header("Particle System info")]
     [SerializeField] float fullDuration;
     [SerializeField] float lifetime, size;
-    [SerializeField] Color pulseColour = Color.white;
+    Color pulseColour;
 
     ParticleSystem ps;
     ParticleSystem.MainModule psMain;
@@ -33,6 +33,7 @@ public class ObjectEcholocationPulse : MonoBehaviour
         SetBurst();
 
         objOutline = GetComponent<ObjectOutline>();
+        pulseColour = objOutline.GetOutlineColour();
 
     }
 

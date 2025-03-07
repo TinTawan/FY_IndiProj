@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PulseTrigger : MonoBehaviour
@@ -30,7 +28,7 @@ public class PulseTrigger : MonoBehaviour
 
     void ExpandColWithPS()
     {
-        if(ps.isPlaying)
+        if (ps.isPlaying)
         {
 
             ParticleSystem.SizeOverLifetimeModule sol = ps.sizeOverLifetime;
@@ -53,12 +51,12 @@ public class PulseTrigger : MonoBehaviour
                 doOnce = false;
             }
 
-            if(pulseLight != null)
+            if (pulseLight != null)
             {
                 pulseLight.range = sphereCol.radius;
                 pulseLight.intensity = ps.main.startSize.constant / 3;
             }
-            
+
 
 
         }
@@ -71,13 +69,12 @@ public class PulseTrigger : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {       
+    {
         Renderer rend = other.GetComponent<Renderer>();
 
         if (other.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
         {
             float[] vals = FindLeftOrRightOfPlayer(other.gameObject.transform.position);
-            //HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.1f, 2f);
 
 
             if (!outline.GetIsOutlined())
@@ -102,7 +99,7 @@ public class PulseTrigger : MonoBehaviour
 
                 }
                 //and middle time if hit by emitting object
-                if(gameObject.CompareTag("EmitterPulse"))
+                if (gameObject.CompareTag("EmitterPulse"))
                 {
                     outline.SetOutlineTime(emittingObjectPulseDuration);
 
@@ -127,7 +124,7 @@ public class PulseTrigger : MonoBehaviour
         float[] output = new float[] { 0, 0 };
         float dotProd = Vector3.Dot(obj, player.transform.right);
 
-        if(dotProd > 0.1f)
+        if (dotProd > 0.1f)
         {
             //right
             output[0] = 0;
@@ -135,7 +132,7 @@ public class PulseTrigger : MonoBehaviour
 
 
         }
-        else if(dotProd < -0.1f)
+        else if (dotProd < -0.1f)
         {
             //left
             output[0] = 1;
@@ -161,5 +158,5 @@ public class PulseTrigger : MonoBehaviour
     {
         return Vector3.Distance(obj1, obj2);
     }
-    
+
 }
