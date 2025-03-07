@@ -6,7 +6,7 @@ public class ObjectOutline : MonoBehaviour
 {
     bool isOutlined = false, canBeTriggered = false;
 
-    [SerializeField] private float outlineTime = 3f;
+    private float outlineTime = 3f;
     [SerializeField] private Color outlineColour;
     Material outlineMat;
 
@@ -97,6 +97,15 @@ public class ObjectOutline : MonoBehaviour
 
     public void StopFadeCR()
     {
-        StopCoroutine(fadeCR);
+        if(fadeCR != null)
+        {
+            StopCoroutine(fadeCR);
+
+        }
+    }
+
+    public Color GetOutlineColour()
+    {
+        return outlineColour;
     }
 }

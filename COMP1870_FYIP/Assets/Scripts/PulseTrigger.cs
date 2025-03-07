@@ -5,6 +5,7 @@ using UnityEngine;
 public class PulseTrigger : MonoBehaviour
 {
     [SerializeField] GameObject lightObj;
+    [SerializeField] float lowPulseDuration = 3f, highPulseDuration = 8f;
     private SphereCollider sphereCol;
     private ParticleSystem ps;
 
@@ -83,12 +84,12 @@ public class PulseTrigger : MonoBehaviour
                 //give lower outline time if hit by low pulse
                 if (gameObject.CompareTag("LowPulse"))
                 {
-                    outline.SetOutlineTime(2f);
+                    outline.SetOutlineTime(lowPulseDuration);
                 }
                 //and longer outline time if hit by high pulse
                 if (gameObject.CompareTag("HighPulse"))
                 {
-                    outline.SetOutlineTime(6f);
+                    outline.SetOutlineTime(highPulseDuration);
 
                 }
 

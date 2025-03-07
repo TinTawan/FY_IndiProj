@@ -1,35 +1,59 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using UnityEngine;
 
 public class ItemSlot : MonoBehaviour
 {
-    int items = 0;
-    bool collected;
+    [SerializeField] float colourDelta = 0.01f;
+    Color objectiveColour;
+
+    ItemInteract item;
+    ObjectOutline itemOutline;
+
+    private void Start()
+    {
+        objectiveColour = GetComponent<ObjectOutline>().GetOutlineColour();
+    }
 
     private void OnTriggerEnter(Collider col)
     {
-        if (col.CompareTag("Player"))
+        if (col.CompareTag("ObjectiveItem"))
         {
-            /*if (col.TryGetComponent(out ItemInteract item))
+            item = col.GetComponentInParent<ItemInteract>();
+            itemOutline = col.GetComponent<ObjectOutline>();
+            if (item.GetIsHolding())
             {
-                if (item.GetDropped())
-                {
-                    items++;
-                    Debug.Log($"Objective Items found: {items}");
-                    Destroy(col.gameObject, 0.1f);
-                }
-                
-            }
-            if (col.GetComponent<ItemInteract>().GetDropped())
-            {
-                items++;
-                Debug.Log($"Objective Items found: {items}");
-                Destroy(col.gameObject, 0.1f);
-            }*/
+                Debug.Log("item inside");
 
+                if(CompareColours(objectiveColour, itemOutline.GetOutlineColour(), colourDelta))
+                {
+                    Debug.Log($"Slot Colour = {objectiveColour}");
+                    Debug.Log($"item Colour = {itemOutline.GetOutlineColour()}");
+
+                }
+                else
+                {
+                    Debug.Log("not same colour");
+
+                    Debug.Log($"Item: R {itemOutline.GetOutlineColour().r}, G {itemOutline.GetOutlineColour().g}, B {itemOutline.GetOutlineColour().b}, A {itemOutline.GetOutlineColour().a}");
+                    Debug.Log($"Slot: R {objectiveColour.r}, G {objectiveColour.g}, B {objectiveColour.b}, A {objectiveColour.a}");
+
+
+
+                }
+
+            }
+
+        }
+    }
+
+    bool CompareColours(Color col1, Color col2, float delta)
+    {
+        if ((Mathf.Abs(col1.r - col2.r) < delta) && (Mathf.Abs(col1.g - col2.g) < delta) && (Mathf.Abs(col1.b - col2.b) < delta) && (Mathf.Abs(col1.a - col2.a) < delta))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 

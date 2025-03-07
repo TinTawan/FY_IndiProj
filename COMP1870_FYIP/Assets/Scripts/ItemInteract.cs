@@ -69,7 +69,8 @@ public class ItemInteract : MonoBehaviour
 
     void CarryItem(GameObject inHeldItem)
     {
-        SetCols(false);
+        //SetCols(false);
+        SetCol(false, 0);
 
         inHeldItem.transform.SetPositionAndRotation(itemSlot.position, Quaternion.identity);
         inHeldItem.transform.SetParent(itemSlot);
@@ -108,13 +109,22 @@ public class ItemInteract : MonoBehaviour
 
     void SetCols(bool areCollidersOn)
     {
-
         //so far this removes the players colliders
         itemCols = heldItem.GetComponents<Collider>();
         foreach (Collider col in itemCols)
         {
             col.enabled = areCollidersOn;
         }
+    }
+    void SetCol(bool isColOn, int colIndex)
+    {
+        itemCols = heldItem.GetComponents<Collider>();
+        itemCols[colIndex].enabled = isColOn;
+    }
+
+    public bool GetIsHolding()
+    {
+        return holdingItem;
     }
 
 
