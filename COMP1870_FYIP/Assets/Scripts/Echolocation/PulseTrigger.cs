@@ -76,6 +76,7 @@ public class PulseTrigger : MonoBehaviour
         {
             float[] vals = FindLeftOrRightOfPlayer(other.gameObject.transform.position);
 
+            //outline.StopFadeCR();
 
             if (!outline.GetIsOutlined())
             {

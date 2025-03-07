@@ -6,7 +6,7 @@ using UnityEngine;
 public class ItemInteract : MonoBehaviour
 {
     [SerializeField] Transform itemSlot;
-    [SerializeField] float outlineDepth = 0.02f;
+    [SerializeField] float outlineDepth = 0.02f, interactOutlineDepth = 0.005f;
 
     PlayerInput playerInput;
 
@@ -64,15 +64,39 @@ public class ItemInteract : MonoBehaviour
             canPickUp = true;
             heldItem = col.gameObject;
 
+            if (col.TryGetComponent(out ObjectOutline outline))
+            {
+                if (!outline.GetIsOutlined())
+                {
+                    outline.SetIsOutlined(true);
+                    outline.SetOutlineDepth(interactOutlineDepth);
+                }
+                
+            }
+
         }
     }
     private void OnTriggerExit(Collider col)
     {
         if (col.CompareTag("ObjectiveItem"))
         {
-            canPickUp = false;
             //heldItem = null;
 
+            if (col.TryGetComponent(out ObjectOutline outline))
+            {
+                /*if (!outline.GetIsOutlined())
+                {
+                    
+                }*/
+                if(outline.GetFadeOutCoroutine() == null)
+                {
+                    outline.SetIsOutlined(false);
+                    outline.SetOutlineDepth(0f);
+                }
+                
+            }
+
+            canPickUp = false;
         }
     }
 
@@ -90,7 +114,7 @@ public class ItemInteract : MonoBehaviour
         if (heldItem.TryGetComponent(out ObjectOutline outline))
         {
             outline.StopFadeCR();
-            outline.TurnOnOutline(outlineDepth);
+            outline.SetOutlineDepth(outlineDepth);
             outline.SetIsOutlined(true);
 
         }
@@ -103,8 +127,6 @@ public class ItemInteract : MonoBehaviour
 
         if (heldItem.TryGetComponent(out ObjectOutline outline))
         {
-            //outline.TurnOnOutline(0f);
-            //outline.SetIsOutlined(false);
             outline.SetOutlineTime(3f);
             outline.SetCanBeTriggered(false);
             outline.CallFadeOutCoroutine();

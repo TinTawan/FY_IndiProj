@@ -31,7 +31,7 @@ public class ItemSlot : MonoBehaviour
 
                     //show slot has been filled
                     slotOutline.StopFadeCR();
-                    slotOutline.TurnOnOutline(outlineDepth);
+                    slotOutline.SetOutlineDepth(outlineDepth);
                     slotOutline.SetIsOutlined(true);
 
                     //remove item 

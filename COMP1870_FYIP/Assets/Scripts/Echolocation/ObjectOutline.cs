@@ -69,6 +69,8 @@ public class ObjectOutline : MonoBehaviour
         {
             objEchoPulse.SetPlayOnce(true);
         }
+
+        fadeCR = null;
     }
 
     public void SetOutlineTime(float inTime)
@@ -90,7 +92,7 @@ public class ObjectOutline : MonoBehaviour
         canBeTriggered = inBool;
     }
 
-    public void TurnOnOutline(float depth)
+    public void SetOutlineDepth(float depth)
     {
         outlineMat.SetFloat("_outlineDepth", depth);
     }
@@ -112,5 +114,11 @@ public class ObjectOutline : MonoBehaviour
     public void CallFadeOutCoroutine()
     {
         fadeCR = StartCoroutine(FadeOutline(outlineMat));
+    }
+    public Coroutine GetFadeOutCoroutine()
+    {
+        if (fadeCR == null) return null;
+
+        return fadeCR;
     }
 }
