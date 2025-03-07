@@ -90,7 +90,7 @@ public class PulseTrigger : MonoBehaviour
                 {
                     outline.SetOutlineTime(lowPulseDuration);
 
-                    HapticManager.instance.HapticFeedback(vals[0] * 0.5f, vals[1] * 0.5f, 0.5f);
+                    HapticManager.instance.HapticFeedback(vals[0] * 0.2f, vals[1] * 0.7f, 0.3f);
 
                 }
                 //and longer outline time if hit by high pulse
@@ -98,16 +98,15 @@ public class PulseTrigger : MonoBehaviour
                 {
                     outline.SetOutlineTime(highPulseDuration);
 
-                    //HapticManager.instance.HapticFeedback(0.3f, 0.3f, 0.2f);
-
+                    HapticManager.instance.HapticFeedback(vals[0] * 0.3f, vals[1] * 1f, 0.4f);
 
                 }
                 //and middle time if hit by emitting object
-                else
+                if(gameObject.CompareTag("EmitterPulse"))
                 {
                     outline.SetOutlineTime(emittingObjectPulseDuration);
 
-                    //HapticManager.instance.HapticFeedback(0.1f, 0.1f, 0.1f);
+                    HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.5f, 0.2f);
 
                 }
 
@@ -134,7 +133,6 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 0;
             output[1] = 1;
 
-            Debug.Log("right");
 
         }
         else if(dotProd < -0.1f)
@@ -143,7 +141,6 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 1;
             output[1] = 0;
 
-            Debug.Log("left");
 
         }
         else
