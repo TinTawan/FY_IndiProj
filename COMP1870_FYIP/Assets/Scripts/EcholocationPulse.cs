@@ -84,6 +84,8 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
+        HapticManager.instance.HapticFeedback(0.5f, 0.5f, 0.25f);
+
 
         if (canHPulse && currentPulse == 1)
         {
