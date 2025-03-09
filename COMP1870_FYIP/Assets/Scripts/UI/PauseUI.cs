@@ -1,0 +1,34 @@
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class PauseUI : MonoBehaviour
+{
+    [SerializeField] GameObject pausedSection, audioSection;
+
+
+    private void Start()
+    {
+        pausedSection.SetActive(true);
+        audioSection.SetActive(false);
+
+    }
+
+    public void Resume()
+    {
+        GameMenuManager.instance.SetIsPaused(false);
+    }
+
+    public void Settings()
+    {
+        pausedSection.SetActive(false);
+        audioSection.SetActive(true);
+
+        //EventSystem.current = 
+    }
+
+    public void Back()
+    {
+        pausedSection.SetActive(true);
+        audioSection.SetActive(false);
+    }
+}

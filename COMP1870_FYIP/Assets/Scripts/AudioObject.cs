@@ -16,6 +16,7 @@ public class AudioObject : MonoBehaviour
         audioSource.pitch = 1f + pitch;
         audioSource.Play();
 
+        Destroy(gameObject, audioSource.clip.length);
     }
 
     public void SetClip(AudioClip inClip)
@@ -31,11 +32,11 @@ public class AudioObject : MonoBehaviour
         pitch = inDelta;
     }
 
-    void Update()
+    /*void Update()
     {
         if (!audioSource.isPlaying)
         {
             Destroy(gameObject);
         }
-    }
+    }*/
 }
