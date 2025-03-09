@@ -16,7 +16,10 @@ public class PlayerMovement : MonoBehaviour
     Vector2 moveVect;
     float vertMove;
     [SerializeField] private float moveForce = 1f;
-    [SerializeField] private float boostForce = 1f;
+    [SerializeField] private float boostForce = 1f, boostCD = 4f;
+
+    bool canBoost = true;
+    float boostTimer;
 
 
     private void Awake()
@@ -36,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+
     private void Move_performed(InputAction.CallbackContext ctx)
     {
         moveVect = ctx.ReadValue<Vector2>();
@@ -54,12 +58,34 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Boost_performed(InputAction.CallbackContext ctx)
     {
-        rb.AddForce(cam.forward.normalized * boostForce, ForceMode.Impulse);
+        if (canBoost)
+        {
+            canBoost = false;
+            rb.AddForce(cam.forward.normalized * boostForce, ForceMode.Impulse);
+            boostTimer = boostCD;
+        }
     }
 
+    private void Update()
+    {
+        BoostCooldown();
+    }
     private void FixedUpdate()
     {
         Move();
+    }
+
+    void BoostCooldown()
+    {
+        if (boostTimer <= 0)
+        {
+            canBoost = true;
+        }
+        else
+        {
+            boostTimer -= Time.deltaTime;
+            canBoost = false;
+        }
     }
 
     void Move()
