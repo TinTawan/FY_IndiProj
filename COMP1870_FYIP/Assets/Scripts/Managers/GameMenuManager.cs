@@ -11,9 +11,6 @@ public class GameMenuManager : MonoBehaviour
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject pauseUI;
 
-    [Header("First Select Objects")]
-    [SerializeField] GameObject resumeButtonGO;
-    [SerializeField] GameObject masterSliderGO;
 
     PlayerInput playerInput;
 
@@ -69,10 +66,12 @@ public class GameMenuManager : MonoBehaviour
 
     private void Pause()
     {
+        //set correct time and panels
         Time.timeScale = 0f;
         gameUI.SetActive(false);
         pauseUI.SetActive(true);
 
+        //set correct input map
         playerInput.Player.Disable();
         playerInput.UI.Enable();
 
@@ -101,10 +100,12 @@ public class GameMenuManager : MonoBehaviour
     }
     private void UnPause()
     {
+        //set correct time and panels
         Time.timeScale = 1f;
         gameUI.SetActive(true);
         pauseUI.SetActive(false);
 
+        //set correct input map
         playerInput.Player.Enable();
         playerInput.UI.Disable();
 

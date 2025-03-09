@@ -3,7 +3,8 @@ using UnityEngine.EventSystems;
 
 public class PauseUI : MonoBehaviour
 {
-    [SerializeField] GameObject pausedSection, audioSection;
+    [SerializeField] GameObject pausedSection, audioSection, resumeButtonGO;
+
 
 
     private void Start()
@@ -28,6 +29,14 @@ public class PauseUI : MonoBehaviour
 
     public void Back()
     {
+        pausedSection.SetActive(true);
+        audioSection.SetActive(false);
+    }
+
+    private void OnEnable()
+    {
+        EventSystem.current.SetSelectedGameObject(resumeButtonGO);
+
         pausedSection.SetActive(true);
         audioSection.SetActive(false);
     }

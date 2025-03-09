@@ -32,11 +32,4 @@ public class AudioObject : MonoBehaviour
         pitch = inDelta;
     }
 
-    /*void Update()
-    {
-        if (!audioSource.isPlaying)
-        {
-            Destroy(gameObject);
-        }
-    }*/
 }
