@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,9 +15,10 @@ public class GameMenuManager : MonoBehaviour
 
     PlayerInput playerInput;
 
-    bool isPaused;
+    public bool isPaused { get; set; }
 
     List<AudioSource> currentSounds = new List<AudioSource>();
+
 
     private void Awake()
     {
@@ -43,6 +45,7 @@ public class GameMenuManager : MonoBehaviour
     private void UnPause_performed(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
     {
         isPaused = !isPaused;
+
     }
 
 
@@ -66,12 +69,15 @@ public class GameMenuManager : MonoBehaviour
 
     private void Pause()
     {
+        //Debug.Log($"PAUSED: Player map: {playerInput.Player.enabled} UI map: {playerInput.UI.enabled}");
+
         //set correct time and panels
         Time.timeScale = 0f;
         gameUI.SetActive(false);
         pauseUI.SetActive(true);
 
         //set correct input map
+        playerInput.Player.SwitchPulse.Disable();
         playerInput.Player.Disable();
         playerInput.UI.Enable();
 
@@ -98,8 +104,12 @@ public class GameMenuManager : MonoBehaviour
 
 
     }
+
+
     private void UnPause()
     {
+        //Debug.Log($"PLAYING: Player map: {playerInput.Player.enabled} UI map: {playerInput.UI.enabled}");
+
         //set correct time and panels
         Time.timeScale = 1f;
         gameUI.SetActive(true);
@@ -127,8 +137,4 @@ public class GameMenuManager : MonoBehaviour
 
     }
 
-    public void SetIsPaused(bool inBool)
-    {
-        isPaused = inBool;
-    }
 }

@@ -16,7 +16,7 @@ public class PauseUI : MonoBehaviour
 
     public void Resume()
     {
-        GameMenuManager.instance.SetIsPaused(false);
+        GameMenuManager.instance.isPaused = false;
     }
 
     public void Settings()

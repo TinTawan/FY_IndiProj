@@ -46,81 +46,89 @@ public class EcholocationPulse : MonoBehaviour
 
     private void SwitchPulse_performed(InputAction.CallbackContext ctx)
     {
-        currentPulse += (int)ctx.ReadValue<float>();
-        currentPulse = Mathf.Clamp(currentPulse, 0, 1);
-
-        if (currentPulse == 1)
+        if (!GameMenuManager.instance.isPaused)
         {
-            /*pulsePrefab = highPulsePrefab;
-            pulseDuration = highPulseDuration;
-            pulseSize = highPulseSize;*/
+            currentPulse += (int)ctx.ReadValue<float>();
+            currentPulse = Mathf.Clamp(currentPulse, 0, 1);
 
-            Debug.Log($"Current pulse: {currentPulse} : High Frequency");
+            if (currentPulse == 1)
+            {
+                /*pulsePrefab = highPulsePrefab;
+                pulseDuration = highPulseDuration;
+                pulseSize = highPulseSize;*/
 
+                Debug.Log($"Current pulse: {currentPulse} : High Frequency");
+
+            }
+            if (currentPulse == 0)
+            {
+                /*pulsePrefab = lowPulsePrefab;
+                pulseDuration = lowPulseDuration;
+                pulseSize = lowPulseSize;*/
+
+                Debug.Log($"Current pulse: {currentPulse} : Low Frequency");
+
+            }
         }
-        if (currentPulse == 0)
-        {
-            /*pulsePrefab = lowPulsePrefab;
-            pulseDuration = lowPulseDuration;
-            pulseSize = lowPulseSize;*/
-
-            Debug.Log($"Current pulse: {currentPulse} : Low Frequency");
-
-        }
+        
 
     }
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
-
-        if (canHPulse && currentPulse == 1)
+        if (!GameMenuManager.instance.isPaused)
         {
-            HapticManager.instance.HapticFeedback(highHapticStrength, 0, highHapticDuration);
+            if (canHPulse && currentPulse == 1)
+            {
+                HapticManager.instance.HapticFeedback(highHapticStrength, 0, highHapticDuration);
 
-            AudioManager.instance.PlaySound(AudioManager.soundType.highPulseOut, transform.position, 0.1f);
+                AudioManager.instance.PlaySound(AudioManager.soundType.highPulseOut, transform.position, 0.1f);
 
-            GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
-            ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
+                GameObject pulse = Instantiate(highPulsePrefab, transform.position, Quaternion.identity);
+                ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
 
-            pulsePS.Stop();
+                pulsePS.Stop();
 
-            ParticleSystem.MainModule pulseMain = pulsePS.main;
-            pulseMain.startLifetime = highPulseDuration;
-            pulseMain.duration = highPulseDuration;
-            pulseMain.startSize = highPulseSize;
+                ParticleSystem.MainModule pulseMain = pulsePS.main;
+                pulseMain.startLifetime = highPulseDuration;
+                pulseMain.duration = highPulseDuration;
+                pulseMain.startSize = highPulseSize;
 
-            pulsePS.Play();
+                pulsePS.Play();
 
 
-            Destroy(pulse, highPulseDuration + 1f);
+                Destroy(pulse, highPulseDuration + 1f);
 
-            canHPulse = false;
-            hTimer = highCD;
+                canHPulse = false;
+                hTimer = highCD;
+            }
+            if (canLPulse && currentPulse == 0)
+            {
+                HapticManager.instance.HapticFeedback(0, lowHapticStrength, lowHapticDuration);
+
+                AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseOut, transform.position, 0.1f);
+
+                GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
+                ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
+
+                pulsePS.Stop();
+
+                ParticleSystem.MainModule pulseMain = pulsePS.main;
+                pulseMain.startLifetime = lowPulseDuration;
+                pulseMain.duration = lowPulseDuration;
+                pulseMain.startSize = lowPulseSize;
+
+                pulsePS.Play();
+
+
+                Destroy(pulse, lowPulseDuration + 1f);
+
+                canLPulse = false;
+                lTimer = lowCD;
+            }
         }
-        if (canLPulse && currentPulse == 0)
-        {
-            HapticManager.instance.HapticFeedback(0, lowHapticStrength, lowHapticDuration);
 
-            AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseOut, transform.position, 0.1f);
-
-            GameObject pulse = Instantiate(lowPulsePrefab, transform.position, Quaternion.identity);
-            ParticleSystem pulsePS = pulse.transform.GetComponentInChildren<ParticleSystem>();
-
-            pulsePS.Stop();
-
-            ParticleSystem.MainModule pulseMain = pulsePS.main;
-            pulseMain.startLifetime = lowPulseDuration;
-            pulseMain.duration = lowPulseDuration;
-            pulseMain.startSize = lowPulseSize;
-
-            pulsePS.Play();
-
-
-            Destroy(pulse, lowPulseDuration + 1f);
-
-            canLPulse = false;
-            lTimer = lowCD;
-        }
+        
 
     }
 
