@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class GameMenuManager : MonoBehaviour
@@ -134,6 +134,12 @@ public class GameMenuManager : MonoBehaviour
 
             currentSounds.Clear();
         }
+
+    }
+
+    public void ToMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
 
     }
 
