@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 
@@ -12,6 +13,14 @@ public class GameMenuManager : MonoBehaviour
     [SerializeField] GameObject gameUI;
     [SerializeField] GameObject pauseUI;
 
+    [Header("UI Elements")]
+    [SerializeField] Slider masterSlider;
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
+
+    private const string MASTER_VOL_PARAM = "Master";
+    private const string MUSIC_VOL_PARAM = "Music";
+    private const string SFX_VOL_PARAM = "SFX";
 
     PlayerInput playerInput;
 
@@ -35,8 +44,23 @@ public class GameMenuManager : MonoBehaviour
         playerInput.UI.Get();
         playerInput.UI.UnPause.performed += UnPause_performed;
 
-    }
+        masterSlider.onValueChanged.AddListener(delegate { MasterSliderChanged(); });
+        musicSlider.onValueChanged.AddListener(delegate { MusicSliderChanged(); });
+        sfxSlider.onValueChanged.AddListener(delegate { SFXSliderChanged(); });
 
+    }
+    private void MasterSliderChanged()
+    {
+        AudioMixerManager.instance.SetMasterVol(masterSlider.value);
+    }
+    private void MusicSliderChanged()
+    {
+        AudioMixerManager.instance.SetMusicVol(musicSlider.value);
+    }
+    private void SFXSliderChanged()
+    {
+        AudioMixerManager.instance.SetSFXVol(sfxSlider.value);
+    }
 
     private void Pause_performed(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
     {
@@ -53,6 +77,12 @@ public class GameMenuManager : MonoBehaviour
     {
         gameUI.SetActive(true);
         pauseUI.SetActive(false);
+
+        AudioMixerManager.instance.LoadVolSettings();
+
+        masterSlider.value = PlayerPrefs.GetFloat(MASTER_VOL_PARAM);
+        musicSlider.value = PlayerPrefs.GetFloat(MUSIC_VOL_PARAM);
+        sfxSlider.value = PlayerPrefs.GetFloat(SFX_VOL_PARAM);
     }
 
     private void Update()
@@ -102,7 +132,7 @@ public class GameMenuManager : MonoBehaviour
             }
         }
 
-
+        
     }
 
 
