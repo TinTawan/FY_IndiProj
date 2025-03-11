@@ -1,8 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 public class GameMenuManager : MonoBehaviour
@@ -31,7 +30,7 @@ public class GameMenuManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
@@ -99,7 +98,6 @@ public class GameMenuManager : MonoBehaviour
 
     private void Pause()
     {
-        //Debug.Log($"PAUSED: Player map: {playerInput.Player.enabled} UI map: {playerInput.UI.enabled}");
 
         //set correct time and panels
         Time.timeScale = 0f;
@@ -124,7 +122,7 @@ public class GameMenuManager : MonoBehaviour
         {
             foreach (AudioSource sound in currentSounds)
             {
-                if(sound != null)
+                if (sound != null)
                 {
                     sound.Pause();
                 }
@@ -132,13 +130,12 @@ public class GameMenuManager : MonoBehaviour
             }
         }
 
-        
+
     }
 
 
     private void UnPause()
     {
-        //Debug.Log($"PLAYING: Player map: {playerInput.Player.enabled} UI map: {playerInput.UI.enabled}");
 
         //set correct time and panels
         Time.timeScale = 1f;

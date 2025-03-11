@@ -48,27 +48,10 @@ public class EcholocationPulse : MonoBehaviour
     {
         if (!GameMenuManager.instance.isPaused)
         {
+            //clamp the current pulse so it can only be 0 or 1
             currentPulse += (int)ctx.ReadValue<float>();
             currentPulse = Mathf.Clamp(currentPulse, 0, 1);
 
-            if (currentPulse == 1)
-            {
-                /*pulsePrefab = highPulsePrefab;
-                pulseDuration = highPulseDuration;
-                pulseSize = highPulseSize;*/
-
-                Debug.Log($"Current pulse: {currentPulse} : High Frequency");
-
-            }
-            if (currentPulse == 0)
-            {
-                /*pulsePrefab = lowPulsePrefab;
-                pulseDuration = lowPulseDuration;
-                pulseSize = lowPulseSize;*/
-
-                Debug.Log($"Current pulse: {currentPulse} : Low Frequency");
-
-            }
         }
         
 

@@ -32,7 +32,6 @@ public class HapticManager : MonoBehaviour
 
         if (gamepad != null)
         {
-            //Debug.Log($"Left: {lowFrequency} | Right: {highFrequency}");
             gamepad.SetMotorSpeeds(lowFrequency, highFrequency);
 
             StartCoroutine(StopHaptics(duration, gamepad));

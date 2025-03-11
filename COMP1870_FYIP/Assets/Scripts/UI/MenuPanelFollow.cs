@@ -20,7 +20,6 @@ public class MenuPanelFollow : MonoBehaviour
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-        rectTransform.gameObject.SetActive(true);
 
         playerInput = new PlayerInput();
         playerInput.UI.Enable();

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectEcholocationPulse : MonoBehaviour
@@ -42,12 +40,9 @@ public class ObjectEcholocationPulse : MonoBehaviour
         if (objOutline.GetIsOutlined() && playOnce)
         {
             ps.Play();
-            
+
         }
-        /*if (!objOutline.GetIsOutlined() || !playOnce)
-        {
-            ps.Stop();
-        }*/
+
 
     }
 
@@ -59,8 +54,8 @@ public class ObjectEcholocationPulse : MonoBehaviour
         //set the colour over lifetime module colour using a gradient
         Gradient grad = new Gradient();
         grad.SetKeys(
-            new GradientColorKey[] { new GradientColorKey(pulseColour, 0.0f), new GradientColorKey(pulseColour, 1.0f)}, 
-            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 0.95f)}
+            new GradientColorKey[] { new GradientColorKey(pulseColour, 0.0f), new GradientColorKey(pulseColour, 1.0f) },
+            new GradientAlphaKey[] { new GradientAlphaKey(1.0f, 0.0f), new GradientAlphaKey(0.0f, 0.95f) }
         );
         psCol.color = new ParticleSystem.MinMaxGradient(grad);
 
@@ -95,10 +90,5 @@ public class ObjectEcholocationPulse : MonoBehaviour
         playOnce = inBool;
     }
 
-    /*private void OnValidate()
-    {
-        SetPS();
-        SetBurst();
-    }*/
 
 }

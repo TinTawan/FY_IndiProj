@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -52,7 +50,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    public void PlaySound(soundType type, Vector3 pos/*, float vol*/, float pitchDelta)
+    public void PlaySound(soundType type, Vector3 pos, float pitchDelta)
     {
         GameObject newSound = Instantiate(audioObject, pos, Quaternion.identity);
         AudioObject soundObj = newSound.GetComponent<AudioObject>();
@@ -93,7 +91,6 @@ public class AudioManager : MonoBehaviour
 
         }
 
-        //soundObj.SetVolume(vol);
         soundObj.SetPitchDelta(Random.Range(-pitchDelta, pitchDelta));
 
         soundObj.StartAudio();

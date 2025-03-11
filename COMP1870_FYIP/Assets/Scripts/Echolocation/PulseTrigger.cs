@@ -70,13 +70,11 @@ public class PulseTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Renderer rend = col.GetComponent<Renderer>();
 
-        if (col.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
+        if (col.TryGetComponent(out ObjectOutline outline))
         {
             float[] vals = FindLeftOrRightOfPlayer(col.gameObject.transform.position);
 
-            //outline.StopFadeCR();
 
             if (!outline.GetIsOutlined())
             {
@@ -139,7 +137,6 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 0;
             output[1] = 1;
 
-            Debug.Log("right");
         }
         else if (dotProd < -0.1f)
         {
@@ -147,7 +144,6 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 1;
             output[1] = 0;
 
-            Debug.Log("left");
         }
         else
         {
@@ -155,7 +151,6 @@ public class PulseTrigger : MonoBehaviour
             output[0] = 1;
             output[1] = 1;
 
-            Debug.Log("same plane");
 
         }
 

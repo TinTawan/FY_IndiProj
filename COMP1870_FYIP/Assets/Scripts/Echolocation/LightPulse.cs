@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LightPulse : MonoBehaviour
@@ -21,16 +20,13 @@ public class LightPulse : MonoBehaviour
 
     IEnumerator FadeLight(float onTime, float subVal)
     {
-        //Debug.Log("Fade out soon");
         yield return new WaitForSeconds(onTime);
-        //Debug.Log("Fade out now");
 
         while (pLight.range > 0)
         {
-            //Debug.Log("Fading");
 
             pLight.range -= subVal;
-            if(pLight.intensity > 0)
+            if (pLight.intensity > 0)
             {
                 pLight.intensity -= subVal / 2;
             }
@@ -39,7 +35,6 @@ public class LightPulse : MonoBehaviour
 
         }
 
-        //Debug.Log("Faded out");
 
         Destroy(pLight.gameObject, 1f);
     }
