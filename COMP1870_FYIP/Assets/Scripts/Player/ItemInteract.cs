@@ -35,13 +35,15 @@ public class ItemInteract : MonoBehaviour
         //player can pick up or drop item by interacting
         if (holdingItem)
         {
-            //Debug.Log("Dropped item");
+            AudioManager.instance.PlaySound(AudioManager.soundType.itemDrop, transform.position, 0.2f);
+
             Dropitem();
             return;
         }
         if (canPickUp)
         {
-            //Debug.Log("Interacted with item");
+            AudioManager.instance.PlaySound(AudioManager.soundType.itemPickUp, transform.position, 0.3f);
+
             CarryItem(heldItem);
         }
 
@@ -79,14 +81,9 @@ public class ItemInteract : MonoBehaviour
     {
         if (col.CompareTag("ObjectiveItem"))
         {
-            //heldItem = null;
 
             if (col.TryGetComponent(out ObjectOutline outline))
             {
-                /*if (!outline.GetIsOutlined())
-                {
-                    
-                }*/
                 if(outline.GetFadeOutCoroutine() == null)
                 {
                     outline.SetIsOutlined(false);

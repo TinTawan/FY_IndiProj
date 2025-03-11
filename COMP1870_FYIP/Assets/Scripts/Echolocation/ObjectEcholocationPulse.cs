@@ -40,6 +40,7 @@ public class ObjectEcholocationPulse : MonoBehaviour
         if (objOutline.GetIsOutlined() && playOnce)
         {
             ps.Play();
+            AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseOut, transform.position, 0.2f);
 
         }
 

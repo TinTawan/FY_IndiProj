@@ -70,8 +70,9 @@ public class PulseTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        Renderer rend = col.GetComponent<Renderer>();
 
-        if (col.TryGetComponent(out ObjectOutline outline))
+        if (col.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
         {
             float[] vals = FindLeftOrRightOfPlayer(col.gameObject.transform.position);
 
@@ -108,7 +109,7 @@ public class PulseTrigger : MonoBehaviour
 
                     HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.5f, 0.2f);
 
-                    AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseHit, col.transform.position, 0.2f);
+                    AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseHit, col.transform.position, 0.2f);
 
                 }
 
