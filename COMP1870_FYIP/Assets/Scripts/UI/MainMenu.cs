@@ -1,14 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
+using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    [SerializeField] GameObject mainSection, settingsSection, audioSection, controlsSection, creditsSection;
-    [SerializeField] Slider masterSlider, musicSlider, sfxSlider;
+    [Header("UI Sections")]
+    [SerializeField] GameObject mainSection;
+    [SerializeField] GameObject settingsSection, audioSection, controlsSection, creditsSection;
+
+    [Header("UI Elements")]
+    [SerializeField] Slider masterSlider;
+    [SerializeField] Slider musicSlider, sfxSlider;
+
 
     private const string MASTER_VOL_PARAM = "Master";
     private const string MUSIC_VOL_PARAM = "Music";
@@ -55,13 +59,29 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        StartCoroutine(PlayGame());
     }
 
+    IEnumerator PlayGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        //fade screen?
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+    }
 
     public void Quit()
     {
+        StartCoroutine(QuitGame());
+
+    }
+
+    IEnumerator QuitGame()
+    {
+        yield return new WaitForSeconds(0.5f);
+        //fade screen?
         Application.Quit();
+
     }
 
 }
