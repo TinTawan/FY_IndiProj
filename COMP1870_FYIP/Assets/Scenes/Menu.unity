@@ -2307,9 +2307,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minBreathSize: 0.2
   maxBreathSize: 0.35
-  maxExpandSize: 1.5
+  maxExpandSize: 1
   scaleSpeed: 0.75
   scaleSpeedMult: 0.01
+  smoothMoveSpeed: 15
 --- !u!1 &550669832
 GameObject:
   m_ObjectHideFlags: 0
@@ -3549,7 +3550,7 @@ MonoBehaviour:
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 1916864359}
+    m_SelectOnRight: {fileID: 283967342}
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
@@ -3604,7 +3605,7 @@ MonoBehaviour:
         m_MethodName: SetSelectedGameObject
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 475668989}
+          m_ObjectArgument: {fileID: 1441669357}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0

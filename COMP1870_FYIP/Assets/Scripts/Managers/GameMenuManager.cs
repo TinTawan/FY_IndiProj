@@ -169,7 +169,7 @@ public class GameMenuManager : MonoBehaviour
 
     public void ToMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
 
     }
 

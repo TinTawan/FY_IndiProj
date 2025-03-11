@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
@@ -7,20 +8,23 @@ public class MenuPanelFollow : MonoBehaviour
 {
     RectTransform rectTransform;
 
-    float startSize;
     bool clicked = false;
-    [SerializeField] float minBreathSize, maxBreathSize, maxExpandSize, scaleSpeed = 1f, scaleSpeedMult = 3f;
+    [SerializeField] float minBreathSize, maxBreathSize, maxExpandSize, scaleSpeed = 1f, scaleSpeedMult = 3f, smoothMoveSpeed = 5f;
 
     PlayerInput playerInput;
+
+    Vector3 val = Vector3.zero, mousePos;
+
+    Coroutine expandRoutine;
 
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
-
-        startSize = rectTransform.localScale.x;
+        rectTransform.gameObject.SetActive(true);
 
         playerInput = new PlayerInput();
         playerInput.UI.Enable();
+        playerInput.UI.Submit.performed += Submit_performed;
 
         if (Gamepad.current == null)
         {
@@ -30,7 +34,16 @@ public class MenuPanelFollow : MonoBehaviour
         }
         else
         {
-            rectTransform.position = EventSystem.current.currentSelectedGameObject.transform.position;
+            rectTransform.position = EventSystem.current.firstSelectedGameObject.transform.position;
+        }
+    }
+
+    private void Submit_performed(InputAction.CallbackContext ctx)
+    {
+        if (!clicked)
+        {
+            clicked = true;
+            expandRoutine = StartCoroutine(ExpandAndReturn());
         }
     }
 
@@ -39,20 +52,37 @@ public class MenuPanelFollow : MonoBehaviour
         if (!clicked)
         {
             clicked = true;
-            StartCoroutine(ExpandAndReturn());
+            expandRoutine = StartCoroutine(ExpandAndReturn());
         }
 
     }
 
     private void Point_performed(InputAction.CallbackContext ctx)
     {
-        rectTransform.position = ctx.ReadValue<Vector2>();
+        mousePos = ctx.ReadValue<Vector2>();
     }
 
     private void Update()
     {
         ScaleWithSin();
 
+        if(Gamepad.current == null)
+        {
+            rectTransform.position = Vector3.SmoothDamp(rectTransform.position, mousePos, ref val, Time.deltaTime * smoothMoveSpeed);
+        }
+        else
+        {
+            //if selected object has the slider component, move to its handle rather than to the slider
+            if (EventSystem.current.currentSelectedGameObject.TryGetComponent(out Slider slider))
+            {
+                rectTransform.position = Vector3.SmoothDamp(rectTransform.position, slider.handleRect.transform.position, ref val, Time.deltaTime * smoothMoveSpeed);
+            }
+            else
+            {
+                rectTransform.position = Vector3.SmoothDamp(rectTransform.position, EventSystem.current.currentSelectedGameObject.transform.position, ref val, Time.deltaTime * smoothMoveSpeed);
+
+            }
+        }
     }
 
     void ScaleWithSin()
@@ -80,13 +110,13 @@ public class MenuPanelFollow : MonoBehaviour
             yield return null;
         }
 
+        yield return new WaitForSeconds(0.5f);
+
         while (rectTransform.localScale.x > maxBreathSize && clicked)
         {
-            ScaleRect(-scaleSpeed * scaleSpeedMult * 1.5f);
+            ScaleRect(-scaleSpeed * scaleSpeedMult * 3f);
             yield return null;
         }
-
-        //yield return new WaitForSeconds(0.5f);
 
         clicked = false;
     }
@@ -96,8 +126,10 @@ public class MenuPanelFollow : MonoBehaviour
         return b1 + (s - a1) * (b2 - b1) / (a2 - a1);
     }
 
+
     private void OnDisable()
     {
+        expandRoutine = null;
         playerInput.UI.Disable();
     }
 }

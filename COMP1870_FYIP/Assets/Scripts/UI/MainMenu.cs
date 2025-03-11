@@ -13,10 +13,13 @@ public class MainMenu : MonoBehaviour
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider musicSlider, sfxSlider;
 
+    Coroutine playRoutine;
+
 
     private const string MASTER_VOL_PARAM = "Master";
     private const string MUSIC_VOL_PARAM = "Music";
     private const string SFX_VOL_PARAM = "SFX";
+
 
     private void Awake()
     {
@@ -24,6 +27,7 @@ public class MainMenu : MonoBehaviour
         musicSlider.onValueChanged.AddListener(delegate { MusicSliderChanged(); });
         sfxSlider.onValueChanged.AddListener(delegate { SFXSliderChanged(); });
 
+        Time.timeScale = 1f;
     }
 
     private void MasterSliderChanged()
@@ -59,14 +63,18 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        StartCoroutine(PlayGame());
+        Debug.Log("Pressed play");
+        playRoutine = StartCoroutine(PlayGame());
     }
 
     IEnumerator PlayGame()
     {
+
         yield return new WaitForSeconds(0.5f);
         //fade screen?
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
+
 
     }
 
@@ -84,4 +92,8 @@ public class MainMenu : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        playRoutine = null;
+    }
 }
