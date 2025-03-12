@@ -30,12 +30,17 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Player.VerticalMove.performed += VerticalMove_performed;
         playerInput.Player.VerticalMove.canceled += VerticalMove_cancelled;
         playerInput.Player.Boost.performed += Boost_performed;
+        playerInput.Player.Cheat.performed += Cheat_performed;
 
         cam = Camera.main.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    private void Cheat_performed(InputAction.CallbackContext ctx)
+    {
+        GameManager.instance.IncrementObjects();
+    }
 
     private void Move_performed(InputAction.CallbackContext ctx)
     {

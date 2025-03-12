@@ -63,7 +63,6 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        Debug.Log("Pressed play");
         playRoutine = StartCoroutine(PlayGame());
     }
 

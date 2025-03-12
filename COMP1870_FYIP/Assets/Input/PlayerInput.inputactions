@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Cheat",
+                    "type": "Button",
+                    "id": "b96ab66d-4c04-44de-858a-0e8404af15a2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -340,6 +349,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ff77b18b-e36e-4c9d-964c-ff1d1ac3e564",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "Cheat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "337de947-e377-47ed-a1bd-971c1a264da8",
+                    "path": "<Gamepad>/select",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Cheat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
