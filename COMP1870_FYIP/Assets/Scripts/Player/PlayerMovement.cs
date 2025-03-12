@@ -17,6 +17,9 @@ public class PlayerMovement : MonoBehaviour
 
     bool canBoost = true;
     float boostTimer;
+    public bool hurt { get; set; }
+    public bool inArea { get; set; }
+
 
 
     private void Awake()
@@ -44,7 +47,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void Move_performed(InputAction.CallbackContext ctx)
     {
-        moveVect = ctx.ReadValue<Vector2>();
+        if (hurt)
+        {
+            moveVect = ctx.ReadValue<Vector2>()/4;
+        }
+        else
+        {
+            moveVect = ctx.ReadValue<Vector2>();
+        }
     }
     private void Move_cancelled(InputAction.CallbackContext ctx)
     {
@@ -60,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Boost_performed(InputAction.CallbackContext ctx)
     {
-        if (canBoost)
+        if (canBoost && !hurt)
         {
             canBoost = false;
             rb.AddForce(cam.forward.normalized * boostForce, ForceMode.Impulse);
@@ -71,6 +81,8 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         BoostCooldown();
+
+
     }
     private void FixedUpdate()
     {
@@ -104,5 +116,20 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         playerInput.Player.Disable();
+    }
+
+    private void OnTriggerStay(Collider col)
+    {
+        if (col.CompareTag("HurtArea"))
+        {
+            inArea = true;
+        }
+    }
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.CompareTag("HurtArea"))
+        {
+            inArea = false;
+        }
     }
 }

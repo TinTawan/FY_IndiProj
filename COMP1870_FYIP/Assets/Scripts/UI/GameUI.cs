@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +10,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] RawImage edgeGradientRI;
     [SerializeField] Color highFreqCol;
     [SerializeField] Color lowFreqCol;
+    [SerializeField] Color hurtCol = Color.red;
     //min val for the radius that is furthest off the screen, max for closest towards middle
     [SerializeField] float edgeRadMin = 0.75f, edgeRadMax = 0.5f;
 
@@ -20,12 +19,16 @@ public class GameUI : MonoBehaviour
     [SerializeField] float colLerpSpeed = 2f;
     Color currentEdgeCol;
 
+    PlayerMovement player;
+
     private void Start()
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
 
         edgeGradientMat = edgeGradientRI.material;
         edgeGradientMat.SetColor("_edgeColour", highFreqCol);
+
+        player = HapticManager.instance.GetPlayer();
 
     }
 
@@ -40,15 +43,27 @@ public class GameUI : MonoBehaviour
     {
         Color targetCol;
 
-        if(echoPulse.GetCurrentPulse() == 0)
+        if (player.hurt)
         {
-            targetCol = lowFreqCol;
+            targetCol = hurtCol;
+            if (player.hurt)
+            {
+                Invoke(nameof(PlayerHurt), Random.Range(3, 6));
+            }
         }
         else
         {
-            targetCol = highFreqCol;
+            if (echoPulse.GetCurrentPulse() == 0)
+            {
+                targetCol = lowFreqCol;
+            }
+            else
+            {
+                targetCol = highFreqCol;
 
+            }
         }
+        
 
         currentEdgeCol = Color.Lerp(currentEdgeCol, targetCol, colLerpSpeed * Time.deltaTime);
 
@@ -63,7 +78,7 @@ public class GameUI : MonoBehaviour
         float hRad = Mathf.Lerp(edgeRadMax, edgeRadMin, echoPulse.GetHTimer());
         float lRad = Mathf.Lerp(edgeRadMax, edgeRadMin, echoPulse.GetLTimer());
 
-        if (echoPulse.GetCurrentPulse() == 0) 
+        if (echoPulse.GetCurrentPulse() == 0)
         {
             edgeGradientMat.SetFloat("_radius", lRad);
 
@@ -82,6 +97,10 @@ public class GameUI : MonoBehaviour
 
     }
 
+    void PlayerHurt()
+    {
+        player.hurt = false;
+    }
 
 
     private void OnDisable()

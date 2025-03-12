@@ -10,6 +10,9 @@ public class WinMenu : MonoBehaviour
     {
         mainSection.SetActive(true);
         creditsSection.SetActive(false);
+
+        AudioManager.instance.PlaySound(AudioManager.soundType.win, transform.position, 0);
+
     }
 
     public void ToMenu()

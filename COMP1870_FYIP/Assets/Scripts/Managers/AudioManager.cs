@@ -15,7 +15,8 @@ public class AudioManager : MonoBehaviour
         itemPickUp,
         itemDrop,
         itemPlaced,
-        wrongItemPlaced
+        wrongItemPlaced,
+        win
 
 
 
@@ -34,6 +35,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip[] itemDropSound;
     [SerializeField] AudioClip[] itemPlacedSound;
     [SerializeField] AudioClip[] wrongItemPlacedSound;
+    [SerializeField] AudioClip[] winSound;
+
 
 
 
@@ -93,7 +96,9 @@ public class AudioManager : MonoBehaviour
             case (soundType.wrongItemPlaced):
                 soundObj.SetClip(wrongItemPlacedSound[Random.Range(0, wrongItemPlacedSound.Length)]);
                 break;
-
+            case (soundType.win):
+                soundObj.SetClip(winSound[Random.Range(0, winSound.Length)]);
+                break;
 
         }
 

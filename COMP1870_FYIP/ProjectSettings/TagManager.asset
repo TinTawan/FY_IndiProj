@@ -9,6 +9,7 @@ TagManager:
   - LowPulse
   - HighPulse
   - EmitterPulse
+  - HurtArea
   layers:
   - Default
   - TransparentFX

@@ -84,6 +84,12 @@ public class EcholocationPulse : MonoBehaviour
 
                 canHPulse = false;
                 hTimer = highCD;
+
+
+                if (HapticManager.instance.GetPlayer().inArea)
+                {
+                    HapticManager.instance.GetPlayer().hurt = true;
+                }
             }
             if (canLPulse && currentPulse == 0)
             {
