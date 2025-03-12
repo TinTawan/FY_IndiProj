@@ -28,6 +28,7 @@ public class ItemSlot : MonoBehaviour
                 {
                     //correct item to correct slot
                     AudioManager.instance.PlaySound(AudioManager.soundType.itemPlaced, transform.position, 0.3f);
+                    GameManager.instance.IncrementObjects();
 
                     //show slot has been filled
                     slotOutline.StopFadeCR();
