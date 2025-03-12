@@ -9,6 +9,7 @@ public class ObjectEcholocationPulse : MonoBehaviour
     [Header("Particle System info")]
     [SerializeField] float fullDuration;
     [SerializeField] float lifetime, size;
+
     Color pulseColour;
 
     ParticleSystem ps;
@@ -27,12 +28,12 @@ public class ObjectEcholocationPulse : MonoBehaviour
         psCol = ps.colorOverLifetime;
         psEm = ps.emission;
 
-        SetPS();
-        SetBurst();
-
+        
         objOutline = GetComponent<ObjectOutline>();
         pulseColour = objOutline.GetOutlineColour();
 
+        SetPS();
+        SetBurst();
     }
 
     private void Update()
@@ -43,7 +44,6 @@ public class ObjectEcholocationPulse : MonoBehaviour
             AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseOut, transform.position, 0.2f);
 
         }
-
 
     }
 

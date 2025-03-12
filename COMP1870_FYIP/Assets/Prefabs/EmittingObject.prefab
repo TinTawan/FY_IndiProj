@@ -5074,7 +5074,7 @@ Transform:
   m_GameObject: {fileID: 3453502494064406700}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.51, y: 4.02, z: -13.11}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5197,7 +5197,6 @@ MonoBehaviour:
   fullDuration: 3
   lifetime: 1
   size: 20
-  pulseColour: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &6592126720707054150
 MonoBehaviour:
   m_ObjectHideFlags: 0
