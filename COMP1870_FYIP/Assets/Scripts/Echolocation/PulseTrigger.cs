@@ -37,21 +37,16 @@ public class PulseTrigger : MonoBehaviour
 
             sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
 
-            if (doOnce)
+            if (doOnce && !HapticManager.instance.GetPlayer().inArea)
             {
                 GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
                 pulseLight = obj.GetComponent<Light>();
-
-
                 LightPulse lp = pulseLight.GetComponent<LightPulse>();
                 lp.SetLifetime(ps.main.startLifetime.constant + 1f);
                 lp.SetFadeSpeed(0.1f);
-
-                //Light light = lp.GetComponent<Light>();
-                //light.color = ps.GetComponent<Renderer>().material.GetColor("_intersectColour");
-
-
+    
                 doOnce = false;
+    
             }
 
             if (pulseLight != null)
