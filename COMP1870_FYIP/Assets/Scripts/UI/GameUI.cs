@@ -28,7 +28,7 @@ public class GameUI : MonoBehaviour
         edgeGradientMat = edgeGradientRI.material;
         edgeGradientMat.SetColor("_edgeColour", highFreqCol);
 
-        player = HapticManager.instance.GetPlayer();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>(); 
 
     }
 

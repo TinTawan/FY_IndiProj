@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public class PulseTrigger : MonoBehaviour
 {
@@ -37,7 +39,7 @@ public class PulseTrigger : MonoBehaviour
 
             sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
 
-            if (doOnce && !HapticManager.instance.GetPlayer().inArea)
+            if (doOnce && !GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().inArea)
             {
                 GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
                 pulseLight = obj.GetComponent<Light>();
@@ -123,37 +125,45 @@ public class PulseTrigger : MonoBehaviour
 
     float[] FindLeftOrRightOfPlayer(Vector3 obj)
     {
-        PlayerMovement player = HapticManager.instance.GetPlayer();
-
-        float[] output = new float[] { 0, 0 };
-
-        Vector3 directionToPlayer = (obj - player.transform.position).normalized;
-        float dotProd = Vector3.Dot(directionToPlayer, player.transform.right);
-
-        if (dotProd > 0.1f)
+        if(Gamepad.current != null)
         {
-            //right
-            output[0] = 0;
-            output[1] = 1;
+            PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
-        }
-        else if (dotProd < -0.1f)
-        {
-            //left
-            output[0] = 1;
-            output[1] = 0;
+            float[] output = new float[] { 0, 0 };
 
+            Vector3 directionToPlayer = (obj - player.transform.position).normalized;
+            float dotProd = Vector3.Dot(directionToPlayer, player.transform.right);
+
+            if (dotProd > 0.1f)
+            {
+                //right
+                output[0] = 0;
+                output[1] = 1;
+
+            }
+            else if (dotProd < -0.1f)
+            {
+                //left
+                output[0] = 1;
+                output[1] = 0;
+
+            }
+            else
+            {
+                //same plane
+                output[0] = 1;
+                output[1] = 1;
+
+
+            }
+
+            return output;
         }
         else
         {
-            //same plane
-            output[0] = 1;
-            output[1] = 1;
-
-
+            return null;
         }
-
-        return output;
+        
 
     }
 

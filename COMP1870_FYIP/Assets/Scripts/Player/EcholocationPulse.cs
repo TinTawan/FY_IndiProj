@@ -85,10 +85,10 @@ public class EcholocationPulse : MonoBehaviour
                 canHPulse = false;
                 hTimer = highCD;
 
-
-                if (HapticManager.instance.GetPlayer().inArea)
+                PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+                if (player.inArea)
                 {
-                    HapticManager.instance.GetPlayer().hurt = true;
+                    player.hurt = true;
                 }
             }
             if (canLPulse && currentPulse == 0)

@@ -69,7 +69,7 @@ public class MainMenu : MonoBehaviour
     IEnumerator PlayGame()
     {
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         //fade screen?
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, LoadSceneMode.Single);
@@ -85,7 +85,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator QuitGame()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
         //fade screen?
         Application.Quit();
 

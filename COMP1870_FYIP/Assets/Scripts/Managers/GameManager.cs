@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if(objectsPlaced >= 4)
+        if(objectsPlaced >= 5)
         {
             //win
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
