@@ -16,7 +16,7 @@ public class PulseTrigger : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         sphereCol = GetComponent<SphereCollider>();
 
-        sphereCol.radius = .5f;
+        sphereCol.radius = .2f;
     }
 
     private void Update()
@@ -47,6 +47,9 @@ public class PulseTrigger : MonoBehaviour
                 lp.SetLifetime(ps.main.startLifetime.constant + 1f);
                 lp.SetFadeSpeed(0.1f);
 
+                //Light light = lp.GetComponent<Light>();
+                //light.color = ps.GetComponent<Renderer>().material.GetColor("_intersectColour");
+
 
                 doOnce = false;
             }
@@ -62,7 +65,7 @@ public class PulseTrigger : MonoBehaviour
         }
         else
         {
-            sphereCol.radius = 0.5f;
+            sphereCol.radius = 0.2f;
 
         }
 
