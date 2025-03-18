@@ -43,8 +43,10 @@ public class ItemInteract : MonoBehaviour
         if (canPickUp)
         {
             AudioManager.instance.PlaySound(AudioManager.soundType.itemPickUp, transform.position, 0.3f);
-
-            CarryItem(heldItem);
+            if(heldItem != null)
+            {
+                CarryItem(heldItem);
+            }
         }
 
 

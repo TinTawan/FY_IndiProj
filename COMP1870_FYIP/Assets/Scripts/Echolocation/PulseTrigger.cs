@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-
 public class PulseTrigger : MonoBehaviour
 {
     [SerializeField] GameObject lightObj;
@@ -13,12 +12,18 @@ public class PulseTrigger : MonoBehaviour
 
     bool doOnce = true;
 
+    PlayerMovement pMovement;
+    EcholocationPulse ePulse;
+
     private void Start()
     {
         ps = GetComponent<ParticleSystem>();
         sphereCol = GetComponent<SphereCollider>();
 
         sphereCol.radius = .2f;
+
+        pMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        ePulse = pMovement.gameObject.GetComponent<EcholocationPulse>();
     }
 
     private void Update()
@@ -39,8 +44,9 @@ public class PulseTrigger : MonoBehaviour
 
             sphereCol.radius = currentSize * ps.main.startSize.constant * 0.5f;
 
-            if (doOnce && !GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().inArea)
+            if (doOnce && !pMovement.inArea)
             {
+                Debug.Log("Not in area so light pulse");
                 GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
                 pulseLight = obj.GetComponent<Light>();
                 LightPulse lp = pulseLight.GetComponent<LightPulse>();
@@ -50,6 +56,19 @@ public class PulseTrigger : MonoBehaviour
                 doOnce = false;
     
             }
+            else if(doOnce && pMovement.inArea && ePulse.GetCurrentPulse() == 0)
+            {
+                Debug.Log("In area but using low freq so light pulse");
+
+                GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
+                pulseLight = obj.GetComponent<Light>();
+                LightPulse lp = pulseLight.GetComponent<LightPulse>();
+                lp.SetLifetime(ps.main.startLifetime.constant + 1f);
+                lp.SetFadeSpeed(0.1f);
+
+                doOnce = false;
+            }
+            
 
             if (pulseLight != null)
             {
