@@ -13,6 +13,7 @@ public class GameUI : MonoBehaviour
     [SerializeField] Color hurtCol = Color.red;
     //min val for the radius that is furthest off the screen, max for closest towards middle
     [SerializeField] float edgeRadMin = 0.75f, edgeRadMax = 0.5f;
+    [SerializeField] float edgeSoftnessMin = 3.3f, edgeSoftnessMax = 1.5f;
 
     Material edgeGradientMat;
 
@@ -48,6 +49,8 @@ public class GameUI : MonoBehaviour
             targetCol = hurtCol;
             if (player.hurt)
             {
+                edgeGradientMat.SetFloat("_radius", edgeRadMax);
+                edgeGradientMat.SetFloat("_softness", edgeSoftnessMax);
                 Invoke(nameof(PlayerHurt), Random.Range(3, 6));
             }
         }
@@ -100,6 +103,7 @@ public class GameUI : MonoBehaviour
     void PlayerHurt()
     {
         player.hurt = false;
+        edgeGradientMat.SetFloat("_softness", edgeSoftnessMin);
     }
 
 
