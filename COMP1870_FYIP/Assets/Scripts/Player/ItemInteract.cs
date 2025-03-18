@@ -111,7 +111,6 @@ public class ItemInteract : MonoBehaviour
 
         if (heldItem.TryGetComponent(out ObjectOutline outline))
         {
-            Debug.Log("Outline now");
             outline.StopFadeCR();
             outline.SetOutlineDepth(outlineDepth);
             outline.SetIsOutlined(true);

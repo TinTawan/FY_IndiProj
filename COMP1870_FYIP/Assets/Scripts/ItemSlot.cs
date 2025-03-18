@@ -28,6 +28,7 @@ public class ItemSlot : MonoBehaviour
                 {
                     //correct item to correct slot
                     AudioManager.instance.PlaySound(AudioManager.soundType.itemPlaced, transform.position, 0.3f);
+                    HapticManager.instance.HapticFeedback(0.1f, 0.3f, 0.5f);
                     GameManager.instance.IncrementObjects();
 
                     //show slot has been filled
@@ -44,10 +45,7 @@ public class ItemSlot : MonoBehaviour
                 {
                     //wrong item for this slot
                     AudioManager.instance.PlaySound(AudioManager.soundType.wrongItemPlaced, transform.position, 0.5f);
-
-
-                    //Debug.Log($"Item: R {itemOutline.GetOutlineColour().r}, G {itemOutline.GetOutlineColour().g}, B {itemOutline.GetOutlineColour().b}, A {itemOutline.GetOutlineColour().a}");
-                    //Debug.Log($"Slot: R {objectiveColour.r}, G {objectiveColour.g}, B {objectiveColour.b}, A {objectiveColour.a}");
+                    HapticManager.instance.HapticFeedback(0.2f, 0.4f, 0.2f);
 
                 }
 
