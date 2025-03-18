@@ -46,7 +46,6 @@ public class PulseTrigger : MonoBehaviour
 
             if (doOnce && !pMovement.inArea)
             {
-                Debug.Log("Not in area so light pulse");
                 GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
                 pulseLight = obj.GetComponent<Light>();
                 LightPulse lp = pulseLight.GetComponent<LightPulse>();
@@ -58,8 +57,6 @@ public class PulseTrigger : MonoBehaviour
             }
             else if(doOnce && pMovement.inArea && ePulse.GetCurrentPulse() == 0)
             {
-                Debug.Log("In area but using low freq so light pulse");
-
                 GameObject obj = Instantiate(lightObj, transform.position, Quaternion.identity);
                 pulseLight = obj.GetComponent<Light>();
                 LightPulse lp = pulseLight.GetComponent<LightPulse>();

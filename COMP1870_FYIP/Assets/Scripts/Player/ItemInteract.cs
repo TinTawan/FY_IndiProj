@@ -57,6 +57,7 @@ public class ItemInteract : MonoBehaviour
         if (col.CompareTag("ObjectiveItem") && !holdingItem)
         {
             AudioManager.instance.PlaySound(AudioManager.soundType.canInteract, transform.position, 0.3f);
+            HapticManager.instance.HapticFeedback(.1f, .3f, .2f);
 
         }
     }
@@ -86,7 +87,7 @@ public class ItemInteract : MonoBehaviour
 
             if (col.TryGetComponent(out ObjectOutline outline))
             {
-                if(outline.GetFadeOutCoroutine() == null)
+                if(outline.GetFadeOutCoroutine() == null && !holdingItem)
                 {
                     outline.SetIsOutlined(false);
                     outline.SetOutlineDepth(0f);
@@ -100,7 +101,6 @@ public class ItemInteract : MonoBehaviour
 
     void CarryItem(GameObject inHeldItem)
     {
-        //SetCols(false);
         SetCol(false, 0);
 
         inHeldItem.transform.SetPositionAndRotation(itemSlot.position, Quaternion.identity);
@@ -111,6 +111,7 @@ public class ItemInteract : MonoBehaviour
 
         if (heldItem.TryGetComponent(out ObjectOutline outline))
         {
+            Debug.Log("Outline now");
             outline.StopFadeCR();
             outline.SetOutlineDepth(outlineDepth);
             outline.SetIsOutlined(true);
