@@ -59,6 +59,8 @@ public class ItemInteract : MonoBehaviour
             AudioManager.instance.PlaySound(AudioManager.soundType.canInteract, transform.position, 0.3f);
             HapticManager.instance.HapticFeedback(.1f, .3f, .2f);
 
+            itemCols = col.GetComponents<Collider>();
+
         }
     }
     private void OnTriggerStay(Collider col)
@@ -101,7 +103,8 @@ public class ItemInteract : MonoBehaviour
 
     void CarryItem(GameObject inHeldItem)
     {
-        SetCol(false, 0);
+        SetCol(false, 1);
+
 
         inHeldItem.transform.SetPositionAndRotation(itemSlot.position, Quaternion.identity);
         inHeldItem.transform.SetParent(itemSlot);
@@ -135,6 +138,8 @@ public class ItemInteract : MonoBehaviour
 
         canPickUp = true;
         holdingItem = false;
+
+        itemCols = null;
 
     }
 
