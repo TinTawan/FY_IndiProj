@@ -25,7 +25,7 @@ public class GameMenuManager : MonoBehaviour
 
     public bool isPaused { get; set; }
 
-    [SerializeField] List<AudioSource> currentSounds = new List<AudioSource>();
+    List<AudioSource> currentSounds = new List<AudioSource>();
 
 
     private void Awake()

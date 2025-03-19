@@ -42,9 +42,9 @@ public class ItemInteract : MonoBehaviour
         }
         if (canPickUp)
         {
-            AudioManager.instance.PlaySound(AudioManager.soundType.itemPickUp, transform.position, 0.3f);
             if(heldItem != null)
             {
+                AudioManager.instance.PlaySound(AudioManager.soundType.itemPickUp, transform.position, 0.3f);
                 CarryItem(heldItem);
             }
         }
