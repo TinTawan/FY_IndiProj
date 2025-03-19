@@ -25,7 +25,7 @@ public class GameMenuManager : MonoBehaviour
 
     public bool isPaused { get; set; }
 
-    List<AudioSource> currentSounds = new List<AudioSource>();
+    [SerializeField] List<AudioSource> currentSounds = new List<AudioSource>();
 
 
     private void Awake()
@@ -115,7 +115,11 @@ public class GameMenuManager : MonoBehaviour
         AudioSource[] sounds = FindObjectsOfType<AudioSource>();
         foreach (AudioSource sound in sounds)
         {
-            currentSounds.Add(sound);
+            //only add new sounds to list
+            if(currentSounds.IndexOf(sound) < 0)
+            {
+                currentSounds.Add(sound);
+            }
         }
         //if there are any, pause them
         if (currentSounds.Count > 0)
@@ -124,13 +128,17 @@ public class GameMenuManager : MonoBehaviour
             {
                 if (sound != null)
                 {
-                    sound.Pause();
+                    //only pause sound if it isnt on the camera (music does not pause)
+                    if(!sound.TryGetComponent(out Camera cam))
+                    {
+                        sound.Pause();
+                    }
                 }
 
             }
         }
 
-
+        HapticManager.instance.StopHaptics();
     }
 
 

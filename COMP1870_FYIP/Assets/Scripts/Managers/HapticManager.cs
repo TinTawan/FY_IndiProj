@@ -52,9 +52,9 @@ public class HapticManager : MonoBehaviour
         gamepad.ResetHaptics();
     }
 
-    public PlayerMovement GetPlayer()
+    public void StopHaptics()
     {
-        return player;
+        Gamepad.current.ResetHaptics();
     }
 
     private void OnDisable()
