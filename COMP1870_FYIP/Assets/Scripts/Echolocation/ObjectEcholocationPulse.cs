@@ -43,7 +43,8 @@ public class ObjectEcholocationPulse : MonoBehaviour
             ps.Play();
             AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseOut, transform.position, 0.2f);
 
-            Invoke(nameof(StopOutline), 0.1f);
+            Invoke(nameof(StopOutline), 1f);
+            Invoke(nameof(StopPS), 6f);
 
         }
 
@@ -54,7 +55,6 @@ public class ObjectEcholocationPulse : MonoBehaviour
         objOutline.SetOutlineDepth(0f);
         playOnce = false;
 
-        Invoke(nameof(StopPS), 5f);
     }
     void StopPS()
     {
