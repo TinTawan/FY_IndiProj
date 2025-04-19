@@ -110,7 +110,10 @@ public class PulseTrigger : MonoBehaviour
                 {
                     outline.SetOutlineTime(lowPulseDuration);
 
-                    HapticManager.instance.HapticFeedback(vals[0] * 0.2f, vals[1] * 0.7f, 0.3f);
+                    if (Gamepad.current != null)
+                    {
+                        HapticManager.instance.HapticFeedback(vals[0] * 0.2f, vals[1] * 0.7f, 0.3f);
+                    }
 
                     AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseHit, col.transform.position, 0.2f);
 
@@ -120,7 +123,10 @@ public class PulseTrigger : MonoBehaviour
                 {
                     outline.SetOutlineTime(highPulseDuration);
 
-                    HapticManager.instance.HapticFeedback(vals[0] * 0.3f, vals[1] * 1f, 0.4f);
+                    if (Gamepad.current != null)
+                    {
+                        HapticManager.instance.HapticFeedback(vals[0] * 0.3f, vals[1] * 1f, 0.4f);
+                    }
 
                     AudioManager.instance.PlaySound(AudioManager.soundType.highPulseHit, col.transform.position, 0.2f);
 
@@ -130,7 +136,10 @@ public class PulseTrigger : MonoBehaviour
                 {
                     outline.SetOutlineTime(emittingObjectPulseDuration);
 
-                    HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.5f, 0.2f);
+                    if (Gamepad.current != null)
+                    {
+                        HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.5f, 0.2f);
+                    }
 
                     AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseHit, col.transform.position, 0.2f);
 

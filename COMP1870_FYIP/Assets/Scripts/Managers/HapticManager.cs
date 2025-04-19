@@ -54,7 +54,10 @@ public class HapticManager : MonoBehaviour
 
     public void StopHaptics()
     {
-        Gamepad.current.ResetHaptics();
+        if (Gamepad.current != null)
+        {
+            Gamepad.current.ResetHaptics();
+        }
     }
 
     private void OnDisable()
