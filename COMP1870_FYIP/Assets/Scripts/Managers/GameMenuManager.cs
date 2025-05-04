@@ -98,6 +98,7 @@ public class GameMenuManager : MonoBehaviour
 
     private void Pause()
     {
+        Cursor.visible = true;
 
         //set correct time and panels
         Time.timeScale = 0f;
@@ -144,6 +145,7 @@ public class GameMenuManager : MonoBehaviour
 
     private void UnPause()
     {
+        Cursor.visible = false;
 
         //set correct time and panels
         Time.timeScale = 1f;

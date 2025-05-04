@@ -58,6 +58,8 @@ public class MainMenu : MonoBehaviour
         masterSlider.value = PlayerPrefs.GetFloat(MASTER_VOL_PARAM);
         musicSlider.value = PlayerPrefs.GetFloat(MUSIC_VOL_PARAM);
         sfxSlider.value = PlayerPrefs.GetFloat(SFX_VOL_PARAM);
+
+        Cursor.visible = false;
     }
 
 
