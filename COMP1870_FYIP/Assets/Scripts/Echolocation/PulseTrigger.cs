@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,8 @@ public class PulseTrigger : MonoBehaviour
 
     PlayerMovement pMovement;
     EcholocationPulse ePulse;
+
+    private HashSet<GameObject> hitObjects = new HashSet<GameObject>();
 
     private void Start()
     {
@@ -86,6 +89,7 @@ public class PulseTrigger : MonoBehaviour
         else
         {
             sphereCol.radius = 0.2f;
+            hitObjects.Clear();
 
         }
 
@@ -93,63 +97,80 @@ public class PulseTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Renderer rend = col.GetComponent<Renderer>();
-
-        if (col.TryGetComponent(out ObjectOutline outline)/* && rend.isVisible*/)
+        //objective items have 2 colliders, so only work with non-duplicates
+        if (hitObjects.Contains(col.gameObject))
         {
-            float[] vals = FindLeftOrRightOfPlayer(col.gameObject.transform.position);
+            return;
+        }
+
+        if (col.TryGetComponent(out ObjectOutline outline))
+        {
+            GameObject hitObject = col.gameObject;
+            hitObjects.Add(hitObject);
+
+            float outlineTime = 0f;
+            float hapticTime = 0f;
+            Vector2 hapticStrength = Vector2.zero;
+            AudioManager.soundType sfx = default;
+
+            float[] vals = null;
+            if(Gamepad.current != null)
+            {
+                vals = FindLeftOrRightOfPlayer(col.gameObject.transform.position);
+            }
+
+            if (gameObject.CompareTag("LowPulse"))
+            {
+                outlineTime = lowPulseDuration;
+                sfx = AudioManager.soundType.lowPulseHit;
+                if(vals != null)
+                {
+                    hapticStrength = new Vector2(vals[0] * 0.2f, vals[1] * 0.7f);
+                    hapticTime = 0.3f;
+                }
+                
+            }
+            else if (gameObject.CompareTag("HighPulse"))
+            {
+                outlineTime = highPulseDuration;
+                sfx = AudioManager.soundType.highPulseHit;
+                if(vals != null)
+                {
+                    hapticStrength = new Vector2(vals[0] * 0.3f, vals[1] * 1f);
+                    hapticTime = 0.4f;
+                }
+               
+            }
+            else if (gameObject.CompareTag("EmitterPulse"))
+            {
+                outlineTime = emittingObjectPulseDuration;
+                sfx = AudioManager.soundType.emitterPulseHit;
+                if(vals != null)
+                {
+                    hapticStrength = new Vector2(vals[0] * 0.1f, vals[1] * 0.5f);
+                    hapticTime = 0.2f;
+                }
+
+            }
 
 
             if (!outline.GetIsOutlined())
             {
-                //outline the object
                 outline.SetCanBeTriggered(true);
+                outline.SetOutlineTime(outlineTime);
 
-                //give lower outline time if hit by low pulse
-                if (gameObject.CompareTag("LowPulse"))
+                if (Gamepad.current != null && vals != null)
                 {
-                    outline.SetOutlineTime(lowPulseDuration);
-
-                    if (Gamepad.current != null)
-                    {
-                        HapticManager.instance.HapticFeedback(vals[0] * 0.2f, vals[1] * 0.7f, 0.3f);
-                    }
-
-                    AudioManager.instance.PlaySound(AudioManager.soundType.lowPulseHit, col.transform.position, 0.2f);
-
+                    HapticManager.instance.HapticFeedback(hapticStrength.x, hapticStrength.y, hapticTime);
                 }
-                //and longer outline time if hit by high pulse
-                if (gameObject.CompareTag("HighPulse"))
-                {
-                    outline.SetOutlineTime(highPulseDuration);
-
-                    if (Gamepad.current != null)
-                    {
-                        HapticManager.instance.HapticFeedback(vals[0] * 0.3f, vals[1] * 1f, 0.4f);
-                    }
-
-                    AudioManager.instance.PlaySound(AudioManager.soundType.highPulseHit, col.transform.position, 0.2f);
-
-                }
-                //and middle time if hit by emitting object
-                if (gameObject.CompareTag("EmitterPulse"))
-                {
-                    outline.SetOutlineTime(emittingObjectPulseDuration);
-
-                    if (Gamepad.current != null)
-                    {
-                        HapticManager.instance.HapticFeedback(vals[0] * 0.1f, vals[1] * 0.5f, 0.2f);
-                    }
-
-                    AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseHit, col.transform.position, 0.2f);
-
-                }
-
             }
             else
             {
                 outline.SetCanBeTriggered(false);
             }
+
+            AudioManager.instance.PlaySound(sfx, hitObject.transform.position, 0.2f);
+
         }
 
 
@@ -199,9 +220,5 @@ public class PulseTrigger : MonoBehaviour
 
     }
 
-    float DistanceBetweenObjects(Vector3 obj1, Vector3 obj2)
-    {
-        return Vector3.Distance(obj1, obj2);
-    }
 
 }
