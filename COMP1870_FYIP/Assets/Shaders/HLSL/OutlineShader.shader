@@ -108,10 +108,11 @@ Shader "Unlit/OutlineShader"
         {
             Name "Materials"
 
-            Tags { "LightMode" = "UniversalForward" "Queue" = "Geometry" }
+            Tags { "Queue" = "Overlay" "LightMode" = "UniversalForward" }
             ZWrite Off
+            ZTest LEqual
             ColorMask RGB
-
+            
             Cull Back
 
             HLSLPROGRAM
@@ -146,7 +147,7 @@ Shader "Unlit/OutlineShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = /*TRANSFORM_TEX(v.uv, _baseTex)*/v.uv;
+                o.uv = v.uv;
                 o.tangentNormal = v.normal;
                 return o;
             }
@@ -165,7 +166,7 @@ Shader "Unlit/OutlineShader"
 
                 float NdotL = saturate(dot(finalNormal, lightDir));
 
-                col.rgb *= (0.5 + 0.5 * NdotL); // brighten the lit side
+                col.rgb *= (0.5 + 0.5 * NdotL); 
 
                 return col;
             }
