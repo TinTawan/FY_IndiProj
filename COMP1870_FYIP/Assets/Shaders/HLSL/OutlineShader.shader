@@ -1,14 +1,19 @@
 Shader "Unlit/OutlineShader"
 {
+
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-
         //==== my custom inputs ====//
-        _outlineDepth ("outlineDepth", Range(0, 0.5)) = 0.01
+        _outlineDepth ("outlineDepth", Range(0, 0.05)) = 0.05
         _outlineColour ("outlineColour", Color) = (0, 0, 0, 1)
-        //_baseMaterial ("baseMaterial", )
+        _baseTex("baseTexture", 2D) = "white" { }
+        _baseNormal("baseNormal", 2D) = "white" { }
+        [HideInInspector]_usesTwoMaterials("usesTwoMaterials", Range(0,1)) = 0
+        [HideInInspector]_baseTex2("baseTexture2", 2D) = "white" { }
+        [HideInInspector]_baseNormal2("baseNormal2", 2D) = "white" { }
     }
+    CustomEditor "OutlineShaderGUI"
+
     SubShader
     {
         Tags 
@@ -21,11 +26,11 @@ Shader "Unlit/OutlineShader"
 
         Pass
         {
+            Cull Front
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
-            // make fog work
-            //#pragma multi_compile_fog
 
             #include "UnityCG.cginc"
 
@@ -39,16 +44,15 @@ Shader "Unlit/OutlineShader"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                //UNITY_FOG_COORDS(1)
                 float4 vertex : SV_POSITION;
             };
 
-            sampler2D _MainTex;
-            float4 _MainTex_ST;
 
             //==== my custom inputs ====//
             float _outlineDepth;
             float4 _outlineColour;
+
+            sampler2D _baseTex;
 
             v2f vert (appdata v)
             {
@@ -63,36 +67,24 @@ Shader "Unlit/OutlineShader"
 
                 //Camera Position Node
                 float3 camPos = _WorldSpaceCameraPos;
+                float3 camPosObjectSpace = mul(unity_WorldToObject, float4(camPos, 1.0)).xyz;
 
                 //Object Space Position Node
                 float3 posObjectSpace = v.vertex.xyz;
 
                 //Object Space Normal Vector Node
                 float3 normal = normalize(v.normal);
-                //float3 normalObjectSpace = mul((float3x3)unity_ObjectToWorld, normal);
-
 
                 v2f o;
-                //o.vertex = UnityObjectToClipPos(v.vertex);
-                //o.uv = TRANSFORM_TEX(v.uv, _MainTex);
-                ////UNITY_TRANSFER_FOG(o,o.vertex);
 
-                /*float3 a = _outlineDepth / ((objectScale.x + objectScale.y + objectScale.z) / 3);
-                float3 b = (objectPos / camPos) / 2;
-                float depth = a * b;
-
-                float3 normalDepth = normalObjectSpace * depth;
-
-                float3 vertPos = posObjectSpace + normalDepth;*/
-
-                float3 a = _outlineDepth / ((objectScale.x + objectScale.y + objectScale.z) / 3);
-                float3 b = distance(objectPos, camPos) * 0.5;
+                float objectScaleMean = (objectScale.x + objectScale.y + objectScale.z) / 3;
+                float3 a = _outlineDepth / objectScaleMean;
+                float3 b = distance(objectPos, camPosObjectSpace) * 0.25;
+                //b *= 0.5;
 
                 float depth = a * b;
 
                 float3 vertPos = posObjectSpace + (normal * depth);
-
-                //float3 displacedPosition = v.vertex.xyz + normal * (_outlineDepth / objectScale.x);
 
                 o.vertex = UnityObjectToClipPos(float4(vertPos, 1.0));
 
@@ -101,13 +93,19 @@ Shader "Unlit/OutlineShader"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                // sample the texture
-                //fixed4 col = tex2D(_MainTex, i.uv);
+                //fixed4 tex = tex2D(_baseTex, i.uv);
+                
                 fixed4 col = _outlineColour;
                 col.a = 1.0;
-                return col;
+                return col /** tex*/;
             }
             ENDCG
+        }
+
+        Pass
+        {
+            
+            
         }
     }
 }

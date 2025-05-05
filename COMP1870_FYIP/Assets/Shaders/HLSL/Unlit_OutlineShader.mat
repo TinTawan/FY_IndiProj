@@ -27,9 +27,26 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _baseNormal:
+        m_Texture: {fileID: 2800000, guid: 6d95b5972e7f5b0419057d960302b488, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _baseNormal2:
+        m_Texture: {fileID: 2800000, guid: acc02cc28f47f2543908b6eed56a4191, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _baseTex:
+        m_Texture: {fileID: 2800000, guid: 31f0babf251ca144a90b9326b0f173bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _baseTex2:
+        m_Texture: {fileID: 2800000, guid: ec9b9ccd91dc6444688b5c3b5b6e2f11, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _outlineDepth: 0.05
+    - _usesTwoMaterials: 1
     m_Colors:
     - _outlineColour: {r: 0, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
