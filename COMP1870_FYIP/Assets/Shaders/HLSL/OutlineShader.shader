@@ -162,12 +162,6 @@ Shader "Unlit/OutlineShader"
 
                 float3 finalNormal = normalize(i.tangentNormal + norm);
 
-                float3 lightDir = normalize(float3(0.9, 0.6, 0.8));
-
-                float NdotL = saturate(dot(finalNormal, lightDir));
-
-                col.rgb *= (0.5 + 0.5 * NdotL); 
-
                 return col;
             }
             ENDHLSL
