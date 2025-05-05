@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Unlit_OutlineShader
+  m_Name: Unlit_OutlineShader 1
   m_Shader: {fileID: 4800000, guid: 94c6278a22f685447ac643b0cdb85e83, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -28,7 +28,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _baseNormal:
-        m_Texture: {fileID: 2800000, guid: acc02cc28f47f2543908b6eed56a4191, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6d95b5972e7f5b0419057d960302b488, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _baseNormal2:
@@ -36,7 +36,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _baseTex:
-        m_Texture: {fileID: 2800000, guid: ec9b9ccd91dc6444688b5c3b5b6e2f11, type: 3}
+        m_Texture: {fileID: 2800000, guid: 31f0babf251ca144a90b9326b0f173bb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _baseTex2:

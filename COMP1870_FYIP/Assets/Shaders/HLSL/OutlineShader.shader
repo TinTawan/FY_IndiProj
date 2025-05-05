@@ -8,12 +8,8 @@ Shader "Unlit/OutlineShader"
         _outlineColour ("outlineColour", Color) = (0, 0, 0, 1)
         _baseTex("baseTexture", 2D) = "white" { }
         _baseNormal("baseNormal", 2D) = "white" { }
-        //hide these as they are shown through the OutlineShaderGUI
-        [HideInInspector] _usesTwoMaterials("usesTwoMaterials", Range(0,1)) = 0
-        [HideInInspector] _baseTex2("baseTexture2", 2D) = "white" { }
-        [HideInInspector] _baseNormal2("baseNormal2", 2D) = "white" { }
+
     }
-    CustomEditor "OutlineShaderGUI"
 
     SubShader
     {
@@ -22,7 +18,6 @@ Shader "Unlit/OutlineShader"
             "RenderType"="Opaque" 
             "RenderPipeline"="UniversalPipeline"
             "UniversalMaterialType"="Unlit"
-            //"Queue"="Background"
         }
         LOD 100
 
@@ -85,6 +80,7 @@ Shader "Unlit/OutlineShader"
 
                 v2f o;
 
+                //based on Outline Shader Graph
                 float objectScaleMean = (objectScale.x + objectScale.y + objectScale.z) / 3;
                 float3 a = _outlineDepth / objectScaleMean;
                 float3 b = distance(objectPos, camPosObjectSpace) * 0.25;
@@ -134,6 +130,8 @@ Shader "Unlit/OutlineShader"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
+                float3 worldNormal : TEXCOORD1;
+                float3 tangentNormal : TEXCOORD2;
                 float4 vertex : SV_POSITION;
             };
 
@@ -148,24 +146,33 @@ Shader "Unlit/OutlineShader"
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = /*TRANSFORM_TEX(v.uv, _baseTex)*/v.uv;
+                o.tangentNormal = v.normal;
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target
             {
-                //textures
                 float2 uv = TRANSFORM_TEX(i.uv, _baseTex);
                 float2 normaluv = TRANSFORM_TEX(i.uv, _baseNormal);
 
                 half4 col = tex2D(_baseTex, uv);
-                half4 norm = tex2D(_baseNormal, normaluv);
+                half3 norm = tex2D(_baseNormal, normaluv).xyz * 2.0 - 1.0;
 
-                
+                float3 finalNormal = normalize(i.tangentNormal + norm);
 
-                return col * norm;
+                float3 lightDir = normalize(float3(0.9, 0.6, 0.8));
+
+                float NdotL = saturate(dot(finalNormal, lightDir));
+
+                col.rgb *= (0.5 + 0.5 * NdotL); // brighten the lit side
+
+                return col;
             }
             ENDHLSL
         }
+
+        
     }
 
     Fallback "Diffuse"
