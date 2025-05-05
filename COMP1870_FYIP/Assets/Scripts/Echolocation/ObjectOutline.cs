@@ -16,7 +16,7 @@ public class ObjectOutline : MonoBehaviour
 
     private void Start()
     {
-        outlineMat = GetComponent<MeshRenderer>().materials[1];
+        outlineMat = GetComponent<MeshRenderer>().materials[0];
         outlineMat.SetColor("_outlineColour", outlineColour);
 
         if(TryGetComponent(out ObjectEcholocationPulse oep))

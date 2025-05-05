@@ -45,7 +45,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _outlineDepth: 0.05
+    - _darkness: 1
+    - _outlineDepth: 0
     - _usesTwoMaterials: 1
     m_Colors:
     - _outlineColour: {r: 0, g: 1, b: 0, a: 1}

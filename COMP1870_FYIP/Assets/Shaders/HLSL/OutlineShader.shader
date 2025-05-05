@@ -7,8 +7,7 @@ Shader "Unlit/OutlineShader"
         _outlineDepth ("outlineDepth", Range(0, 0.05)) = 0.05
         _outlineColour ("outlineColour", Color) = (0, 0, 0, 1)
         _baseTex("baseTexture", 2D) = "white" { }
-        _baseNormal("baseNormal", 2D) = "white" { }
-
+        _darkness("darkness", Range(0, 1)) = 1
     }
 
     SubShader
@@ -21,15 +20,89 @@ Shader "Unlit/OutlineShader"
         }
         LOD 100
 
+
+        //Render materials pass
+        Pass
+        {
+            Name "Materials"
+
+            Tags { "Queue" = "Geometry" "LightMode" = "UniversalForward" }
+            ZWrite On
+            ZTest LEqual
+            ColorMask RGB
+            Blend SrcAlpha OneMinusSrcAlpha
+
+            Stencil {
+                Ref 1
+                Comp equal
+                Pass keep
+            }
+
+            Cull Back
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float3 worldNormal : TEXCOORD1;
+                float4 vertex : SV_POSITION;
+            };
+
+
+            //==== my custom inputs ====//
+            sampler2D _baseTex;
+            float4 _baseTex_ST;
+            float _darkness;
+
+            v2f vert(appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                float2 uv = TRANSFORM_TEX(i.uv, _baseTex);
+
+                half4 col = tex2D(_baseTex, uv);
+
+                col.rgb *= _darkness;
+
+                return col;
+            }
+            ENDHLSL
+        }
+
         //do outline pass
         Pass
         {
             Name "Outline"
 
-            Tags { "Queue" = "Background" "LightMode" = "SRPDefaultUnlit"}
+            Tags { "Queue" = "Overlay" "LightMode" = "SRPDefaultUnlit"}
             ZWrite On
+            ZTest Less
             ColorMask RGB
             Blend SrcAlpha OneMinusSrcAlpha
+
+            Stencil {
+                Ref 1
+                Comp always
+                Pass replace
+            }
 
             Cull Front
 
@@ -99,70 +172,6 @@ Shader "Unlit/OutlineShader"
                 fixed4 outline = _outlineColour;
                 outline.a = 1.0;
                 return outline;
-            }
-            ENDHLSL
-        }
-
-        //Render materials pass
-        Pass    
-        {
-            Name "Materials"
-
-            Tags { "Queue" = "Overlay" "LightMode" = "UniversalForward" }
-            ZWrite Off
-            ZTest LEqual
-            ColorMask RGB
-            
-            Cull Back
-
-            HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-
-            #include "UnityCG.cginc"
-
-            struct appdata
-            {
-                float4 vertex : POSITION;
-                float3 normal : NORMAL;
-                float2 uv : TEXCOORD0;
-            };
-
-            struct v2f
-            {
-                float2 uv : TEXCOORD0;
-                float3 worldNormal : TEXCOORD1;
-                float3 tangentNormal : TEXCOORD2;
-                float4 vertex : SV_POSITION;
-            };
-
-
-            //==== my custom inputs ====//
-            sampler2D _baseTex;
-            float4 _baseTex_ST;
-            sampler2D _baseNormal;
-            float4 _baseNormal_ST;
-
-            v2f vert(appdata v)
-            {
-                v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
-                o.uv = v.uv;
-                o.tangentNormal = v.normal;
-                return o;
-            }
-
-            fixed4 frag(v2f i) : SV_Target
-            {
-                float2 uv = TRANSFORM_TEX(i.uv, _baseTex);
-                float2 normaluv = TRANSFORM_TEX(i.uv, _baseNormal);
-
-                half4 col = tex2D(_baseTex, uv);
-                half3 norm = tex2D(_baseNormal, normaluv).xyz * 2.0 - 1.0;
-
-                float3 finalNormal = normalize(i.tangentNormal + norm);
-
-                return col;
             }
             ENDHLSL
         }
