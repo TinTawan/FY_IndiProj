@@ -8,9 +8,10 @@ Shader "Unlit/OutlineShader"
         _outlineColour ("outlineColour", Color) = (0, 0, 0, 1)
         _baseTex("baseTexture", 2D) = "white" { }
         _baseNormal("baseNormal", 2D) = "white" { }
-        [HideInInspector]_usesTwoMaterials("usesTwoMaterials", Range(0,1)) = 0
-        [HideInInspector]_baseTex2("baseTexture2", 2D) = "white" { }
-        [HideInInspector]_baseNormal2("baseNormal2", 2D) = "white" { }
+        //hide these as they are shown through the OutlineShaderGUI
+        [HideInInspector] _usesTwoMaterials("usesTwoMaterials", Range(0,1)) = 0
+        [HideInInspector] _baseTex2("baseTexture2", 2D) = "white" { }
+        [HideInInspector] _baseNormal2("baseNormal2", 2D) = "white" { }
     }
     CustomEditor "OutlineShaderGUI"
 
@@ -21,14 +22,23 @@ Shader "Unlit/OutlineShader"
             "RenderType"="Opaque" 
             "RenderPipeline"="UniversalPipeline"
             "UniversalMaterialType"="Unlit"
+            //"Queue"="Background"
         }
         LOD 100
 
+        //do outline pass
         Pass
         {
+            Name "Outline"
+
+            Tags { "Queue" = "Background" "LightMode" = "SRPDefaultUnlit"}
+            ZWrite On
+            ColorMask RGB
+            Blend SrcAlpha OneMinusSrcAlpha
+
             Cull Front
 
-            CGPROGRAM
+            HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
@@ -51,8 +61,6 @@ Shader "Unlit/OutlineShader"
             //==== my custom inputs ====//
             float _outlineDepth;
             float4 _outlineColour;
-
-            sampler2D _baseTex;
 
             v2f vert (appdata v)
             {
@@ -80,8 +88,7 @@ Shader "Unlit/OutlineShader"
                 float objectScaleMean = (objectScale.x + objectScale.y + objectScale.z) / 3;
                 float3 a = _outlineDepth / objectScaleMean;
                 float3 b = distance(objectPos, camPosObjectSpace) * 0.25;
-                //b *= 0.5;
-
+                
                 float depth = a * b;
 
                 float3 vertPos = posObjectSpace + (normal * depth);
@@ -92,20 +99,74 @@ Shader "Unlit/OutlineShader"
             }
 
             fixed4 frag(v2f i) : SV_Target
-            {
-                //fixed4 tex = tex2D(_baseTex, i.uv);
-                
-                fixed4 col = _outlineColour;
-                col.a = 1.0;
-                return col /** tex*/;
+            {                
+                fixed4 outline = _outlineColour;
+                outline.a = 1.0;
+                return outline;
             }
-            ENDCG
+            ENDHLSL
         }
 
-        Pass
+        //Render materials pass
+        Pass    
         {
-            
-            
+            Name "Materials"
+
+            Tags { "LightMode" = "UniversalForward" "Queue" = "Geometry" }
+            ZWrite Off
+            ColorMask RGB
+
+            Cull Back
+
+            HLSLPROGRAM
+            #pragma vertex vert
+            #pragma fragment frag
+
+            #include "UnityCG.cginc"
+
+            struct appdata
+            {
+                float4 vertex : POSITION;
+                float3 normal : NORMAL;
+                float2 uv : TEXCOORD0;
+            };
+
+            struct v2f
+            {
+                float2 uv : TEXCOORD0;
+                float4 vertex : SV_POSITION;
+            };
+
+
+            //==== my custom inputs ====//
+            sampler2D _baseTex;
+            float4 _baseTex_ST;
+            sampler2D _baseNormal;
+            float4 _baseNormal_ST;
+
+            v2f vert(appdata v)
+            {
+                v2f o;
+                o.vertex = UnityObjectToClipPos(v.vertex);
+                return o;
+            }
+
+            fixed4 frag(v2f i) : SV_Target
+            {
+                //textures
+                float2 uv = TRANSFORM_TEX(i.uv, _baseTex);
+                float2 normaluv = TRANSFORM_TEX(i.uv, _baseNormal);
+
+                half4 col = tex2D(_baseTex, uv);
+                half4 norm = tex2D(_baseNormal, normaluv);
+
+                
+
+                return col * norm;
+            }
+            ENDHLSL
         }
     }
+
+    Fallback "Diffuse"
 }

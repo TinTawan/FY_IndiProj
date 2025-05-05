@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEngine;
 
 public class OutlineShaderGUI : ShaderGUI
 {
@@ -13,9 +12,7 @@ public class OutlineShaderGUI : ShaderGUI
 
         materialEditor.ShaderProperty(usesTwoMaterials, "Show Second Inputs");
 
-
-
-        if(usesTwoMaterials.floatValue > 0.5f)
+        if (usesTwoMaterials.floatValue > 0.5f)
         {
             EditorGUI.indentLevel++;
             materialEditor.ShaderProperty(baseTex2, "Second Base Texture");
