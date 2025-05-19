@@ -98,6 +98,9 @@ public class ItemInteract : MonoBehaviour
             }
 
             canPickUp = false;
+
+            itemCols = null;
+
         }
     }
 
@@ -139,7 +142,6 @@ public class ItemInteract : MonoBehaviour
         canPickUp = true;
         holdingItem = false;
 
-        itemCols = null;
 
     }
 
