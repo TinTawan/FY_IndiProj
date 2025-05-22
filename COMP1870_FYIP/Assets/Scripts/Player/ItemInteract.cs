@@ -108,7 +108,6 @@ public class ItemInteract : MonoBehaviour
     {
         SetCol(false, 1);
 
-
         inHeldItem.transform.SetPositionAndRotation(itemSlot.position, Quaternion.identity);
         inHeldItem.transform.SetParent(itemSlot);
 
@@ -123,6 +122,10 @@ public class ItemInteract : MonoBehaviour
 
         }
 
+        inHeldItem.GetComponent<MeshRenderer>().material.SetInt("_materialZTestMode", 8/*(int)UnityEngine.Rendering.CompareFunction.LessEqual*/);
+        inHeldItem.GetComponent<MeshRenderer>().material.SetInt("_outlineZTestMode", 8/*(int)UnityEngine.Rendering.CompareFunction.Less*/);
+
+
     }
 
     void Dropitem()
@@ -135,6 +138,9 @@ public class ItemInteract : MonoBehaviour
             outline.SetCanBeTriggered(false);
             outline.CallFadeOutCoroutine();
         }
+
+        heldItem.GetComponent<MeshRenderer>().material.SetInt("_materialZTestMode", 4/*(int)UnityEngine.Rendering.CompareFunction.Always*/);
+        heldItem.GetComponent<MeshRenderer>().material.SetInt("_outlineZTestMode", 2/*(int)UnityEngine.Rendering.CompareFunction.Always*/);
 
         heldItem.transform.SetParent(null);
         heldItem = null;

@@ -8,6 +8,9 @@ Shader "Unlit/OutlineShader"
         _outlineColour ("outlineColour", Color) = (0, 0, 0, 1)
         _baseTex("baseTexture", 2D) = "white" { }
         _darkness("darkness", Range(0, 1)) = 1
+        _materialZTestMode("materialZTestMode", Float) = 4
+        _outlineZTestMode("outlineZTestMode", Float) = 2
+
     }
 
     SubShader
@@ -21,14 +24,17 @@ Shader "Unlit/OutlineShader"
         LOD 100
 
 
-        //Render materials pass
+        //Regular passes for material and outline
+
+        //Render materials pass AND ZTest LEqual
         Pass
         {
             Name "Materials"
 
+
             Tags { "Queue" = "Geometry" "LightMode" = "UniversalForward" }
             ZWrite On
-            ZTest LEqual
+            ZTest [_materialZTestMode]
             ColorMask RGB
             Blend SrcAlpha OneMinusSrcAlpha
 
@@ -43,6 +49,7 @@ Shader "Unlit/OutlineShader"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            //#pragma multi_compile _ ZTEST_ALWAYS
 
             #include "UnityCG.cginc"
 
@@ -71,6 +78,7 @@ Shader "Unlit/OutlineShader"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
+
                 return o;
             }
 
@@ -82,19 +90,20 @@ Shader "Unlit/OutlineShader"
 
                 col.rgb *= _darkness;
 
+
                 return col;
             }
             ENDHLSL
         }
 
-        //do outline pass
+        //Outline pass AND ZTest Less
         Pass
         {
             Name "Outline"
 
             Tags { "Queue" = "Overlay" "LightMode" = "SRPDefaultUnlit"}
             ZWrite On
-            ZTest Less
+            ZTest[_outlineZTestMode]
             ColorMask RGB
             Blend SrcAlpha OneMinusSrcAlpha
 
@@ -109,6 +118,7 @@ Shader "Unlit/OutlineShader"
             HLSLPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            //#pragma multi_compile _ ZTEST_ALWAYS
 
             #include "UnityCG.cginc"
 
@@ -171,6 +181,8 @@ Shader "Unlit/OutlineShader"
             {                
                 fixed4 outline = _outlineColour;
                 outline.a = 1.0;
+                
+
                 return outline;
             }
             ENDHLSL
