@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ItemInteract : MonoBehaviour
 {
@@ -122,9 +123,12 @@ public class ItemInteract : MonoBehaviour
 
         }
 
-        inHeldItem.GetComponent<MeshRenderer>().material.SetInt("_materialZTestMode", 8/*(int)UnityEngine.Rendering.CompareFunction.LessEqual*/);
-        inHeldItem.GetComponent<MeshRenderer>().material.SetInt("_outlineZTestMode", 8/*(int)UnityEngine.Rendering.CompareFunction.Less*/);
+        Material itemMat = inHeldItem.GetComponent<MeshRenderer>().material;
+        itemMat.SetInt("_materialZTestMode", (int)CompareFunction.Always);
+        itemMat.SetInt("_outlineZTestMode", (int)CompareFunction.Always);
+        itemMat.renderQueue = (int)RenderQueue.Geometry;
 
+        StartCoroutine(ForceDepthReset(inHeldItem));
 
     }
 
@@ -139,8 +143,12 @@ public class ItemInteract : MonoBehaviour
             outline.CallFadeOutCoroutine();
         }
 
-        heldItem.GetComponent<MeshRenderer>().material.SetInt("_materialZTestMode", 4/*(int)UnityEngine.Rendering.CompareFunction.Always*/);
-        heldItem.GetComponent<MeshRenderer>().material.SetInt("_outlineZTestMode", 2/*(int)UnityEngine.Rendering.CompareFunction.Always*/);
+        Material itemMat = heldItem.GetComponent<MeshRenderer>().material;
+        itemMat.SetInt("_materialZTestMode", (int)CompareFunction.LessEqual);
+        itemMat.SetInt("_outlineZTestMode", (int)CompareFunction.Less);
+        itemMat.renderQueue = (int)RenderQueue.Overlay;
+
+        StartCoroutine(ForceDepthReset(heldItem));
 
         heldItem.transform.SetParent(null);
         heldItem = null;
@@ -183,6 +191,12 @@ public class ItemInteract : MonoBehaviour
         Dropitem();
     }
 
+    IEnumerator ForceDepthReset(GameObject go)
+    {
+        go.GetComponent<MeshRenderer>().enabled = false;
+        yield return null;
+        go.GetComponent<MeshRenderer>().enabled = true;
+    }
 
     private void OnDisable()
     {
