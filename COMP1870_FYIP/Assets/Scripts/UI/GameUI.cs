@@ -22,6 +22,8 @@ public class GameUI : MonoBehaviour
     PlayerMovement player;
     bool doOnce = true;
 
+    Animator anim;
+
     private void Start()
     {
         echoPulse = FindObjectOfType<EcholocationPulse>();
@@ -31,12 +33,19 @@ public class GameUI : MonoBehaviour
 
         player = echoPulse.GetComponent<PlayerMovement>();
 
+        anim = GetComponentInChildren<Animator>();
+
     }
 
     private void Update()
     {
         LerpEdgeCol();
         EdgeCooldownLerp();
+
+        if (GameManager.instance.win)
+        {
+            anim.SetTrigger("win");
+        }
     }
 
     //lerp between the colours for the currently selected frequency type
