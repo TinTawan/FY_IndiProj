@@ -10,6 +10,7 @@ public class EcholocationPulse : MonoBehaviour
     [SerializeField] private int highPulseSize, lowPulseSize;
 
     PlayerInput playerInput;
+    PlayerMovement player;
 
     //Switch pulse
     int currentPulse = 1;
@@ -36,6 +37,11 @@ public class EcholocationPulse : MonoBehaviour
         playerInput.Player.Enable();
         playerInput.Player.Echo.performed += Echo_performed;
         playerInput.Player.SwitchPulse.performed += SwitchPulse_performed;
+    }
+
+    private void Start()
+    {
+        player = GetComponent<PlayerMovement>();
     }
 
     private void Update()
@@ -85,7 +91,6 @@ public class EcholocationPulse : MonoBehaviour
                 canHPulse = false;
                 hTimer = highCD;
 
-                PlayerMovement player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
                 if (player.inArea)
                 {
                     player.hurt = true;

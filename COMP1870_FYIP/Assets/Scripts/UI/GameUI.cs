@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class GameUI : MonoBehaviour
 {
     EcholocationPulse echoPulse;
@@ -21,6 +20,7 @@ public class GameUI : MonoBehaviour
     Color currentEdgeCol;
 
     PlayerMovement player;
+    bool doOnce = true;
 
     private void Start()
     {
@@ -29,7 +29,7 @@ public class GameUI : MonoBehaviour
         edgeGradientMat = edgeGradientRI.material;
         edgeGradientMat.SetColor("_edgeColour", highFreqCol);
 
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>(); 
+        player = echoPulse.GetComponent<PlayerMovement>();
 
     }
 
@@ -47,12 +47,17 @@ public class GameUI : MonoBehaviour
         if (player.hurt)
         {
             targetCol = hurtCol;
-            if (player.hurt)
+
+            if (doOnce)
             {
+                doOnce = false;
+
                 edgeGradientMat.SetFloat("_radius", edgeRadMax);
                 edgeGradientMat.SetFloat("_softness", edgeSoftnessMax);
-                Invoke(nameof(PlayerHurt), Random.Range(3, 6));
+                Invoke(nameof(EndPlayerHurtState), Random.Range(3, 6));
             }
+            
+
         }
         else
         {
@@ -94,16 +99,13 @@ public class GameUI : MonoBehaviour
 
     }
 
-    //slowly increase and decrease the smoothness in a beating heart pattern to make the edge feel more alive
-    void EdgeSoftness()
-    {
 
-    }
-
-    void PlayerHurt()
+    void EndPlayerHurtState()
     {
         player.hurt = false;
         edgeGradientMat.SetFloat("_softness", edgeSoftnessMin);
+
+        doOnce = true;
     }
 
 
@@ -112,6 +114,7 @@ public class GameUI : MonoBehaviour
         //reset material attributes
         edgeGradientMat.SetColor("_edgeColour", highFreqCol);
         edgeGradientMat.SetFloat("_radius", edgeRadMax);
+        edgeGradientMat.SetFloat("_softness", edgeSoftnessMin);
 
     }
 
