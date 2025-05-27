@@ -27,20 +27,19 @@ public class RebindControls : MonoBehaviour
 
     private void OnEnable()
     {
+        InputManager.rebindComplete += UpdateUI;
+        InputManager.rebindCanceled += UpdateUI;
         
     }
 
     private void OnDisable() 
     {
-        InputManager.Instance.rebindComplete -= UpdateUI;
-        InputManager.Instance.rebindCanceled -= UpdateUI;
+        InputManager.rebindComplete -= UpdateUI;
+        InputManager.rebindCanceled -= UpdateUI;
     }
 
     private void Start()
     {
-        InputManager.Instance.rebindComplete += UpdateUI;
-        InputManager.Instance.rebindCanceled += UpdateUI;
-
         rebindButton.onClick.AddListener(() => DoRebind());
         resetButton.onClick.AddListener(() => ResetBinding());
 

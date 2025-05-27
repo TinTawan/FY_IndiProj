@@ -12,9 +12,9 @@ public class InputManager : MonoBehaviour
 
     public PlayerInput playerInput; // your generated input system class
 
-    public event Action rebindComplete;
-    public event Action rebindCanceled;
-    public event Action<InputAction, int> rebindStarted;
+    public static event Action rebindComplete;
+    public static event Action rebindCanceled;
+    public static event Action<InputAction, int> rebindStarted;
 
     private void Awake() 
     {
@@ -23,15 +23,15 @@ public class InputManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            if (Instance.playerInput == null)
-                Instance.playerInput = new PlayerInput();
+            
         }
         else
         {
             Destroy(gameObject);
         }
 
-        
+        if (Instance.playerInput == null)
+            Instance.playerInput = new PlayerInput();
     }
 
     public void StartRebind(string actionName, int bindingIndex, TMP_Text statusText, TMP_Text rebindOverlayText, GameObject rebindOverlay, bool excludeMouse)
@@ -159,8 +159,8 @@ public class InputManager : MonoBehaviour
         if (actionName == null)
             return null;
 
-        /*if (Instance.playerInput == null)
-            Instance.playerInput = new PlayerInput();*/
+        if (Instance.playerInput == null)
+            Instance.playerInput = new PlayerInput();
 
         InputAction action = Instance.playerInput.asset.FindAction(actionName);
         return action.GetBindingDisplayString(bindingIndex);
@@ -176,19 +176,23 @@ public class InputManager : MonoBehaviour
 
     public void LoadBindingOverride(string actionName)
     {
-        if (actionName == null)
-            return;
+        /*if (actionName == null)
+            return;*/
 
         if (Instance.playerInput == null)
             Instance.playerInput = new PlayerInput();
 
-        InputAction action = Instance.playerInput.asset.FindAction(actionName);
-
-        for ( int i = 0; i < action.bindings.Count; i++)
+        if(actionName != null)
         {
-            if ( !string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
-                action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
+            InputAction action = Instance.playerInput.asset.FindAction(actionName);
+
+            for (int i = 0; i < action.bindings.Count; i++)
+            {
+                if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+                    action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
+            }
         }
+        
     }
 
     public void ResetBinding(string actionName, int bindingIndex)
