@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "VerticalMoveUp",
+                    "name": "SwimUp",
                     "type": "Value",
                     "id": "16a83708-4ff4-4e3f-944e-89a1d99eb031",
                     "expectedControlType": "Axis",
@@ -24,7 +24,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "VerticalMoveDown",
+                    "name": "SwimDown",
                     "type": "Value",
                     "id": "93eaff77-700b-4221-aee9-ee764a9e21f1",
                     "expectedControlType": "Axis",
@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "SwitchPulse",
+                    "name": "HighPulse",
                     "type": "Value",
                     "id": "62506e0c-a782-4c06-835b-2bef2108121b",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "LowPulse",
+                    "type": "Value",
+                    "id": "34defbce-5f8d-4734-bae6-72ceefc61299",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -225,7 +234,7 @@
                     "interactions": "",
                     "processors": "Scale",
                     "groups": "Keyboard",
-                    "action": "VerticalMoveUp",
+                    "action": "SwimUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -236,7 +245,7 @@
                     "interactions": "",
                     "processors": "Scale",
                     "groups": "Gamepad",
-                    "action": "VerticalMoveUp",
+                    "action": "SwimUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -265,22 +274,11 @@
                 {
                     "name": "",
                     "id": "eb16f096-3cc4-4f77-af68-cd20f00d1376",
-                    "path": "<Mouse>/scroll/y",
+                    "path": "<Mouse>/scroll/up",
                     "interactions": "",
-                    "processors": "Clamp(min=-1,max=1)",
+                    "processors": "",
                     "groups": "Keyboard",
-                    "action": "SwitchPulse",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "070890a7-ec65-4f06-adb9-71a3bfbec1f4",
-                    "path": "<Gamepad>/leftShoulder",
-                    "interactions": "",
-                    "processors": "Scale(factor=-1)",
-                    "groups": "Gamepad",
-                    "action": "SwitchPulse",
+                    "action": "HighPulse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -289,9 +287,9 @@
                     "id": "76ece174-60a5-4bf0-9c90-65e97abb6095",
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
-                    "processors": "Scale",
+                    "processors": "",
                     "groups": "Gamepad",
-                    "action": "SwitchPulse",
+                    "action": "HighPulse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -368,7 +366,7 @@
                     "interactions": "",
                     "processors": "Scale(factor=-1)",
                     "groups": "Keyboard",
-                    "action": "VerticalMoveDown",
+                    "action": "SwimDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -379,7 +377,29 @@
                     "interactions": "",
                     "processors": "Scale(factor=-1)",
                     "groups": "Gamepad",
-                    "action": "VerticalMoveDown",
+                    "action": "SwimDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b26e23d8-0761-4823-8959-17f8718e0643",
+                    "path": "<Mouse>/scroll/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "LowPulse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4117f49c-b64b-4421-b94e-6fc5341d3150",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "LowPulse",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

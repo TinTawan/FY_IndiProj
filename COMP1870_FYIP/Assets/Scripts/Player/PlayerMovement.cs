@@ -32,10 +32,10 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Player.Enable();
         playerInput.Player.Move.performed += Move_performed;
         playerInput.Player.Move.canceled += Move_cancelled;
-        playerInput.Player.VerticalMoveUp.performed += VerticalMoveUp_performed;
-        playerInput.Player.VerticalMoveUp.canceled += VerticalMoveUp_cancelled;
-        playerInput.Player.VerticalMoveDown.performed += VerticalMoveDown_performed;
-        playerInput.Player.VerticalMoveDown.canceled += VerticalMoveDown_cancelled;
+        playerInput.Player.SwimUp.performed += VerticalMoveUp_performed;
+        playerInput.Player.SwimUp.canceled += VerticalMoveUp_cancelled;
+        playerInput.Player.SwimDown.performed += VerticalMoveDown_performed;
+        playerInput.Player.SwimDown.canceled += VerticalMoveDown_cancelled;
         playerInput.Player.Boost.performed += Boost_performed;
         playerInput.Player.Cheat.performed += Cheat_performed;
 

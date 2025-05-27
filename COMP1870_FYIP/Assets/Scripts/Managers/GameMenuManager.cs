@@ -106,7 +106,8 @@ public class GameMenuManager : MonoBehaviour
         pauseUI.SetActive(true);
 
         //set correct input map
-        playerInput.Player.SwitchPulse.Disable();
+        playerInput.Player.HighPulse.Disable();
+        playerInput.Player.LowPulse.Disable();
         playerInput.Player.Disable();
         playerInput.UI.Enable();
 

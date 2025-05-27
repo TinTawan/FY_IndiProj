@@ -37,7 +37,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""VerticalMoveUp"",
+                    ""name"": ""SwimUp"",
                     ""type"": ""Value"",
                     ""id"": ""16a83708-4ff4-4e3f-944e-89a1d99eb031"",
                     ""expectedControlType"": ""Axis"",
@@ -46,7 +46,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""VerticalMoveDown"",
+                    ""name"": ""SwimDown"",
                     ""type"": ""Value"",
                     ""id"": ""93eaff77-700b-4221-aee9-ee764a9e21f1"",
                     ""expectedControlType"": ""Axis"",
@@ -82,9 +82,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""SwitchPulse"",
+                    ""name"": ""HighPulse"",
                     ""type"": ""Value"",
                     ""id"": ""62506e0c-a782-4c06-835b-2bef2108121b"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""LowPulse"",
+                    ""type"": ""Value"",
+                    ""id"": ""34defbce-5f8d-4734-bae6-72ceefc61299"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -247,7 +256,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": ""Scale"",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""VerticalMoveUp"",
+                    ""action"": ""SwimUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -258,7 +267,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": ""Scale"",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""VerticalMoveUp"",
+                    ""action"": ""SwimUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -287,22 +296,11 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""eb16f096-3cc4-4f77-af68-cd20f00d1376"",
-                    ""path"": ""<Mouse>/scroll/y"",
+                    ""path"": ""<Mouse>/scroll/up"",
                     ""interactions"": """",
-                    ""processors"": ""Clamp(min=-1,max=1)"",
+                    ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""SwitchPulse"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""070890a7-ec65-4f06-adb9-71a3bfbec1f4"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale(factor=-1)"",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchPulse"",
+                    ""action"": ""HighPulse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -311,9 +309,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""id"": ""76ece174-60a5-4bf0-9c90-65e97abb6095"",
                     ""path"": ""<Gamepad>/rightShoulder"",
                     ""interactions"": """",
-                    ""processors"": ""Scale"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""SwitchPulse"",
+                    ""action"": ""HighPulse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -390,7 +388,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": ""Scale(factor=-1)"",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""VerticalMoveDown"",
+                    ""action"": ""SwimDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -401,7 +399,29 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": ""Scale(factor=-1)"",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""VerticalMoveDown"",
+                    ""action"": ""SwimDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b26e23d8-0761-4823-8959-17f8718e0643"",
+                    ""path"": ""<Mouse>/scroll/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""LowPulse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4117f49c-b64b-4421-b94e-6fc5341d3150"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""LowPulse"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -872,12 +892,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_VerticalMoveUp = m_Player.FindAction("VerticalMoveUp", throwIfNotFound: true);
-        m_Player_VerticalMoveDown = m_Player.FindAction("VerticalMoveDown", throwIfNotFound: true);
+        m_Player_SwimUp = m_Player.FindAction("SwimUp", throwIfNotFound: true);
+        m_Player_SwimDown = m_Player.FindAction("SwimDown", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Echo = m_Player.FindAction("Echo", throwIfNotFound: true);
-        m_Player_SwitchPulse = m_Player.FindAction("SwitchPulse", throwIfNotFound: true);
+        m_Player_HighPulse = m_Player.FindAction("HighPulse", throwIfNotFound: true);
+        m_Player_LowPulse = m_Player.FindAction("LowPulse", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Cheat = m_Player.FindAction("Cheat", throwIfNotFound: true);
@@ -956,12 +977,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_VerticalMoveUp;
-    private readonly InputAction m_Player_VerticalMoveDown;
+    private readonly InputAction m_Player_SwimUp;
+    private readonly InputAction m_Player_SwimDown;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Echo;
-    private readonly InputAction m_Player_SwitchPulse;
+    private readonly InputAction m_Player_HighPulse;
+    private readonly InputAction m_Player_LowPulse;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Cheat;
@@ -970,12 +992,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @VerticalMoveUp => m_Wrapper.m_Player_VerticalMoveUp;
-        public InputAction @VerticalMoveDown => m_Wrapper.m_Player_VerticalMoveDown;
+        public InputAction @SwimUp => m_Wrapper.m_Player_SwimUp;
+        public InputAction @SwimDown => m_Wrapper.m_Player_SwimDown;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Echo => m_Wrapper.m_Player_Echo;
-        public InputAction @SwitchPulse => m_Wrapper.m_Player_SwitchPulse;
+        public InputAction @HighPulse => m_Wrapper.m_Player_HighPulse;
+        public InputAction @LowPulse => m_Wrapper.m_Player_LowPulse;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Cheat => m_Wrapper.m_Player_Cheat;
@@ -991,12 +1014,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @VerticalMoveUp.started += instance.OnVerticalMoveUp;
-            @VerticalMoveUp.performed += instance.OnVerticalMoveUp;
-            @VerticalMoveUp.canceled += instance.OnVerticalMoveUp;
-            @VerticalMoveDown.started += instance.OnVerticalMoveDown;
-            @VerticalMoveDown.performed += instance.OnVerticalMoveDown;
-            @VerticalMoveDown.canceled += instance.OnVerticalMoveDown;
+            @SwimUp.started += instance.OnSwimUp;
+            @SwimUp.performed += instance.OnSwimUp;
+            @SwimUp.canceled += instance.OnSwimUp;
+            @SwimDown.started += instance.OnSwimDown;
+            @SwimDown.performed += instance.OnSwimDown;
+            @SwimDown.canceled += instance.OnSwimDown;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
@@ -1006,9 +1029,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Echo.started += instance.OnEcho;
             @Echo.performed += instance.OnEcho;
             @Echo.canceled += instance.OnEcho;
-            @SwitchPulse.started += instance.OnSwitchPulse;
-            @SwitchPulse.performed += instance.OnSwitchPulse;
-            @SwitchPulse.canceled += instance.OnSwitchPulse;
+            @HighPulse.started += instance.OnHighPulse;
+            @HighPulse.performed += instance.OnHighPulse;
+            @HighPulse.canceled += instance.OnHighPulse;
+            @LowPulse.started += instance.OnLowPulse;
+            @LowPulse.performed += instance.OnLowPulse;
+            @LowPulse.canceled += instance.OnLowPulse;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -1025,12 +1051,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @VerticalMoveUp.started -= instance.OnVerticalMoveUp;
-            @VerticalMoveUp.performed -= instance.OnVerticalMoveUp;
-            @VerticalMoveUp.canceled -= instance.OnVerticalMoveUp;
-            @VerticalMoveDown.started -= instance.OnVerticalMoveDown;
-            @VerticalMoveDown.performed -= instance.OnVerticalMoveDown;
-            @VerticalMoveDown.canceled -= instance.OnVerticalMoveDown;
+            @SwimUp.started -= instance.OnSwimUp;
+            @SwimUp.performed -= instance.OnSwimUp;
+            @SwimUp.canceled -= instance.OnSwimUp;
+            @SwimDown.started -= instance.OnSwimDown;
+            @SwimDown.performed -= instance.OnSwimDown;
+            @SwimDown.canceled -= instance.OnSwimDown;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
@@ -1040,9 +1066,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Echo.started -= instance.OnEcho;
             @Echo.performed -= instance.OnEcho;
             @Echo.canceled -= instance.OnEcho;
-            @SwitchPulse.started -= instance.OnSwitchPulse;
-            @SwitchPulse.performed -= instance.OnSwitchPulse;
-            @SwitchPulse.canceled -= instance.OnSwitchPulse;
+            @HighPulse.started -= instance.OnHighPulse;
+            @HighPulse.performed -= instance.OnHighPulse;
+            @HighPulse.canceled -= instance.OnHighPulse;
+            @LowPulse.started -= instance.OnLowPulse;
+            @LowPulse.performed -= instance.OnLowPulse;
+            @LowPulse.canceled -= instance.OnLowPulse;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -1216,12 +1245,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnVerticalMoveUp(InputAction.CallbackContext context);
-        void OnVerticalMoveDown(InputAction.CallbackContext context);
+        void OnSwimUp(InputAction.CallbackContext context);
+        void OnSwimDown(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnEcho(InputAction.CallbackContext context);
-        void OnSwitchPulse(InputAction.CallbackContext context);
+        void OnHighPulse(InputAction.CallbackContext context);
+        void OnLowPulse(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnCheat(InputAction.CallbackContext context);

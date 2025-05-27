@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,8 +37,11 @@ public class EcholocationPulse : MonoBehaviour
         playerInput = new PlayerInput();
         playerInput.Player.Enable();
         playerInput.Player.Echo.performed += Echo_performed;
-        playerInput.Player.SwitchPulse.performed += SwitchPulse_performed;
+        playerInput.Player.HighPulse.performed += HighPulse_performed;
+        playerInput.Player.LowPulse.performed += LowPulse_performed;
+
     }
+
 
     private void Start()
     {
@@ -50,16 +54,24 @@ public class EcholocationPulse : MonoBehaviour
 
     }
 
-    private void SwitchPulse_performed(InputAction.CallbackContext ctx)
+    private void HighPulse_performed(InputAction.CallbackContext ctx)
     {
         if (!GameMenuManager.instance.isPaused)
         {
             //clamp the current pulse so it can only be 0 or 1
-            currentPulse += (int)ctx.ReadValue<float>();
-            currentPulse = Mathf.Clamp(currentPulse, 0, 1);
+            //currentPulse += (int)ctx.ReadValue<float>();
+            //currentPulse = Mathf.Clamp(currentPulse, 0, 1);
 
+            currentPulse = 1;
         }
         
+    }
+    private void LowPulse_performed(InputAction.CallbackContext ctx)
+    {
+        if (!GameMenuManager.instance.isPaused)
+        {
+            currentPulse = 0;
+        }
 
     }
 
