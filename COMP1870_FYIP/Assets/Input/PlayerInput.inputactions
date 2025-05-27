@@ -15,9 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "VerticalMove",
+                    "name": "VerticalMoveUp",
                     "type": "Value",
                     "id": "16a83708-4ff4-4e3f-944e-89a1d99eb031",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "VerticalMoveDown",
+                    "type": "Value",
+                    "id": "93eaff77-700b-4221-aee9-ee764a9e21f1",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -89,17 +98,6 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "fa2133d8-894c-4ecb-b715-1094f44950ff",
-                    "path": "<Gamepad>/leftStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "2D Vector",
                     "id": "47947b2e-8147-4f3c-90e5-9090cf5bd387",
                     "path": "2DVector(mode=1)",
@@ -156,12 +154,12 @@
                 },
                 {
                     "name": "",
-                    "id": "0fd3f3f1-96d1-4812-af07-1011a90e4ed7",
-                    "path": "<Gamepad>/rightStick",
+                    "id": "fa2133d8-894c-4ecb-b715-1094f44950ff",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
-                    "processors": "ScaleVector2(x=-100,y=100),InvertVector2(invertY=false)",
+                    "processors": "",
                     "groups": "Gamepad",
-                    "action": "Look",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -172,6 +170,17 @@
                     "interactions": "",
                     "processors": "DeltaTimeScale,ScaleVector2(x=0.1,y=0.1)",
                     "groups": "Keyboard",
+                    "action": "Look",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0fd3f3f1-96d1-4812-af07-1011a90e4ed7",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=-100,y=100),InvertVector2(invertY=false)",
+                    "groups": "Gamepad",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -211,45 +220,23 @@
                 },
                 {
                     "name": "",
-                    "id": "bd3ccf16-603e-496b-805c-a983c562da54",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "Scale",
-                    "groups": "Gamepad",
-                    "action": "VerticalMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a9380305-f0e6-47b1-94f3-c8f7354a941d",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "Scale(factor=-1)",
-                    "groups": "Gamepad",
-                    "action": "VerticalMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8ac2308e-6272-4b08-b339-c0ac715607f6",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "Scale",
                     "groups": "Keyboard",
-                    "action": "VerticalMove",
+                    "action": "VerticalMoveUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "54859806-445b-4102-b5b2-a6d832f259ef",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "bd3ccf16-603e-496b-805c-a983c562da54",
+                    "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
-                    "processors": "Scale(factor=-1)",
-                    "groups": "Keyboard",
-                    "action": "VerticalMove",
+                    "processors": "Scale",
+                    "groups": "Gamepad",
+                    "action": "VerticalMoveUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -371,6 +358,28 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Cheat",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "20dbf246-6482-4a2d-88d6-1a11a1f52c2e",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "Scale(factor=-1)",
+                    "groups": "Keyboard",
+                    "action": "VerticalMoveDown",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "096adb04-a84a-4b41-8168-566a95ab094a",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "Scale(factor=-1)",
+                    "groups": "Gamepad",
+                    "action": "VerticalMoveDown",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

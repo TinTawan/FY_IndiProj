@@ -37,9 +37,18 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""VerticalMove"",
+                    ""name"": ""VerticalMoveUp"",
                     ""type"": ""Value"",
                     ""id"": ""16a83708-4ff4-4e3f-944e-89a1d99eb031"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""VerticalMoveDown"",
+                    ""type"": ""Value"",
+                    ""id"": ""93eaff77-700b-4221-aee9-ee764a9e21f1"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -111,17 +120,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": """",
-                    ""id"": ""fa2133d8-894c-4ecb-b715-1094f44950ff"",
-                    ""path"": ""<Gamepad>/leftStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""2D Vector"",
                     ""id"": ""47947b2e-8147-4f3c-90e5-9090cf5bd387"",
                     ""path"": ""2DVector(mode=1)"",
@@ -178,12 +176,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0fd3f3f1-96d1-4812-af07-1011a90e4ed7"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""fa2133d8-894c-4ecb-b715-1094f44950ff"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": ""ScaleVector2(x=-100,y=100),InvertVector2(invertY=false)"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Look"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -194,6 +192,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": ""DeltaTimeScale,ScaleVector2(x=0.1,y=0.1)"",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0fd3f3f1-96d1-4812-af07-1011a90e4ed7"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2(x=-100,y=100),InvertVector2(invertY=false)"",
+                    ""groups"": ""Gamepad"",
                     ""action"": ""Look"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -233,45 +242,23 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""bd3ccf16-603e-496b-805c-a983c562da54"",
-                    ""path"": ""<Gamepad>/rightTrigger"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale"",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""VerticalMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a9380305-f0e6-47b1-94f3-c8f7354a941d"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": """",
-                    ""processors"": ""Scale(factor=-1)"",
-                    ""groups"": ""Gamepad"",
-                    ""action"": ""VerticalMove"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""8ac2308e-6272-4b08-b339-c0ac715607f6"",
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": ""Scale"",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""VerticalMove"",
+                    ""action"": ""VerticalMoveUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""54859806-445b-4102-b5b2-a6d832f259ef"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""id"": ""bd3ccf16-603e-496b-805c-a983c562da54"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
                     ""interactions"": """",
-                    ""processors"": ""Scale(factor=-1)"",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""VerticalMove"",
+                    ""processors"": ""Scale"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""VerticalMoveUp"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -393,6 +380,28 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Cheat"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""20dbf246-6482-4a2d-88d6-1a11a1f52c2e"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=-1)"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""VerticalMoveDown"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""096adb04-a84a-4b41-8168-566a95ab094a"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=-1)"",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""VerticalMoveDown"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -863,7 +872,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
-        m_Player_VerticalMove = m_Player.FindAction("VerticalMove", throwIfNotFound: true);
+        m_Player_VerticalMoveUp = m_Player.FindAction("VerticalMoveUp", throwIfNotFound: true);
+        m_Player_VerticalMoveDown = m_Player.FindAction("VerticalMoveDown", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
         m_Player_Echo = m_Player.FindAction("Echo", throwIfNotFound: true);
@@ -946,7 +956,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
-    private readonly InputAction m_Player_VerticalMove;
+    private readonly InputAction m_Player_VerticalMoveUp;
+    private readonly InputAction m_Player_VerticalMoveDown;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Boost;
     private readonly InputAction m_Player_Echo;
@@ -959,7 +970,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         private @PlayerInput m_Wrapper;
         public PlayerActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
-        public InputAction @VerticalMove => m_Wrapper.m_Player_VerticalMove;
+        public InputAction @VerticalMoveUp => m_Wrapper.m_Player_VerticalMoveUp;
+        public InputAction @VerticalMoveDown => m_Wrapper.m_Player_VerticalMoveDown;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
         public InputAction @Echo => m_Wrapper.m_Player_Echo;
@@ -979,9 +991,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
-            @VerticalMove.started += instance.OnVerticalMove;
-            @VerticalMove.performed += instance.OnVerticalMove;
-            @VerticalMove.canceled += instance.OnVerticalMove;
+            @VerticalMoveUp.started += instance.OnVerticalMoveUp;
+            @VerticalMoveUp.performed += instance.OnVerticalMoveUp;
+            @VerticalMoveUp.canceled += instance.OnVerticalMoveUp;
+            @VerticalMoveDown.started += instance.OnVerticalMoveDown;
+            @VerticalMoveDown.performed += instance.OnVerticalMoveDown;
+            @VerticalMoveDown.canceled += instance.OnVerticalMoveDown;
             @Look.started += instance.OnLook;
             @Look.performed += instance.OnLook;
             @Look.canceled += instance.OnLook;
@@ -1010,9 +1025,12 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
-            @VerticalMove.started -= instance.OnVerticalMove;
-            @VerticalMove.performed -= instance.OnVerticalMove;
-            @VerticalMove.canceled -= instance.OnVerticalMove;
+            @VerticalMoveUp.started -= instance.OnVerticalMoveUp;
+            @VerticalMoveUp.performed -= instance.OnVerticalMoveUp;
+            @VerticalMoveUp.canceled -= instance.OnVerticalMoveUp;
+            @VerticalMoveDown.started -= instance.OnVerticalMoveDown;
+            @VerticalMoveDown.performed -= instance.OnVerticalMoveDown;
+            @VerticalMoveDown.canceled -= instance.OnVerticalMoveDown;
             @Look.started -= instance.OnLook;
             @Look.performed -= instance.OnLook;
             @Look.canceled -= instance.OnLook;
@@ -1198,7 +1216,8 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnVerticalMove(InputAction.CallbackContext context);
+        void OnVerticalMoveUp(InputAction.CallbackContext context);
+        void OnVerticalMoveDown(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnEcho(InputAction.CallbackContext context);

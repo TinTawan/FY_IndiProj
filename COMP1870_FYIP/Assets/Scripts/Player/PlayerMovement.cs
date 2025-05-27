@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -20,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     public bool hurt { get; set; }
     public bool inArea { get; set; }
 
+    bool upHeld = false, downHeld = false;
 
 
     private void Awake()
@@ -30,8 +32,10 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Player.Enable();
         playerInput.Player.Move.performed += Move_performed;
         playerInput.Player.Move.canceled += Move_cancelled;
-        playerInput.Player.VerticalMove.performed += VerticalMove_performed;
-        playerInput.Player.VerticalMove.canceled += VerticalMove_cancelled;
+        playerInput.Player.VerticalMoveUp.performed += VerticalMoveUp_performed;
+        playerInput.Player.VerticalMoveUp.canceled += VerticalMoveUp_cancelled;
+        playerInput.Player.VerticalMoveDown.performed += VerticalMoveDown_performed;
+        playerInput.Player.VerticalMoveDown.canceled += VerticalMoveDown_cancelled;
         playerInput.Player.Boost.performed += Boost_performed;
         playerInput.Player.Cheat.performed += Cheat_performed;
 
@@ -39,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
     }
+
 
     private void Cheat_performed(InputAction.CallbackContext ctx)
     {
@@ -60,13 +65,23 @@ public class PlayerMovement : MonoBehaviour
     {
         moveVect = Vector2.zero;
     }
-    private void VerticalMove_performed(InputAction.CallbackContext ctx)
+    private void VerticalMoveUp_performed(InputAction.CallbackContext ctx)
     {
-        vertMove = ctx.ReadValue<float>();
+        upHeld = true;
+        //vertMove = ctx.ReadValue<float>();
     }
-    private void VerticalMove_cancelled(InputAction.CallbackContext ctx)
+    private void VerticalMoveUp_cancelled(InputAction.CallbackContext ctx)
     {
-        vertMove = 0;
+        upHeld = false;
+    }
+    private void VerticalMoveDown_performed(InputAction.CallbackContext ctx)
+    {
+        downHeld = true;
+        //vertMove = ctx.ReadValue<float>();
+    }
+    private void VerticalMoveDown_cancelled(InputAction.CallbackContext ctx)
+    {
+        downHeld = false;
     }
     private void Boost_performed(InputAction.CallbackContext ctx)
     {
@@ -82,7 +97,18 @@ public class PlayerMovement : MonoBehaviour
     {
         BoostCooldown();
 
-
+        if ((upHeld && downHeld) || (!upHeld && !downHeld))
+        {
+            vertMove = 0;
+        }
+        else if (upHeld)
+        {
+            vertMove = 1;
+        }
+        else if (downHeld)
+        {
+            vertMove = -1;
+        }
     }
     private void FixedUpdate()
     {
