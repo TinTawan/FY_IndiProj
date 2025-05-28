@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -9,22 +7,15 @@ public class ResetAllBindings : MonoBehaviour
     [SerializeField]
     private InputActionAsset inputActions;
 
-    //[SerializeField] List<RebindControls> allRebinds = new List<RebindControls>();
     RebindControls[] allRebinds;
     ScrollRect scroll;
 
     public void ResetBindings()
     {
-        /*foreach (InputActionMap map in inputActions.actionMaps)
-        {
-            map.RemoveAllBindingOverrides();
-
-        }*/
-
-        if(scroll == null || allRebinds == null)
+        if (scroll == null || allRebinds == null)
         {
             scroll = Resources.FindObjectsOfTypeAll<ScrollRect>()[0];
-            allRebinds = scroll.GetComponentsInChildren<RebindControls>();  
+            allRebinds = scroll.GetComponentsInChildren<RebindControls>();
         }
 
         foreach (RebindControls r in allRebinds)
@@ -36,6 +27,5 @@ public class ResetAllBindings : MonoBehaviour
 
         PlayerPrefs.DeleteKey("rebinds");
 
-        //allRebinds = null;
     }
 }
