@@ -34,7 +34,7 @@ public class InputManager : MonoBehaviour
             Instance.playerInput = new PlayerInput();
     }
 
-    public void StartRebind(string actionName, int bindingIndex, TMP_Text statusText, TMP_Text rebindOverlayText, GameObject rebindOverlay, bool excludeMouse)
+    public static void StartRebind(string actionName, int bindingIndex, TMP_Text statusText, TMP_Text rebindOverlayText, GameObject rebindOverlay, bool excludeMouse)
     {
         InputAction action = Instance.playerInput.asset.FindAction(actionName);
         if(action == null || action.bindings.Count <= bindingIndex)
@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void DoRebind(InputAction actionToRebind, int bindingIndex, TMP_Text statusText, TMP_Text rebindOverlayText,  GameObject rebindOverlay, bool excludeMouse, bool allCompositeParts)
+    private static void DoRebind(InputAction actionToRebind, int bindingIndex, TMP_Text statusText, TMP_Text rebindOverlayText,  GameObject rebindOverlay, bool excludeMouse, bool allCompositeParts)
     {
         if(actionToRebind == null || bindingIndex < 0)
             return;
@@ -123,7 +123,7 @@ public class InputManager : MonoBehaviour
     }
 
     // Only checks for duplicates within the same action map.
-    private bool CheckDuplicateBindings(InputAction actionToRebind, int bindingIndex, bool allCompositeParts = false)
+    private static bool CheckDuplicateBindings(InputAction actionToRebind, int bindingIndex, bool allCompositeParts = false)
     {
         InputBinding newBinding = actionToRebind.bindings[bindingIndex];
         foreach ( InputBinding binding in actionToRebind.actionMap.bindings)
@@ -166,7 +166,7 @@ public class InputManager : MonoBehaviour
         return action.GetBindingDisplayString(bindingIndex);
     }
 
-    private void SaveBindingOverride(InputAction action)
+    private static void SaveBindingOverride(InputAction action)
     {
         for ( int i = 0; i < action.bindings.Count; i ++)
         {

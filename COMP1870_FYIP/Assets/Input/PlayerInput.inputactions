@@ -51,7 +51,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Echo",
+                    "name": "Echolocate",
                     "type": "Button",
                     "id": "9b4c7ecc-83cb-4939-82b5-a258058df000",
                     "expectedControlType": "Button",
@@ -256,7 +256,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
-                    "action": "Echo",
+                    "action": "Echolocate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -267,7 +267,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Echo",
+                    "action": "Echolocate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

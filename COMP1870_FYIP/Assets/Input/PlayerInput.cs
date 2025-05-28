@@ -73,7 +73,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Echo"",
+                    ""name"": ""Echolocate"",
                     ""type"": ""Button"",
                     ""id"": ""9b4c7ecc-83cb-4939-82b5-a258058df000"",
                     ""expectedControlType"": ""Button"",
@@ -278,7 +278,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Echo"",
+                    ""action"": ""Echolocate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -289,7 +289,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Echo"",
+                    ""action"": ""Echolocate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -896,7 +896,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_Player_SwimDown = m_Player.FindAction("SwimDown", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Boost = m_Player.FindAction("Boost", throwIfNotFound: true);
-        m_Player_Echo = m_Player.FindAction("Echo", throwIfNotFound: true);
+        m_Player_Echolocate = m_Player.FindAction("Echolocate", throwIfNotFound: true);
         m_Player_HighPulse = m_Player.FindAction("HighPulse", throwIfNotFound: true);
         m_Player_LowPulse = m_Player.FindAction("LowPulse", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
@@ -981,7 +981,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_SwimDown;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Boost;
-    private readonly InputAction m_Player_Echo;
+    private readonly InputAction m_Player_Echolocate;
     private readonly InputAction m_Player_HighPulse;
     private readonly InputAction m_Player_LowPulse;
     private readonly InputAction m_Player_Interact;
@@ -996,7 +996,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @SwimDown => m_Wrapper.m_Player_SwimDown;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Boost => m_Wrapper.m_Player_Boost;
-        public InputAction @Echo => m_Wrapper.m_Player_Echo;
+        public InputAction @Echolocate => m_Wrapper.m_Player_Echolocate;
         public InputAction @HighPulse => m_Wrapper.m_Player_HighPulse;
         public InputAction @LowPulse => m_Wrapper.m_Player_LowPulse;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
@@ -1026,9 +1026,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Boost.started += instance.OnBoost;
             @Boost.performed += instance.OnBoost;
             @Boost.canceled += instance.OnBoost;
-            @Echo.started += instance.OnEcho;
-            @Echo.performed += instance.OnEcho;
-            @Echo.canceled += instance.OnEcho;
+            @Echolocate.started += instance.OnEcholocate;
+            @Echolocate.performed += instance.OnEcholocate;
+            @Echolocate.canceled += instance.OnEcholocate;
             @HighPulse.started += instance.OnHighPulse;
             @HighPulse.performed += instance.OnHighPulse;
             @HighPulse.canceled += instance.OnHighPulse;
@@ -1063,9 +1063,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Boost.started -= instance.OnBoost;
             @Boost.performed -= instance.OnBoost;
             @Boost.canceled -= instance.OnBoost;
-            @Echo.started -= instance.OnEcho;
-            @Echo.performed -= instance.OnEcho;
-            @Echo.canceled -= instance.OnEcho;
+            @Echolocate.started -= instance.OnEcholocate;
+            @Echolocate.performed -= instance.OnEcholocate;
+            @Echolocate.canceled -= instance.OnEcholocate;
             @HighPulse.started -= instance.OnHighPulse;
             @HighPulse.performed -= instance.OnHighPulse;
             @HighPulse.canceled -= instance.OnHighPulse;
@@ -1249,7 +1249,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnSwimDown(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
-        void OnEcho(InputAction.CallbackContext context);
+        void OnEcholocate(InputAction.CallbackContext context);
         void OnHighPulse(InputAction.CallbackContext context);
         void OnLowPulse(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);

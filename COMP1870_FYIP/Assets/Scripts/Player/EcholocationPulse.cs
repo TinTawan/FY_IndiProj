@@ -36,7 +36,7 @@ public class EcholocationPulse : MonoBehaviour
     {
         playerInput = new PlayerInput();
         playerInput.Player.Enable();
-        playerInput.Player.Echo.performed += Echo_performed;
+        playerInput.Player.Echolocate.performed += Echo_performed;
         playerInput.Player.HighPulse.performed += HighPulse_performed;
         playerInput.Player.LowPulse.performed += LowPulse_performed;
 

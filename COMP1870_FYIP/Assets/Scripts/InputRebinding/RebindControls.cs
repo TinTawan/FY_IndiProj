@@ -80,7 +80,7 @@ public class RebindControls : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    public void UpdateUI()
     {
         /*if (actionName == null)
             //Debug.Log("action name null");
@@ -103,10 +103,10 @@ public class RebindControls : MonoBehaviour
 
     private void DoRebind()
     {
-        InputManager.Instance.StartRebind(actionName, bindingIndex, rebindText, rebindOverlayText,  rebindOverlay, excludeMouse);
+        InputManager.StartRebind(actionName, bindingIndex, rebindText, rebindOverlayText,  rebindOverlay, excludeMouse);
     }
 
-    private void ResetBinding()
+    public void ResetBinding()
     {
         InputManager.Instance.ResetBinding(actionName, bindingIndex);
         UpdateUI();
