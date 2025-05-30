@@ -98,7 +98,7 @@ public class GameMenuManager : MonoBehaviour
 
     private void Pause()
     {
-        Cursor.visible = true;
+        //Cursor.visible = true;
 
         //set correct time and panels
         Time.timeScale = 0f;

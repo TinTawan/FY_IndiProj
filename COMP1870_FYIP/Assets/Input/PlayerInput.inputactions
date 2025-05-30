@@ -218,17 +218,6 @@
                 },
                 {
                     "name": "",
-                    "id": "cc3a58d3-cb46-4816-9a66-806a4bc5244b",
-                    "path": "<Gamepad>/leftStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Boost",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8ac2308e-6272-4b08-b339-c0ac715607f6",
                     "path": "<Keyboard>/space",
                     "interactions": "",
