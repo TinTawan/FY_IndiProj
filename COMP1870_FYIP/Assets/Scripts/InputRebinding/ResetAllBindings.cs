@@ -20,7 +20,6 @@ public class ResetAllBindings : MonoBehaviour
 
         foreach (RebindControls r in allRebinds)
         {
-            //Debug.Log($"{r.name} ResetBinding");
             r.ResetBinding();
         }
 

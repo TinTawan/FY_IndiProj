@@ -77,7 +77,7 @@ public class EcholocationPulse : MonoBehaviour
 
     void Echo_performed(InputAction.CallbackContext ctx)
     {
-        if (!GameMenuManager.instance.isPaused)
+        if (!GameMenuManager.instance.isPaused && this != null)
         {
             if (canHPulse && currentPulse == 1)
             {

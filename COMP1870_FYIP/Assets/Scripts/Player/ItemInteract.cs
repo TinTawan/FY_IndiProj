@@ -161,7 +161,6 @@ public class ItemInteract : MonoBehaviour
 
     void SetCols(bool areCollidersOn)
     {
-        //so far this removes the players colliders
         if(itemCols != null && itemCols.Length > 0)
         {
             itemCols = heldItem.GetComponents<Collider>();

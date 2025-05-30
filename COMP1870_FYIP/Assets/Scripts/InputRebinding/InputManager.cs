@@ -176,13 +176,15 @@ public class InputManager : MonoBehaviour
 
     public void LoadBindingOverride(string actionName)
     {
-        /*if (actionName == null)
-            return;*/
+        if (actionName == null)
+            return;
 
         if (Instance.playerInput == null)
+        {
             Instance.playerInput = new PlayerInput();
+        }
 
-        if(actionName != null)
+        /*if(actionName != null)
         {
             InputAction action = Instance.playerInput.asset.FindAction(actionName);
 
@@ -191,8 +193,15 @@ public class InputManager : MonoBehaviour
                 if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
                     action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
             }
+        }*/
+        InputAction action = Instance.playerInput.asset.FindAction(actionName);
+
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+                action.ApplyBindingOverride(i, PlayerPrefs.GetString(action.actionMap + action.name + i));
         }
-        
+
     }
 
     public void ResetBinding(string actionName, int bindingIndex)

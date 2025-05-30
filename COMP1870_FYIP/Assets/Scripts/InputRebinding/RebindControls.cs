@@ -29,7 +29,6 @@ public class RebindControls : MonoBehaviour
     {
         InputManager.rebindComplete += UpdateUI;
         InputManager.rebindCanceled += UpdateUI;
-        
     }
 
     private void OnDisable() 

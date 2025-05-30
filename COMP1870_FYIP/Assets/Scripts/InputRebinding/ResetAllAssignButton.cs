@@ -9,7 +9,6 @@ public class ResetAllAssignButton : MonoBehaviour
     {
         resetButton = GetComponent<Button>();
 
-        //resetButton.onClick.RemoveAllListeners();
         resetButton.onClick.AddListener(() => { OnClick(); });
     }
 
@@ -17,8 +16,6 @@ public class ResetAllAssignButton : MonoBehaviour
     {
         if (InputManager.Instance.gameObject.TryGetComponent(out ResetAllBindings reset))
         {
-            //Debug.Log("Reset all");
-            //Debug.Log(reset.gameObject.name);
             reset.ResetBindings();
         }
 

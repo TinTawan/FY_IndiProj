@@ -28,7 +28,6 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        //playerInput = new PlayerInput();
         playerInput = InputManager.Instance.playerInput;
         playerInput.Player.Enable();
         playerInput.Player.Move.performed += Move_performed;
@@ -37,14 +36,18 @@ public class PlayerMovement : MonoBehaviour
         playerInput.Player.SwimUp.canceled += VerticalMoveUp_cancelled;
         playerInput.Player.SwimDown.performed += VerticalMoveDown_performed;
         playerInput.Player.SwimDown.canceled += VerticalMoveDown_cancelled;
-        playerInput.Player.Boost.performed += Boost_performed;
+        playerInput.Player.Boost.started += Boost_started;
         playerInput.Player.Cheat.performed += Cheat_performed;
 
+        
+    }
+
+    private void Start()
+    {
         cam = Camera.main.transform;
 
         Cursor.lockState = CursorLockMode.Locked;
     }
-
 
     private void Cheat_performed(InputAction.CallbackContext ctx)
     {
@@ -69,7 +72,6 @@ public class PlayerMovement : MonoBehaviour
     private void VerticalMoveUp_performed(InputAction.CallbackContext ctx)
     {
         upHeld = true;
-        //vertMove = ctx.ReadValue<float>();
     }
     private void VerticalMoveUp_cancelled(InputAction.CallbackContext ctx)
     {
@@ -78,15 +80,14 @@ public class PlayerMovement : MonoBehaviour
     private void VerticalMoveDown_performed(InputAction.CallbackContext ctx)
     {
         downHeld = true;
-        //vertMove = ctx.ReadValue<float>();
     }
     private void VerticalMoveDown_cancelled(InputAction.CallbackContext ctx)
     {
         downHeld = false;
     }
-    private void Boost_performed(InputAction.CallbackContext ctx)
+    private void Boost_started(InputAction.CallbackContext ctx)
     {
-        if (canBoost && !hurt)
+        if (canBoost && !hurt && cam != null)
         {
             canBoost = false;
             rb.AddForce(cam.forward.normalized * boostForce, ForceMode.Impulse);

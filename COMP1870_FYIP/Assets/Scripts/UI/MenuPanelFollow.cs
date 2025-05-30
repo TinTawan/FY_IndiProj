@@ -17,6 +17,9 @@ public class MenuPanelFollow : MonoBehaviour
 
     Coroutine expandRoutine;
 
+    [SerializeField] GameObject rebindOverlay;
+    [SerializeField] Image maskedPanel;
+
     private void Start()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -93,6 +96,14 @@ public class MenuPanelFollow : MonoBehaviour
             rectTransform.localScale = new(scale, scale, scale);
         }
 
+        if (rebindOverlay.activeInHierarchy)
+        {
+            maskedPanel.enabled = false;
+        }
+        else
+        {
+            maskedPanel.enabled = true;
+        }
     }
 
     void ScaleRect(float addVal)
