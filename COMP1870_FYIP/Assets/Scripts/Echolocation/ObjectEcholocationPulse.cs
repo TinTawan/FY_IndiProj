@@ -21,6 +21,9 @@ public class ObjectEcholocationPulse : MonoBehaviour
     ObjectOutline objOutline;
     bool playOnce = true;
 
+
+    GameUI gameui;
+
     private void Awake()
     {
         ps = GetComponentInChildren<ParticleSystem>();
@@ -36,9 +39,14 @@ public class ObjectEcholocationPulse : MonoBehaviour
         SetBurst();
     }
 
+    private void Start()
+    {
+        gameui = FindObjectOfType<GameUI>();
+    }
+
     private void Update()
     {
-        if (objOutline.GetIsOutlined() && playOnce)
+        if (objOutline.GetIsOutlined() && playOnce && gameui.gameObject.activeInHierarchy)
         {
             ps.Play();
             AudioManager.instance.PlaySound(AudioManager.soundType.emitterPulseOut, transform.position, 0.2f);

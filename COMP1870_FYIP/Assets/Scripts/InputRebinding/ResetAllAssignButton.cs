@@ -17,8 +17,8 @@ public class ResetAllAssignButton : MonoBehaviour
     {
         if (InputManager.Instance.gameObject.TryGetComponent(out ResetAllBindings reset))
         {
-            Debug.Log("Reset all");
-            Debug.Log(reset.gameObject.name);
+            //Debug.Log("Reset all");
+            //Debug.Log(reset.gameObject.name);
             reset.ResetBindings();
         }
 

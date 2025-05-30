@@ -28,7 +28,8 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        playerInput = new PlayerInput();
+        //playerInput = new PlayerInput();
+        playerInput = InputManager.Instance.playerInput;
         playerInput.Player.Enable();
         playerInput.Player.Move.performed += Move_performed;
         playerInput.Player.Move.canceled += Move_cancelled;

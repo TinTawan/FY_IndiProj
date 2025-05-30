@@ -20,7 +20,7 @@ public class ItemInteract : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = new PlayerInput();
+        playerInput = InputManager.Instance.playerInput;
         playerInput.Player.Enable();
         playerInput.Player.Interact.started += Interact_started;
     }

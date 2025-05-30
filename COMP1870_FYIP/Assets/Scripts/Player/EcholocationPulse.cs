@@ -34,7 +34,7 @@ public class EcholocationPulse : MonoBehaviour
 
     private void Awake()
     {
-        playerInput = new PlayerInput();
+        playerInput = InputManager.Instance.playerInput;
         playerInput.Player.Enable();
         playerInput.Player.Echolocate.performed += Echo_performed;
         playerInput.Player.HighPulse.performed += HighPulse_performed;
