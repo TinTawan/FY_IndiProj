@@ -44,12 +44,13 @@ public class RebindControls : MonoBehaviour
 
         if (inputActionReference != null)
         {
-            InputManager.Instance.LoadBindingOverride(actionName);
             GetBindingInfo(selectBinding);
+            InputManager.Instance.LoadBindingOverride(actionName);
             UpdateUI();
         }
 
     }
+
 
     private void OnValidate() 
     {

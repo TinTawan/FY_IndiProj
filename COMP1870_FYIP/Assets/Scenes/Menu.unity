@@ -1579,7 +1579,7 @@ GameObject:
   - component: {fileID: 147033803}
   - component: {fileID: 147033804}
   m_Layer: 5
-  m_Name: ControlsSection
+  m_Name: ControlsSection_old
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1670,8 +1670,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 1274043164}
   rebindButton: {fileID: 1819396451}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 1752294399}
   resetButton: {fileID: 1237892201}
 --- !u!1 &200057170
@@ -4758,10 +4758,10 @@ RectTransform:
   - {fileID: 1868210308}
   m_Father: {fileID: 747611754}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960.8026, y: -292.5}
-  m_SizeDelta: {x: 1921.6052, y: 585}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584127622
 MonoBehaviour:
@@ -6586,8 +6586,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 600387828}
   rebindButton: {fileID: 1445963502}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 1500244}
   resetButton: {fileID: 1763021698}
 --- !u!1 &727148345 stripped
@@ -6627,8 +6627,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 252184175}
   rebindButton: {fileID: 90475231}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 1043026781}
   resetButton: {fileID: 259566218}
 --- !u!1 &736817495
@@ -6725,7 +6725,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &747611754
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6739,6 +6739,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 584127621}
+  - {fileID: 2041823521}
   - {fileID: 1529221214}
   m_Father: {fileID: 1393113692}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8862,10 +8863,10 @@ RectTransform:
   - {fileID: 41815633}
   m_Father: {fileID: 1529221214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 336.9342, y: -197.5}
-  m_SizeDelta: {x: 573.8684, y: 295}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940648529
 MonoBehaviour:
@@ -9583,8 +9584,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 745570287}
   rebindButton: {fileID: 721132179}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 748443847}
   resetButton: {fileID: 1458650032}
 --- !u!1 &1004780714
@@ -12248,10 +12249,10 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1842312750}
   - {fileID: 747611754}
   - {fileID: 1487504300}
   - {fileID: 736817496}
-  - {fileID: 1842312750}
   - {fileID: 147033803}
   - {fileID: 399905861}
   - {fileID: 769900551}
@@ -14131,10 +14132,10 @@ RectTransform:
   - {fileID: 2106125220}
   m_Father: {fileID: 747611754}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960.8026, y: -832.5}
-  m_SizeDelta: {x: 1921.6052, y: 395}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1529221215
 MonoBehaviour:
@@ -14219,8 +14220,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 390166222}
   rebindButton: {fileID: 1251006329}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 1897873276}
   resetButton: {fileID: 911358122}
 --- !u!1 &1543731669
@@ -16036,8 +16037,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 938544675}
   rebindButton: {fileID: 98242367}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 1816509357}
   resetButton: {fileID: 1093153698}
 --- !u!1 &1785412173
@@ -16369,7 +16370,7 @@ GameObject:
   - component: {fileID: 1842312750}
   - component: {fileID: 1842312751}
   m_Layer: 5
-  m_Name: ControlsSection (1)
+  m_Name: ControlsSection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17047,10 +17048,10 @@ RectTransform:
   - {fileID: 441394028}
   m_Father: {fileID: 1529221214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 960.8026, y: -197.5}
-  m_SizeDelta: {x: 573.8684, y: 295}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1916864358
 MonoBehaviour:
@@ -17117,6 +17118,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 747611753}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1842312749}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -17671,8 +17684,8 @@ MonoBehaviour:
     m_Flags: 4
   actionText: {fileID: 694454475}
   rebindButton: {fileID: 625171456}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 1112157794}
   resetButton: {fileID: 11079388}
 --- !u!224 &1926784595 stripped
@@ -18497,6 +18510,102 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2041804048}
   m_CullTransparentMesh: 1
+--- !u!1 &2041823520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041823521}
+  - component: {fileID: 2041823524}
+  - component: {fileID: 2041823523}
+  - component: {fileID: 2041823522}
+  m_Layer: 5
+  m_Name: Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2041823521
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041823520}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 747611754}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -288.2177}
+  m_SizeDelta: {x: 1920, y: -576.4354}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2041823522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041823520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 1
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
+--- !u!114 &2041823523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041823520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0.07450981, b: 0.3254902, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2041823524
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041823520}
+  m_CullTransparentMesh: 1
 --- !u!114 &2043055569 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5149745084346650848, guid: 9ce9e129833c8c349a6f29ea11c3e79b, type: 3}
@@ -18545,8 +18654,8 @@ MonoBehaviour:
     m_Flags: 0
   actionText: {fileID: 1935748813}
   rebindButton: {fileID: 908929562}
-  rebindOverlay: {fileID: 0}
-  rebindOverlayText: {fileID: 0}
+  rebindOverlay: {fileID: 769900550}
+  rebindOverlayText: {fileID: 2094933834}
   rebindText: {fileID: 28205585}
   resetButton: {fileID: 53569771}
 --- !u!1 &2080595561
@@ -18818,10 +18927,10 @@ RectTransform:
   - {fileID: 118417461}
   m_Father: {fileID: 1529221214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 1584.671, y: -197.5}
-  m_SizeDelta: {x: 573.8684, y: 295}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2106125221
 MonoBehaviour:

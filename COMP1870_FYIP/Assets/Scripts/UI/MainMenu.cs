@@ -52,7 +52,7 @@ public class MainMenu : MonoBehaviour
         mainSection.SetActive(true);
         settingsSection.SetActive(false);
         audioSection.SetActive(false);
-        controlsSection.SetActive(false);
+        //controlsSection.SetActive(false);
         creditsSection.SetActive(false);
 
         masterSlider.value = PlayerPrefs.GetFloat(MASTER_VOL_PARAM);
